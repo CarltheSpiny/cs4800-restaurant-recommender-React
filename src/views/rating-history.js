@@ -22,7 +22,7 @@ const RatingHistory = (props) => {
         className="rating-history-image"
       />
       <div className="rating-history-header">
-        <h1 className="rating-history-title">&lt;Restaurant Name&gt;</h1>
+        <h1 className="rating-history-title">Restaurant Name</h1>
       </div>
       <div className="rating-history-container1"></div>
     </div>
