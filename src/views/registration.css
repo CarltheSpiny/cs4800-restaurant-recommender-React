@@ -1,0 +1,502 @@
+.registration-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registration-image {
+  width: 100%;
+  height: var(--dl-size-size-medium);
+  align-self: center;
+  object-fit: cover;
+}
+.registration-header {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-unit);
+  flex-direction: column;
+  justify-content: center;
+}
+.registration-title {
+  align-self: center;
+  text-align: center;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.registration-text {
+  align-self: center;
+}
+.registration-container1 {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.registration-text03 {
+  align-self: center;
+  margin-right: var(--dl-space-space-unit);
+}
+.registration-navlink {
+  align-self: center;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: underline none;
+}
+.registration-registration-container {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  margin-top: var(--dl-space-space-unit);
+  align-items: center;
+  justify-content: center;
+}
+.registration-registration-form {
+  flex: 1;
+  width: 200px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.registration-all-fields {
+  flex: 1;
+  width: 200px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+}
+.registration-user-fields {
+  gap: var(--dl-space-space-unit);
+  flex: 1;
+  height: 312px;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: stretch;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registration-user-name-field {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text08 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field01 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text09 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput01 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field02 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text10 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput02 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field03 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text11 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput03 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field04 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text12 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput04 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field05 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text13 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput05 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field06 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text14 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput06 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field07 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text15 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput07 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field08 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text16 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput08 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field09 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text17 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-select {
+  flex: 1;
+  width: var(--dl-size-size-xxlarge);
+  height: 35px;
+  align-self: flex-start;
+}
+.registration-user-name-field10 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text18 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput09 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-user-name-field11 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registration-text19 {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.registration-textinput10 {
+  width: var(--dl-size-size-xxlarge);
+}
+.registration-sign-up-confirm {
+  width: var(--dl-size-size-xxlarge);
+  align-self: center;
+  margin-top: var(--dl-space-space-oneandhalfunits);
+  margin-bottom: var(--dl-space-space-oneandhalfunits);
+}
+@media(max-width: 767px) {
+  .registration-registration-container {
+    width: 728px;
+    height: 743px;
+  }
+  .registration-registration-form {
+    width: 622px;
+    height: 722px;
+  }
+  .registration-all-fields {
+    width: 556px;
+    height: 100%;
+    align-items: flex-start;
+  }
+  .registration-user-fields {
+    width: 699px;
+    height: 663px;
+  }
+}
+@media(max-width: 479px) {
+  .registration-registration-container {
+    width: var(--dl-size-size-xxlarge);
+    height: 811px;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-registration-form {
+    width: auto;
+    height: 100%;
+    position: relative;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .registration-all-fields {
+    width: auto;
+    height: 773px;
+    align-self: flex-start;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .registration-user-fields {
+    width: 479px;
+    height: 938px;
+    align-self: flex-start;
+    margin-top: 0px;
+    align-items: center;
+    padding-bottom: 12px;
+    justify-content: flex-start;
+  }
+  .registration-user-name-field {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text08 {
+    width: 170px;
+    text-align: left;
+    font-family: Arial;
+    padding-right: var(--dl-space-space-unit);
+    text-transform: capitalize;
+  }
+  .registration-textinput {
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+  .registration-user-name-field01 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text09 {
+    width: 170px;
+    text-align: left;
+    font-family: Arial;
+    padding-right: var(--dl-space-space-unit);
+    text-transform: capitalize;
+  }
+  .registration-textinput01 {
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+  .registration-user-name-field02 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text10 {
+    width: 170px;
+    text-align: left;
+  }
+  .registration-user-name-field03 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text11 {
+    width: 170px;
+    text-align: left;
+  }
+  .registration-text12 {
+    width: 170px;
+    align-self: center;
+    text-align: left;
+  }
+  .registration-text13 {
+    width: 170px;
+    text-align: left;
+  }
+  .registration-user-name-field06 {
+    width: auto;
+    align-self: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text14 {
+    width: 170px;
+    text-align: left;
+    font-family: Arial;
+    text-transform: capitalize;
+  }
+  .registration-textinput06 {
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+  .registration-user-name-field07 {
+    width: auto;
+    align-self: center;
+  }
+  .registration-text15 {
+    width: 170px;
+    text-align: left;
+  }
+  .registration-user-name-field08 {
+    width: auto;
+    align-self: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text16 {
+    width: 170px;
+    text-align: left;
+    font-family: Arial;
+    text-transform: capitalize;
+  }
+  .registration-textinput08 {
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+  .registration-user-name-field09 {
+    align-self: center;
+  }
+  .registration-text17 {
+    width: 170px;
+    text-align: left;
+  }
+  .registration-select {
+    flex: 1;
+    width: var(--dl-size-size-xxlarge);
+    align-self: flex-start;
+    border-color: var(--dl-color-gray-black);
+    border-width: 1px;
+  }
+  .registration-user-name-field10 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text18 {
+    width: 170px;
+    text-align: left;
+    font-family: Arial;
+    padding-right: var(--dl-space-space-unit);
+    text-transform: capitalize;
+  }
+  .registration-textinput09 {
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+  .registration-user-name-field11 {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .registration-text19 {
+    width: 170px;
+    text-align: left;
+    font-family: Arial;
+    padding-right: var(--dl-space-space-unit);
+    text-transform: capitalize;
+  }
+  .registration-textinput10 {
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+}

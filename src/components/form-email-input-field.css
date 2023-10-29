@@ -1,0 +1,24 @@
+.form-email-input-field-user-name-field {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.form-email-input-field-text {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.form-email-input-field-textinput {
+  width: var(--dl-size-size-xxlarge);
+}
+@media(max-width: 479px) {
+  .form-email-input-field-user-name-field {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}

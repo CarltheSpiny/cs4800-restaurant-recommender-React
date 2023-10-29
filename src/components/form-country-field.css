@@ -1,0 +1,27 @@
+.form-country-field-user-name-field {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.form-country-field-text {
+  width: var(--dl-size-size-xlarge);
+  height: 35px;
+  align-self: flex-start;
+  text-align: center;
+  line-height: 2;
+  padding-right: var(--dl-space-space-unit);
+}
+.form-country-field-select {
+  flex: 1;
+  width: var(--dl-size-size-xxlarge);
+  height: 35px;
+  align-self: flex-start;
+}
+@media(max-width: 479px) {
+  .form-country-field-user-name-field {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
