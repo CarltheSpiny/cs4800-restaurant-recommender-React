@@ -30,21 +30,21 @@
   height: 2rem;
   margin-bottom: var(--dl-space-space-threeunits);
 }
-.side-menu-navlink {
-  margin-bottom: var(--dl-space-space-threeunits);
-  text-decoration: none;
-}
-.side-menu-navlink1 {
-  margin-bottom: var(--dl-space-space-threeunits);
-  text-decoration: none;
-}
 .side-menu-text {
   margin-bottom: var(--dl-space-space-threeunits);
+  text-decoration: none;
 }
 .side-menu-text1 {
   margin-bottom: var(--dl-space-space-threeunits);
+  text-decoration: none;
 }
-.side-menu-navlink2 {
+.side-menu-text2 {
+  margin-bottom: var(--dl-space-space-threeunits);
+}
+.side-menu-text3 {
+  margin-bottom: var(--dl-space-space-threeunits);
+}
+.side-menu-text4 {
   text-decoration: none;
 }
 .side-menu-root-class-name {

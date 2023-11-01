@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
+import NavigationLinks from './navigation-links'
 import './navigator-bar.css'
 
 const NavigatorBar = (props) => {
@@ -11,30 +12,18 @@ const NavigatorBar = (props) => {
       data-role="Header"
       className={`navigator-bar-header ${props.rootClassName} `}
     >
-      <img
-        alt={props.image_alt}
-        src={props.image_src}
-        className="navigator-bar-image"
-      />
+      <Link to="/" className="navigator-bar-navlink">
+        <img
+          alt={props.image_alt}
+          src={props.image_src}
+          className="navigator-bar-image"
+        />
+      </Link>
       <div className="navigator-bar-nav">
-        <nav className="navigator-bar-nav1">
-          <div className="navigator-bar-container">
-            <Link to="/" className="navigator-bar-navlink">
-              {props.HomePage}
-            </Link>
-            <Link to="/restaurant-search" className="navigator-bar-navlink1">
-              {props.SearchPage}
-            </Link>
-          </div>
-          <div className="navigator-bar-container1">
-            <Link to="/user-information" className="navigator-bar-navlink2">
-              {props.ProfilePage}
-            </Link>
-            <Link to="/rating-history" className="navigator-bar-navlink3">
-              {props.HistoryPage}
-            </Link>
-          </div>
-        </nav>
+        <NavigationLinks
+          rootClassName="navigation-links-root-class-name8"
+          className=""
+        ></NavigationLinks>
       </div>
       <div className="navigator-bar-btn-group">
         <Link to="/user-login" className="navigator-bar-login button">

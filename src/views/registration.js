@@ -198,16 +198,16 @@ const Registration = (props) => {
                 />
               </div>
             </div>
-            <button
+            <Link
+              to="/survey"
               id="confirmButton"
-              type="button"
               className="registration-sign-up-confirm button"
             >
               <span>
-                <span>Sign up</span>
+                <span>Continue</span>
                 <br></br>
               </span>
-            </button>
+            </Link>
           </div>
         </form>
       </div>

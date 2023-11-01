@@ -1,4 +1,4 @@
-.personal-home-container {
+.restaurant-history-container {
   width: 100%;
   display: flex;
   overflow: auto;
@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-.personal-home-gallery {
+.restaurant-history-gallery {
   width: 100%;
   display: flex;
   max-width: var(--dl-size-size-maxwidth);
@@ -18,31 +18,31 @@
   flex-direction: column;
   padding-bottom: var(--dl-space-space-twounits);
 }
-.personal-home-container1 {
+.restaurant-history-container1 {
   width: 100%;
   display: grid;
   grid-gap: var(--dl-space-space-unit);
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 @media(max-width: 991px) {
-  .personal-home-container1 {
+  .restaurant-history-container1 {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @media(max-width: 767px) {
-  .personal-home-gallery {
+  .restaurant-history-gallery {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
-  .personal-home-container1 {
+  .restaurant-history-container1 {
     grid-template-columns: 1fr 1fr;
   }
 }
 @media(max-width: 479px) {
-  .personal-home-gallery {
+  .restaurant-history-gallery {
     padding: var(--dl-space-space-unit);
   }
-  .personal-home-container1 {
+  .restaurant-history-container1 {
     grid-template-columns: 1fr;
   }
 }

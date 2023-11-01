@@ -307,6 +307,7 @@
   align-self: center;
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
+  text-decoration: none;
 }
 @media(max-width: 767px) {
   .registration-registration-container {

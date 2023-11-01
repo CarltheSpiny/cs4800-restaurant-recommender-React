@@ -3,6 +3,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 
 import NavigatorBar from '../components/navigator-bar'
+import Title from '../components/title'
 import './not-implemented.css'
 
 const NotImplemented = (props) => {
@@ -16,6 +17,11 @@ const NotImplemented = (props) => {
         />
       </Helmet>
       <NavigatorBar rootClassName="navigator-bar-root-class-name5"></NavigatorBar>
+      <Title
+        text="Whoops!"
+        heading="Page Not Found"
+        rootClassName="title-root-class-name3"
+      ></Title>
       <div className="not-implemented-container1">
         <h1>The requested page could not be found.</h1>
         <span>Please use the buttons above to go back to the main site.</span>

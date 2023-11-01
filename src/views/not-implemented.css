@@ -9,9 +9,10 @@
 }
 .not-implemented-container1 {
   flex: 1;
+  width: var(--dl-size-size-maxwidth);
   height: auto;
   display: flex;
-  align-self: stretch;
+  align-self: center;
   align-items: center;
   flex-direction: column;
   justify-content: center;
