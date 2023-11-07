@@ -13,9 +13,11 @@ const PersonalHome = (props) => {
     <div className="personal-home-container">
       <Helmet>
         <title>cs4800-restaurant-recommender</title>
-        <meta property="og:title" content="cs4800-restaurant-recommender" />
+        <meta 
+          property="og:title" 
+          content="cs4800-restaurant-recommender" />
       </Helmet>
-      <NavigatorBar></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name3"></NavigatorBar>
       <Title
         text="Your personalized feed of restaurants we think you'll love!"
         heading="Your Feed"

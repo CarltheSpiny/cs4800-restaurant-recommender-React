@@ -25,7 +25,7 @@ const UserLogin = (props) => {
       <div className="user-login-user-login-title">
         <h1 className="user-login-title">User Login</h1>
         <span className="user-login-text">
-          <span>Hello! Please use your email and password to log in</span>
+          <span>Hello! Please use your email and password to log in.</span>
           <br></br>
         </span>
         <div className="user-login-container1">
