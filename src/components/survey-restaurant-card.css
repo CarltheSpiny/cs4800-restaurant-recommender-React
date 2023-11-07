@@ -1,0 +1,70 @@
+.survey-restaurant-card-gallery-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+}
+.survey-restaurant-card-image {
+  top: 0px;
+  left: 0px;
+  right: auto;
+  width: 100%;
+  bottom: auto;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+}
+.survey-restaurant-card-container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  opacity: 0;
+  padding: var(--dl-space-space-twounits);
+  z-index: 1;
+  transition: 0.3s;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.9));;
+}
+.survey-restaurant-card-container:hover {
+  opacity: 1;
+}
+.survey-restaurant-card-container1 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.survey-restaurant-card-container2 {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.survey-restaurant-card-text {
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: var(--dl-space-space-oneandhalfunits);
+}
+.survey-restaurant-card-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: var(--dl-space-space-oneandhalfunits);
+}
+.survey-restaurant-card-text1 {
+  color: #ffffff;
+}
+@media(max-width: 479px) {
+  .survey-restaurant-card-text {
+    align-self: center;
+    margin-bottom: var(--dl-space-space-unit);
+  }
+}

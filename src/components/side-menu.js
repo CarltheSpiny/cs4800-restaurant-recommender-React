@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
@@ -15,17 +14,11 @@ const SideMenu = (props) => {
             src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
             className="side-menu-image"
           />
-          <Link to="/z-seatch-test" className="side-menu-navlink">
-            Search
-          </Link>
-          <Link to="/z-home-test" className="side-menu-navlink1">
-            Home
-          </Link>
-          <span className="side-menu-text">My Profile</span>
-          <span className="side-menu-text1">History</span>
-          <Link to="/z-login-test" className="side-menu-navlink2">
-            Sign In / Log out
-          </Link>
+          <span className="side-menu-text">Search</span>
+          <span className="side-menu-text1">Home</span>
+          <span className="side-menu-text2">My Profile</span>
+          <span className="side-menu-text3">History</span>
+          <span className="side-menu-text4">Sign In / Log out</span>
         </nav>
       </div>
     </div>

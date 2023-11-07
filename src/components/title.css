@@ -1,0 +1,29 @@
+.title-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.title-header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  margin-bottom: var(--dl-space-space-unit);
+  flex-direction: column;
+  justify-content: center;
+}
+.title-image {
+  width: 100%;
+  height: var(--dl-size-size-medium);
+  align-self: center;
+  object-fit: cover;
+}
+
+
+
+
+

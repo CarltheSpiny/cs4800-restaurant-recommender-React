@@ -93,6 +93,14 @@
   align-self: center;
 }
 
+.toast {
+  width: 400px;
+  height: 80px;
+  margin: 15px 0;
+  background: #fff;
+  box_shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  font-weight: 5;
+}
 .Content {
   font-size: 16px;
   font-family: Inter;

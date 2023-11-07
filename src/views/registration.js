@@ -57,7 +57,7 @@ const Registration = (props) => {
         <form className="registration-registration-form">
           <div className="registration-all-fields">
             <div className="registration-user-fields">
-              <div className="registration-user-name-field">
+              <div className="registration-first-name">
                 <span htmlFor="inputIn" className="registration-text08">
                   First Name:
                 </span>
@@ -69,7 +69,7 @@ const Registration = (props) => {
                   className="registration-textinput input"
                 />
               </div>
-              <div className="registration-user-name-field01">
+              <div className="registration-last-name">
                 <span htmlFor="inputIn" className="registration-text09">
                   Last Name
                 </span>
@@ -81,7 +81,7 @@ const Registration = (props) => {
                   className="registration-textinput01 input"
                 />
               </div>
-              <div className="registration-user-name-field02">
+              <div className="registration-email">
                 <span id="textLabel" className="registration-text10">
                   Email:
                 </span>
@@ -93,7 +93,7 @@ const Registration = (props) => {
                   className="registration-textinput02 input"
                 />
               </div>
-              <div className="registration-user-name-field03">
+              <div className="registration-confirm-email">
                 <span id="textLabel" className="registration-text11">
                   Confirm Email:
                 </span>
@@ -105,7 +105,7 @@ const Registration = (props) => {
                   className="registration-textinput03 input"
                 />
               </div>
-              <div className="registration-user-name-field04">
+              <div className="registration-password">
                 <span className="registration-text12">Password:</span>
                 <input
                   type="password"
@@ -116,7 +116,7 @@ const Registration = (props) => {
                   className="registration-textinput04 input"
                 />
               </div>
-              <div className="registration-user-name-field05">
+              <div className="registration-confirm-password">
                 <span className="registration-text13">Confirm Password:</span>
                 <input
                   type="password"
@@ -126,7 +126,7 @@ const Registration = (props) => {
                   className="registration-textinput05 input"
                 />
               </div>
-              <div className="registration-user-name-field06">
+              <div className="registration-street-address">
                 <span htmlFor="inputIn" className="registration-text14">
                   Street Address:
                 </span>
@@ -138,7 +138,7 @@ const Registration = (props) => {
                   className="registration-textinput06 input"
                 />
               </div>
-              <div className="registration-user-name-field07">
+              <div className="registration-apt-address">
                 <span className="registration-text15">Second Line:</span>
                 <input
                   type="text"
@@ -147,7 +147,7 @@ const Registration = (props) => {
                   className="registration-textinput07 input"
                 />
               </div>
-              <div className="registration-user-name-field08">
+              <div className="registration-city">
                 <span htmlFor="inputIn" className="registration-text16">
                   City:
                 </span>
@@ -159,7 +159,7 @@ const Registration = (props) => {
                   className="registration-textinput08 input"
                 />
               </div>
-              <div className="registration-user-name-field09">
+              <div className="registration-country">
                 <label htmlFor="countryIn" className="registration-text17">
                   Country:
                 </label>
@@ -173,7 +173,7 @@ const Registration = (props) => {
                   <option value="Option 3">Option 3</option>
                 </select>
               </div>
-              <div className="registration-user-name-field10">
+              <div className="registration-state-province">
                 <span htmlFor="inputIn" className="registration-text18">
                   State/Province:
                 </span>
@@ -185,7 +185,7 @@ const Registration = (props) => {
                   className="registration-textinput09 input"
                 />
               </div>
-              <div className="registration-user-name-field11">
+              <div className="registration-zip">
                 <span htmlFor="inputIn" className="registration-text19">
                   Zip/Postal Code:
                 </span>
@@ -198,16 +198,16 @@ const Registration = (props) => {
                 />
               </div>
             </div>
-            <button
+            <Link
+              to="/survey"
               id="confirmButton"
-              type="button"
               className="registration-sign-up-confirm button"
             >
               <span>
-                <span>Sign up</span>
+                <span>Continue</span>
                 <br></br>
               </span>
-            </button>
+            </Link>
           </div>
         </form>
       </div>

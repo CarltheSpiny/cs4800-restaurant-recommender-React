@@ -14,7 +14,7 @@ const NavigationLinks = (props) => {
       <Link to="/restaurant-search" className="navigation-links-navlink1">
         {props.SearchPage}
       </Link>
-      <Link to="/rating-history" className="navigation-links-navlink2">
+      <Link to="/restaurant-history" className="navigation-links-navlink2">
         {props.HistoryPage}
       </Link>
       <Link to="/user-information" className="navigation-links-navlink3">

@@ -22,7 +22,7 @@ const UserLogin = (props) => {
         src="https://play.teleporthq.io/static/svg/default-img.svg"
         className="user-login-image"
       />
-      <div className="user-login-header">
+      <div className="user-login-user-login-title">
         <h1 className="user-login-title">User Login</h1>
         <span className="user-login-text">
           <span>Hello! Please use your email and password to log in</span>
@@ -39,9 +39,9 @@ const UserLogin = (props) => {
         </div>
       </div>
       <div className="user-login-container2">
-        <form className="user-login-form">
+        <form className="user-login-login-form">
           <div className="user-login-container3">
-            <div className="user-login-user-name-field">
+            <div className="user-login-email">
               <span id="textLabel" className="user-login-text6">
                 Email:
               </span>
@@ -53,7 +53,7 @@ const UserLogin = (props) => {
                 className="user-login-textinput input"
               />
             </div>
-            <div className="user-login-user-name-field1">
+            <div className="user-login-password">
               <span htmlFor="inputIn" className="user-login-text7">
                 Password:
               </span>
@@ -65,9 +65,13 @@ const UserLogin = (props) => {
                 className="user-login-textinput1 input"
               />
             </div>
-            <button type="submit" className="user-login-button button">
+            <Link
+              to="/"
+              id="loginButton"
+              className="user-login-login-button button"
+            >
               Log in
-            </button>
+            </Link>
           </div>
         </form>
       </div>

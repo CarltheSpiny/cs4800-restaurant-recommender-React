@@ -9,12 +9,17 @@
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
-  text-align: center;
+  text-align: right;
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
 .form-email-input-field-textinput {
   width: var(--dl-size-size-xxlarge);
+}
+@media(max-width: 1200px) {
+  .form-email-input-field-text {
+    text-align: right;
+  }
 }
 @media(max-width: 479px) {
   .form-email-input-field-user-name-field {

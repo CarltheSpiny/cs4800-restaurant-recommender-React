@@ -1,0 +1,29 @@
+.search-bar-container {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+}
+.search-bar-form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  margin-left: var(--dl-space-space-sixunits);
+  margin-right: var(--dl-space-space-sixunits);
+  justify-content: center;
+}
+.search-bar-text {
+  margin-left: var(--dl-space-space-unit);
+  margin-right: var(--dl-space-space-unit);
+}
+.search-bar-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: var(--dl-space-space-unit);
+  margin-right: var(--dl-space-space-unit);
+}
+
+
