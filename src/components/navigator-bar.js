@@ -14,8 +14,8 @@ const NavigatorBar = (props) => {
     >
       <Link to="/" className="navigator-bar-navlink">
         <img
-          alt={props.image_alt}
-          src={props.image_src}
+          alt="logo"
+          src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
           className="navigator-bar-image"
         />
       </Link>

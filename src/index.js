@@ -16,7 +16,7 @@ import UserLogin from './views/user-login'
 import RatingFromSurvey from './views/rating-from-survey'
 import NotImplemented from './views/not-implemented'
 import PersonalHome from './views/personal-home'
-import Rating from './views/rating'
+import RestrauntRating from './views/restraunt-rating'
 import RestaurantHistory from './views/restaurant-history'
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
         <Route component={RatingFromSurvey} exact path="/rating-from-survey" />
         <Route component={NotImplemented} path="**" />
         <Route component={PersonalHome} exact path="/" />
-        <Route component={Rating} exact path="/rating" />
+        <Route component={RestrauntRating} exact path="/restraunt-rating" />
         <Route component={RestaurantHistory} exact path="/restaurant-history" />
         <Redirect to="**" />
       </Switch>

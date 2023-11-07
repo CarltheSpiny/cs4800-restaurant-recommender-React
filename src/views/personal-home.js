@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
 
 import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
-import RestaurantCard1 from '../components/restaurant-card1'
+import RatedRestrauntCard from '../components/rated-restraunt-card'
 import './personal-home.css'
 
 const PersonalHome = (props) => {
@@ -21,53 +22,24 @@ const PersonalHome = (props) => {
         rootClassName="title-root-class-name"
       ></Title>
       <div className="personal-home-gallery">
-        <div className="personal-home-container1">
-          <RestaurantCard1 rootClassName="rootClassName"></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName1"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName3"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName2"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName4"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName5"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName6"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName7"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName8"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName9"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName10"
-          ></RestaurantCard1>
-          <RestaurantCard1
-            image_src="https://play.teleporthq.io/static/svg/default-img.svg"
-            rootClassName="rootClassName11"
-          ></RestaurantCard1>
-        </div>
+        <Link to="/restraunt-rating">
+          <RatedRestrauntCard
+            rootClassName="rated-restraunt-card-root-class-name"
+            className="personal-home-component2"
+          ></RatedRestrauntCard>
+        </Link>
+        <Link to="/restraunt-rating">
+          <RatedRestrauntCard
+            rootClassName="rated-restraunt-card-root-class-name1"
+            className="personal-home-component3"
+          ></RatedRestrauntCard>
+        </Link>
+        <Link to="/restraunt-rating">
+          <RatedRestrauntCard
+            rootClassName="rated-restraunt-card-root-class-name2"
+            className="personal-home-component4"
+          ></RatedRestrauntCard>
+        </Link>
       </div>
     </div>
   )

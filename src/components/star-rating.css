@@ -18,6 +18,7 @@
 }
 .star-rating-button {
   display: flex;
+  box-shadow: 5px 5px 10px 0px #d4d4d4,5px 5px 10px 0px #d4d4d4;
   transition: 0.3s;
   padding-top: 0px;
   border-width: 0px;

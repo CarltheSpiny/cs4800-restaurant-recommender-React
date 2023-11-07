@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet'
 import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
 import SearchBar from '../components/search-bar'
-import RatedRestaurantCard from '../components/rated-restaurant-card'
 import './restaurant-history.css'
 
 const RestaurantHistory = (props) => {
@@ -29,20 +28,7 @@ const RestaurantHistory = (props) => {
         rootClassName="search-bar-root-class-name"
       ></SearchBar>
       <div className="restaurant-history-gallery">
-        <div className="restaurant-history-container1">
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-          <RatedRestaurantCard></RatedRestaurantCard>
-        </div>
+        <div className="restaurant-history-container1"></div>
       </div>
     </div>
   )

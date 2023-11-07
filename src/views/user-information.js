@@ -26,7 +26,7 @@ const UserInformation = (props) => {
         <form className="user-information-registration-form">
           <div className="user-information-all-fields">
             <div className="user-information-user-fields">
-              <div className="user-information-user-name-field">
+              <div className="user-information-first-name">
                 <span htmlFor="inputIn" className="user-information-text">
                   First Name:
                 </span>
@@ -37,9 +37,9 @@ const UserInformation = (props) => {
                   className="user-information-textinput input"
                 />
               </div>
-              <div className="user-information-user-name-field01">
+              <div className="user-information-last-name">
                 <span htmlFor="inputIn" className="user-information-text01">
-                  Last Name
+                  Last Name:
                 </span>
                 <input
                   type="text"
@@ -48,7 +48,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput01 input"
                 />
               </div>
-              <div className="user-information-user-name-field02">
+              <div className="user-information-email">
                 <span id="textLabel" className="user-information-text02">
                   Email:
                 </span>
@@ -59,7 +59,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput02 input"
                 />
               </div>
-              <div className="user-information-user-name-field03">
+              <div className="user-information-confirm-email">
                 <span id="textLabel" className="user-information-text03">
                   Confirm Email:
                 </span>
@@ -70,7 +70,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput03 input"
                 />
               </div>
-              <div className="user-information-user-name-field04">
+              <div className="user-information-password">
                 <span className="user-information-text04">Password:</span>
                 <input
                   type="password"
@@ -80,7 +80,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput04 input"
                 />
               </div>
-              <div className="user-information-user-name-field05">
+              <div className="user-information-confirm-password">
                 <span className="user-information-text05">
                   Confirm Password:
                 </span>
@@ -91,7 +91,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput05 input"
                 />
               </div>
-              <div className="user-information-user-name-field06">
+              <div className="user-information-street-address">
                 <span htmlFor="inputIn" className="user-information-text06">
                   Street Address:
                 </span>
@@ -102,7 +102,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput06 input"
                 />
               </div>
-              <div className="user-information-user-name-field07">
+              <div className="user-information-apt-address">
                 <span className="user-information-text07">Second Line:</span>
                 <input
                   type="text"
@@ -111,7 +111,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput07 input"
                 />
               </div>
-              <div className="user-information-user-name-field08">
+              <div className="user-information-city">
                 <span htmlFor="inputIn" className="user-information-text08">
                   City:
                 </span>
@@ -122,7 +122,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput08 input"
                 />
               </div>
-              <div className="user-information-user-name-field09">
+              <div className="user-information-country">
                 <label htmlFor="countryIn" className="user-information-text09">
                   Country:
                 </label>
@@ -139,7 +139,7 @@ const UserInformation = (props) => {
                   <option value="Option 3">Option 3</option>
                 </select>
               </div>
-              <div className="user-information-user-name-field10">
+              <div className="user-information-state-province">
                 <span htmlFor="inputIn" className="user-information-text10">
                   State/Province:
                 </span>
@@ -150,7 +150,7 @@ const UserInformation = (props) => {
                   className="user-information-textinput09 input"
                 />
               </div>
-              <div className="user-information-user-name-field11">
+              <div className="user-information-zip">
                 <span htmlFor="inputIn" className="user-information-text11">
                   Zip/Postal Code:
                 </span>

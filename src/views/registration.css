@@ -83,7 +83,7 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-.registration-user-name-field {
+.registration-first-name {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -101,7 +101,7 @@
 .registration-textinput {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field01 {
+.registration-last-name {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -119,7 +119,7 @@
 .registration-textinput01 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field02 {
+.registration-email {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -137,7 +137,7 @@
 .registration-textinput02 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field03 {
+.registration-confirm-email {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -155,7 +155,7 @@
 .registration-textinput03 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field04 {
+.registration-password {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -173,7 +173,7 @@
 .registration-textinput04 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field05 {
+.registration-confirm-password {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -191,7 +191,7 @@
 .registration-textinput05 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field06 {
+.registration-street-address {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -209,7 +209,7 @@
 .registration-textinput06 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field07 {
+.registration-apt-address {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -227,7 +227,7 @@
 .registration-textinput07 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field08 {
+.registration-city {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -245,7 +245,7 @@
 .registration-textinput08 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field09 {
+.registration-country {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -266,7 +266,7 @@
   height: 35px;
   align-self: flex-start;
 }
-.registration-user-name-field10 {
+.registration-state-province {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -284,7 +284,7 @@
 .registration-textinput09 {
   width: var(--dl-size-size-xxlarge);
 }
-.registration-user-name-field11 {
+.registration-zip {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -361,7 +361,7 @@
     padding-bottom: 12px;
     justify-content: flex-start;
   }
-  .registration-user-name-field {
+  .registration-first-name {
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -376,7 +376,7 @@
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
-  .registration-user-name-field01 {
+  .registration-last-name {
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -391,7 +391,7 @@
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
-  .registration-user-name-field02 {
+  .registration-email {
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -399,7 +399,7 @@
     width: 170px;
     text-align: left;
   }
-  .registration-user-name-field03 {
+  .registration-confirm-email {
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -416,7 +416,7 @@
     width: 170px;
     text-align: left;
   }
-  .registration-user-name-field06 {
+  .registration-street-address {
     width: auto;
     align-self: center;
     align-items: flex-start;
@@ -432,7 +432,7 @@
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
-  .registration-user-name-field07 {
+  .registration-apt-address {
     width: auto;
     align-self: center;
   }
@@ -440,7 +440,7 @@
     width: 170px;
     text-align: left;
   }
-  .registration-user-name-field08 {
+  .registration-city {
     width: auto;
     align-self: center;
     align-items: flex-start;
@@ -456,7 +456,7 @@
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
-  .registration-user-name-field09 {
+  .registration-country {
     align-self: center;
   }
   .registration-text17 {
@@ -470,7 +470,7 @@
     border-color: var(--dl-color-gray-black);
     border-width: 1px;
   }
-  .registration-user-name-field10 {
+  .registration-state-province {
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -485,7 +485,7 @@
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
-  .registration-user-name-field11 {
+  .registration-zip {
     align-items: flex-start;
     justify-content: flex-start;
   }
