@@ -24,7 +24,7 @@ const NotImplemented = (props) => {
       ></Title>
       <div className="not-implemented-container1">
         <h1>The requested page could not be found.</h1>
-        <span>Please use the menu above to go back to the main site.</span>
+        <span>Please use the buttons above to go back to the main site.</span>
       </div>
     </div>
   )

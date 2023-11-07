@@ -17,7 +17,7 @@ const SideMenu = (props) => {
           <span className="side-menu-text">Search</span>
           <span className="side-menu-text1">Home</span>
           <span className="side-menu-text2">My Profile</span>
-          <span className="side-menu-text3">Your History</span>
+          <span className="side-menu-text3">History</span>
           <span className="side-menu-text4">Sign In / Log out</span>
         </nav>
       </div>
