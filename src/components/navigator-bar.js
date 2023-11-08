@@ -12,7 +12,7 @@ const NavigatorBar = (props) => {
       data-role="Header"
       className={`navigator-bar-header ${props.rootClassName} `}
     >
-      <Link to="/" className="navigator-bar-navlink">
+      <Link to="/landing" className="navigator-bar-navlink">
         <img
           alt="logo"
           src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
