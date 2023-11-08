@@ -41,6 +41,7 @@
   width: auto;
   height: auto;
 }
+
 @media(max-width: 767px) {
   .rated-restraunt-card-gallery-card {
     flex-direction: column;

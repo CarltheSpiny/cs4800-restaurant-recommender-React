@@ -35,8 +35,7 @@
 }
 .user-information-user-fields {
   gap: var(--dl-space-space-unit);
-  flex: 1;
-  height: 312px;
+  height: 198px;
   display: flex;
   flex-wrap: wrap;
   align-self: center;
@@ -78,7 +77,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.user-information-textinput01 {
+.user-information-textinput1 {
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-email {
@@ -96,11 +95,11 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.user-information-textinput02 {
+.user-information-textinput2 {
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-confirm-email {
-  display: flex;
+  display: none;
   position: relative;
   align-items: flex-start;
   flex-direction: row;
@@ -114,7 +113,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.user-information-textinput03 {
+.user-information-textinput3 {
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-password {
@@ -132,11 +131,11 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.user-information-textinput04 {
+.user-information-textinput4 {
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-confirm-password {
-  display: flex;
+  display: none;
   position: relative;
   align-items: flex-start;
   flex-direction: row;
@@ -150,118 +149,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.user-information-textinput05 {
-  width: var(--dl-size-size-xxlarge);
-}
-.user-information-street-address {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.user-information-text06 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: right;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.user-information-textinput06 {
-  width: var(--dl-size-size-xxlarge);
-}
-.user-information-apt-address {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.user-information-text07 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: right;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.user-information-textinput07 {
-  width: var(--dl-size-size-xxlarge);
-}
-.user-information-city {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.user-information-text08 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: right;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.user-information-textinput08 {
-  width: var(--dl-size-size-xxlarge);
-}
-.user-information-country {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.user-information-text09 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: right;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.user-information-select {
-  flex: 1;
-  width: var(--dl-size-size-xxlarge);
-  height: 35px;
-  align-self: flex-start;
-}
-.user-information-state-province {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.user-information-text10 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: right;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.user-information-textinput09 {
-  width: var(--dl-size-size-xxlarge);
-}
-.user-information-zip {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.user-information-text11 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: right;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.user-information-textinput10 {
+.user-information-textinput5 {
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-sign-up-confirm {
@@ -435,7 +323,7 @@
     padding-right: var(--dl-space-space-unit);
     text-transform: capitalize;
   }
-  .user-information-textinput01 {
+  .user-information-textinput1 {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
@@ -463,89 +351,5 @@
   .user-information-text05 {
     width: 170px;
     text-align: left;
-  }
-  .user-information-street-address {
-    width: auto;
-    align-self: center;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .user-information-text06 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    text-transform: capitalize;
-  }
-  .user-information-textinput06 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .user-information-apt-address {
-    width: auto;
-    align-self: center;
-  }
-  .user-information-text07 {
-    width: 170px;
-    text-align: left;
-  }
-  .user-information-city {
-    width: auto;
-    align-self: center;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .user-information-text08 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    text-transform: capitalize;
-  }
-  .user-information-textinput08 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .user-information-country {
-    align-self: center;
-  }
-  .user-information-text09 {
-    width: 170px;
-    text-align: left;
-  }
-  .user-information-select {
-    flex: 1;
-    width: var(--dl-size-size-xxlarge);
-    align-self: flex-start;
-    border-color: var(--dl-color-gray-black);
-    border-width: 1px;
-  }
-  .user-information-state-province {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .user-information-text10 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    padding-right: var(--dl-space-space-unit);
-    text-transform: capitalize;
-  }
-  .user-information-textinput09 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .user-information-zip {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .user-information-text11 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    padding-right: var(--dl-space-space-unit);
-    text-transform: capitalize;
-  }
-  .user-information-textinput10 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
   }
 }

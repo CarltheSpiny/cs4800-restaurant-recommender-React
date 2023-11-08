@@ -78,7 +78,7 @@ const Registration = (props) => {
                   id="inputIn"
                   required
                   placeholder="Doe"
-                  className="registration-textinput01 input"
+                  className="registration-textinput1 input"
                 />
               </div>
               <div className="registration-email">
@@ -90,7 +90,7 @@ const Registration = (props) => {
                   id="emailIn"
                   required
                   placeholder="example@email.com"
-                  className="registration-textinput02 input"
+                  className="registration-textinput2 input"
                 />
               </div>
               <div className="registration-confirm-email">
@@ -102,7 +102,7 @@ const Registration = (props) => {
                   id="emailIn"
                   required
                   placeholder="example@email.com"
-                  className="registration-textinput03 input"
+                  className="registration-textinput3 input"
                 />
               </div>
               <div className="registration-password">
@@ -113,7 +113,7 @@ const Registration = (props) => {
                   required
                   minlength="4"
                   placeholder="Password"
-                  className="registration-textinput04 input"
+                  className="registration-textinput4 input"
                 />
               </div>
               <div className="registration-confirm-password">
@@ -123,78 +123,7 @@ const Registration = (props) => {
                   id="confirmedPassIn"
                   required
                   placeholder="Retype Password"
-                  className="registration-textinput05 input"
-                />
-              </div>
-              <div className="registration-street-address">
-                <span htmlFor="inputIn" className="registration-text14">
-                  Street Address:
-                </span>
-                <input
-                  type="text"
-                  id="inputIn"
-                  required
-                  placeholder="123 Main Street"
-                  className="registration-textinput06 input"
-                />
-              </div>
-              <div className="registration-apt-address">
-                <span className="registration-text15">Second Line:</span>
-                <input
-                  type="text"
-                  id="inputIn"
-                  placeholder="Apt/Unit/Suite"
-                  className="registration-textinput07 input"
-                />
-              </div>
-              <div className="registration-city">
-                <span htmlFor="inputIn" className="registration-text16">
-                  City:
-                </span>
-                <input
-                  type="text"
-                  id="inputIn"
-                  required
-                  placeholder="Pomona"
-                  className="registration-textinput08 input"
-                />
-              </div>
-              <div className="registration-country">
-                <label htmlFor="countryIn" className="registration-text17">
-                  Country:
-                </label>
-                <select id="countryIn" required className="registration-select">
-                  <option value="default" selected>
-                    United States
-                  </option>
-                  <option value="Option 1">Not United States</option>
-                  <option value="Option 1">Option 1</option>
-                  <option value="Option 2">Option 2</option>
-                  <option value="Option 3">Option 3</option>
-                </select>
-              </div>
-              <div className="registration-state-province">
-                <span htmlFor="inputIn" className="registration-text18">
-                  State/Province:
-                </span>
-                <input
-                  type="text"
-                  id="inputIn"
-                  required
-                  placeholder="California"
-                  className="registration-textinput09 input"
-                />
-              </div>
-              <div className="registration-zip">
-                <span htmlFor="inputIn" className="registration-text19">
-                  Zip/Postal Code:
-                </span>
-                <input
-                  type="text"
-                  id="inputIn"
-                  required
-                  placeholder="5-Digit Zip Code"
-                  className="registration-textinput10 input"
+                  className="registration-textinput5 input"
                 />
               </div>
             </div>

@@ -116,7 +116,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.registration-textinput01 {
+.registration-textinput1 {
   width: var(--dl-size-size-xxlarge);
 }
 .registration-email {
@@ -134,7 +134,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.registration-textinput02 {
+.registration-textinput2 {
   width: var(--dl-size-size-xxlarge);
 }
 .registration-confirm-email {
@@ -152,7 +152,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.registration-textinput03 {
+.registration-textinput3 {
   width: var(--dl-size-size-xxlarge);
 }
 .registration-password {
@@ -170,7 +170,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.registration-textinput04 {
+.registration-textinput4 {
   width: var(--dl-size-size-xxlarge);
 }
 .registration-confirm-password {
@@ -188,118 +188,7 @@
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
-.registration-textinput05 {
-  width: var(--dl-size-size-xxlarge);
-}
-.registration-street-address {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.registration-text14 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: center;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.registration-textinput06 {
-  width: var(--dl-size-size-xxlarge);
-}
-.registration-apt-address {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.registration-text15 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: center;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.registration-textinput07 {
-  width: var(--dl-size-size-xxlarge);
-}
-.registration-city {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.registration-text16 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: center;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.registration-textinput08 {
-  width: var(--dl-size-size-xxlarge);
-}
-.registration-country {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.registration-text17 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: center;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.registration-select {
-  flex: 1;
-  width: var(--dl-size-size-xxlarge);
-  height: 35px;
-  align-self: flex-start;
-}
-.registration-state-province {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.registration-text18 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: center;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.registration-textinput09 {
-  width: var(--dl-size-size-xxlarge);
-}
-.registration-zip {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.registration-text19 {
-  width: var(--dl-size-size-xlarge);
-  height: 35px;
-  align-self: flex-start;
-  text-align: center;
-  line-height: 2;
-  padding-right: var(--dl-space-space-unit);
-}
-.registration-textinput10 {
+.registration-textinput5 {
   width: var(--dl-size-size-xxlarge);
 }
 .registration-sign-up-confirm {
@@ -387,7 +276,7 @@
     padding-right: var(--dl-space-space-unit);
     text-transform: capitalize;
   }
-  .registration-textinput01 {
+  .registration-textinput1 {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
@@ -415,89 +304,5 @@
   .registration-text13 {
     width: 170px;
     text-align: left;
-  }
-  .registration-street-address {
-    width: auto;
-    align-self: center;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .registration-text14 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    text-transform: capitalize;
-  }
-  .registration-textinput06 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .registration-apt-address {
-    width: auto;
-    align-self: center;
-  }
-  .registration-text15 {
-    width: 170px;
-    text-align: left;
-  }
-  .registration-city {
-    width: auto;
-    align-self: center;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .registration-text16 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    text-transform: capitalize;
-  }
-  .registration-textinput08 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .registration-country {
-    align-self: center;
-  }
-  .registration-text17 {
-    width: 170px;
-    text-align: left;
-  }
-  .registration-select {
-    flex: 1;
-    width: var(--dl-size-size-xxlarge);
-    align-self: flex-start;
-    border-color: var(--dl-color-gray-black);
-    border-width: 1px;
-  }
-  .registration-state-province {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .registration-text18 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    padding-right: var(--dl-space-space-unit);
-    text-transform: capitalize;
-  }
-  .registration-textinput09 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .registration-zip {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .registration-text19 {
-    width: 170px;
-    text-align: left;
-    font-family: Arial;
-    padding-right: var(--dl-space-space-unit);
-    text-transform: capitalize;
-  }
-  .registration-textinput10 {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
   }
 }

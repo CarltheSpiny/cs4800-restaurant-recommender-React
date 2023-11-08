@@ -16,7 +16,7 @@ const RatedRestrauntCard = (props) => {
         <h2 className="rated-restraunt-card-restraunt-name">
           {props.RestrauntName}
         </h2>
-        <span className="rated-restraunt-card-rating">{props.Rating}</span>
+        <span className="rated-restraunt-card-rating">{props.Like_Amount}</span>
       </div>
     </div>
   )
@@ -24,14 +24,14 @@ const RatedRestrauntCard = (props) => {
 
 RatedRestrauntCard.defaultProps = {
   rootClassName: '',
-  Rating: 'Rating Value',
+  Like_Amount: 'Likes',
   RestrauntImage_src: 'https://play.teleporthq.io/static/svg/default-img.svg',
   RestrauntName: 'Restraunt Name',
 }
 
 RatedRestrauntCard.propTypes = {
   rootClassName: PropTypes.string,
-  Rating: PropTypes.string,
+  Like_Amount: PropTypes.string,
   RestrauntImage_src: PropTypes.string,
   RestrauntName: PropTypes.string,
 }

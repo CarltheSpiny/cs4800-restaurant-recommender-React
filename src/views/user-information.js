@@ -45,7 +45,7 @@ const UserInformation = (props) => {
                   type="text"
                   id="lastName"
                   placeholder="Doe"
-                  className="user-information-textinput01 input"
+                  className="user-information-textinput1 input"
                 />
               </div>
               <div className="user-information-email">
@@ -56,7 +56,7 @@ const UserInformation = (props) => {
                   type="email"
                   id="emailIn"
                   placeholder="example@email.com"
-                  className="user-information-textinput02 input"
+                  className="user-information-textinput2 input"
                 />
               </div>
               <div className="user-information-confirm-email">
@@ -67,7 +67,7 @@ const UserInformation = (props) => {
                   type="email"
                   id="confirmEmailIn"
                   placeholder="example@email.com"
-                  className="user-information-textinput03 input"
+                  className="user-information-textinput3 input"
                 />
               </div>
               <div className="user-information-password">
@@ -77,7 +77,7 @@ const UserInformation = (props) => {
                   id="passwordIn"
                   minlength="4"
                   placeholder="Password"
-                  className="user-information-textinput04 input"
+                  className="user-information-textinput4 input"
                 />
               </div>
               <div className="user-information-confirm-password">
@@ -88,77 +88,7 @@ const UserInformation = (props) => {
                   type="password"
                   id="confirmedPassIn"
                   placeholder="Retype Password"
-                  className="user-information-textinput05 input"
-                />
-              </div>
-              <div className="user-information-street-address">
-                <span htmlFor="inputIn" className="user-information-text06">
-                  Street Address:
-                </span>
-                <input
-                  type="text"
-                  id="adressIn"
-                  placeholder="123 Main Street"
-                  className="user-information-textinput06 input"
-                />
-              </div>
-              <div className="user-information-apt-address">
-                <span className="user-information-text07">Second Line:</span>
-                <input
-                  type="text"
-                  id="secondLineIn"
-                  placeholder="Apt/Unit/Suite"
-                  className="user-information-textinput07 input"
-                />
-              </div>
-              <div className="user-information-city">
-                <span htmlFor="inputIn" className="user-information-text08">
-                  City:
-                </span>
-                <input
-                  type="text"
-                  id="cityIn"
-                  placeholder="Pomona"
-                  className="user-information-textinput08 input"
-                />
-              </div>
-              <div className="user-information-country">
-                <label htmlFor="countryIn" className="user-information-text09">
-                  Country:
-                </label>
-                <select id="countryIn" className="user-information-select">
-                  <option value="default" selected>
-                    United States
-                  </option>
-                  <option value="Option 1">Option 1</option>
-                  <option value="Option 1">Not United States</option>
-                  <option value="Option 1">Option 1</option>
-                  <option value="Option 2">Option 2</option>
-                  <option value="Option 2">Option 2</option>
-                  <option value="Option 3">Option 3</option>
-                  <option value="Option 3">Option 3</option>
-                </select>
-              </div>
-              <div className="user-information-state-province">
-                <span htmlFor="inputIn" className="user-information-text10">
-                  State/Province:
-                </span>
-                <input
-                  type="text"
-                  id="stateIn"
-                  placeholder="California"
-                  className="user-information-textinput09 input"
-                />
-              </div>
-              <div className="user-information-zip">
-                <span htmlFor="inputIn" className="user-information-text11">
-                  Zip/Postal Code:
-                </span>
-                <input
-                  type="text"
-                  id="zipCodeIn"
-                  placeholder="5-Digit Zip Code"
-                  className="user-information-textinput10 input"
+                  className="user-information-textinput5 input"
                 />
               </div>
             </div>
