@@ -27,7 +27,7 @@
 .user-information-all-fields {
   flex: 1;
   width: 200px;
-  height: 434px;
+  height: 388px;
   display: flex;
   align-self: center;
   align-items: center;
@@ -152,13 +152,13 @@
 .user-information-textinput5 {
   width: var(--dl-size-size-xxlarge);
 }
-.user-information-sign-up-confirm {
+.user-information-edit-save-button {
   width: var(--dl-size-size-xxlarge);
   align-self: center;
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
-.user-information-container1 {
+.user-information-subtitle {
   flex: 0 0 auto;
   width: 100%;
   height: 100px;
@@ -173,7 +173,7 @@
   border-right-width: 0px;
   border-bottom-width: 0px;
 }
-.user-information-container2 {
+.user-information-more-options-container {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
@@ -182,7 +182,7 @@
   padding-right: var(--dl-space-space-twounits);
   justify-content: flex-start;
 }
-.user-information-container3 {
+.user-information-container1 {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
@@ -244,6 +244,17 @@
 .user-information-checkbox {
   margin-left: var(--dl-space-space-unit);
   margin-right: var(--dl-space-space-unit);
+}
+@media(max-width: 1200px) {
+  .user-information-all-fields {
+    height: auto;
+  }
+  .user-information-user-fields {
+    height: auto;
+  }
+  .user-information-confirm-email {
+    display: none;
+  }
 }
 @media(max-width: 767px) {
   .user-information-registration-container {

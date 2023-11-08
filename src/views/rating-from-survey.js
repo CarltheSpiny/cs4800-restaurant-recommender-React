@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
 import NavigatorBar from '../components/navigator-bar'
-import StarRating from '../components/star-rating'
+import LikeBar from '../components/like-bar'
 import Label from '../components/label'
 import CommentCard from '../components/comment-card'
 import './rating-from-survey.css'
@@ -42,7 +42,7 @@ const RatingFromSurvey = (props) => {
                 </span>
                 <div className="rating-from-survey-container06">
                   <div className="rating-from-survey-container07">
-                    <StarRating rootClassName="star-rating-root-class-name1"></StarRating>
+                    <LikeBar rootClassName="like-bar-root-class-name1"></LikeBar>
                   </div>
                 </div>
               </div>
@@ -52,7 +52,7 @@ const RatingFromSurvey = (props) => {
                   <br></br>
                 </span>
                 <div className="rating-from-survey-container09">
-                  <StarRating rootClassName="star-rating-root-class-name2"></StarRating>
+                  <LikeBar rootClassName="like-bar-root-class-name2"></LikeBar>
                 </div>
               </div>
             </div>

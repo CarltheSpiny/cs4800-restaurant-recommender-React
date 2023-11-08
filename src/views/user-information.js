@@ -95,24 +95,24 @@ const UserInformation = (props) => {
             <button
               id="confirmButton"
               type="button"
-              className="user-information-sign-up-confirm button"
+              className="user-information-edit-save-button button"
             >
               <span>
-                <span>Save</span>
+                <span>Edit</span>
                 <br></br>
               </span>
             </button>
           </div>
         </form>
       </div>
-      <div className="user-information-container1">
+      <div className="user-information-subtitle">
         <h1 className="Heading">Settings and your Data</h1>
         <span className="Content">
           You can manage settings and other data here.
         </span>
       </div>
-      <div className="user-information-container2">
-        <div className="user-information-container3">
+      <div className="user-information-more-options-container">
+        <div className="user-information-container1">
           <form className="user-information-form">
             <label>Retake Survey</label>
             <button type="button" className="user-information-button button">

@@ -13,8 +13,10 @@ const Title = (props) => {
           src={props.image_src}
           className="title-image"
         />
-        <h1 className="">{props.heading}</h1>
-        <span className="">{props.text}</span>
+        <div className="title-text-container">
+          <h1 className="title-text">{props.heading}</h1>
+          <span className="title-text1">{props.text}</span>
+        </div>
       </div>
     </div>
   )

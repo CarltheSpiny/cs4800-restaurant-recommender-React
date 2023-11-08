@@ -22,6 +22,22 @@
   align-self: center;
   object-fit: cover;
 }
+.title-text-container {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+  padding-top: var(--dl-space-space-unit);
+  flex-direction: column;
+}
+.title-text {
+  align-self: center;
+}
+.title-text1 {
+  align-self: center;
+}
 
 
 
