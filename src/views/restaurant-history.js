@@ -8,7 +8,7 @@ import SearchBar from '../components/search-bar'
 import RatedRestrauntCard from '../components/rated-restraunt-card'
 import './restaurant-history.css'
 
-const RestaurantHistory = (props) => {
+const RestaurantHistoryPage = (props) => {
   return (
     <div className="restaurant-history-container">
       <Helmet>
@@ -37,4 +37,4 @@ const RestaurantHistory = (props) => {
   )
 }
 
-export default RestaurantHistory
+export default RestaurantHistoryPage
