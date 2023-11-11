@@ -28,21 +28,12 @@ const UserLogin = (props) => {
           <span>Hello! Please use your email and password to log in</span>
           <br></br>
         </span>
-        <div className="user-login-container1">
-          <span className="user-login-text3">
-            <span>Don&apos;t have an account?</span>
-            <br></br>
-          </span>
-          <Link to="/registration" className="user-login-navlink">
-            Create one.
-          </Link>
-        </div>
       </div>
-      <div className="user-login-container2">
+      <div className="user-login-user-login-container">
         <form className="user-login-login-form">
-          <div className="user-login-container3">
+          <div className="user-login-container1">
             <div className="user-login-email">
-              <span id="textLabel" className="user-login-text6">
+              <span id="textLabel" className="user-login-text3">
                 Email:
               </span>
               <input
@@ -54,7 +45,7 @@ const UserLogin = (props) => {
               />
             </div>
             <div className="user-login-password">
-              <span htmlFor="inputIn" className="user-login-text7">
+              <span htmlFor="inputIn" className="user-login-text4">
                 Password:
               </span>
               <input
@@ -72,6 +63,15 @@ const UserLogin = (props) => {
             >
               Log in
             </Link>
+            <div className="user-login-to-registration-container">
+              <span className="user-login-text5">
+                <span>Don&apos;t have an account?</span>
+                <br></br>
+              </span>
+              <Link to="/registration" className="user-login-navlink">
+                Create one.
+              </Link>
+            </div>
           </div>
         </form>
       </div>

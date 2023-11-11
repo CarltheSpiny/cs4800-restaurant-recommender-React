@@ -8,13 +8,21 @@ const LikeBar = (props) => {
   return (
     <div className={`like-bar-container ${props.rootClassName} `}>
       <div className="like-bar-container1">
-        <button type="button" id="like_button" className="button">
+        <button
+          id="like_button"
+          type="button"
+          className="button like-bar-like-button"
+        >
           <span className="">
             <span className="">Like</span>
             <br className=""></br>
           </span>
         </button>
-        <button type="button" id="dislike_button" className="button">
+        <button
+          id="dislike_button"
+          type="button"
+          className="button like-bar-dislike-button"
+        >
           <span className="">
             <span className="">Dislike</span>
             <br className=""></br>
@@ -26,15 +34,15 @@ const LikeBar = (props) => {
 }
 
 LikeBar.defaultProps = {
-  rootClassName: '',
-  Like_Button: 'Like',
   Dislike_Button: 'Button',
+  Like_Button: 'Like',
+  rootClassName: '',
 }
 
 LikeBar.propTypes = {
-  rootClassName: PropTypes.string,
-  Like_Button: PropTypes.string,
   Dislike_Button: PropTypes.string,
+  Like_Button: PropTypes.string,
+  rootClassName: PropTypes.string,
 }
 
 export default LikeBar

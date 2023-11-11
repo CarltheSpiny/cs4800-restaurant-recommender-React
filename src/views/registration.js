@@ -35,30 +35,13 @@ const Registration = (props) => {
           </span>
           <br></br>
         </span>
-        <div className="registration-container1">
-          <span className="registration-text03">
-            <span>Already have an account?</span>
-            <br></br>
-          </span>
-          <Link to="/user-login" className="registration-navlink">
-            <span>
-              Sign in
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: ' ',
-                }}
-              />
-            </span>
-            <span>here.</span>
-          </Link>
-        </div>
       </div>
       <div className="registration-registration-container">
         <form className="registration-registration-form">
           <div className="registration-all-fields">
             <div className="registration-user-fields">
               <div className="registration-first-name">
-                <span htmlFor="inputIn" className="registration-text08">
+                <span htmlFor="inputIn" className="registration-text03">
                   First Name:
                 </span>
                 <input
@@ -70,7 +53,7 @@ const Registration = (props) => {
                 />
               </div>
               <div className="registration-last-name">
-                <span htmlFor="inputIn" className="registration-text09">
+                <span htmlFor="inputIn" className="registration-text04">
                   Last Name
                 </span>
                 <input
@@ -82,7 +65,7 @@ const Registration = (props) => {
                 />
               </div>
               <div className="registration-email">
-                <span id="textLabel" className="registration-text10">
+                <span id="textLabel" className="registration-text05">
                   Email:
                 </span>
                 <input
@@ -94,7 +77,7 @@ const Registration = (props) => {
                 />
               </div>
               <div className="registration-confirm-email">
-                <span id="textLabel" className="registration-text11">
+                <span id="textLabel" className="registration-text06">
                   Confirm Email:
                 </span>
                 <input
@@ -106,7 +89,7 @@ const Registration = (props) => {
                 />
               </div>
               <div className="registration-password">
-                <span className="registration-text12">Password:</span>
+                <span className="registration-text07">Password:</span>
                 <input
                   type="password"
                   id="passwordIn"
@@ -117,7 +100,7 @@ const Registration = (props) => {
                 />
               </div>
               <div className="registration-confirm-password">
-                <span className="registration-text13">Confirm Password:</span>
+                <span className="registration-text08">Confirm Password:</span>
                 <input
                   type="password"
                   id="confirmedPassIn"
@@ -128,15 +111,32 @@ const Registration = (props) => {
               </div>
             </div>
             <Link
-              to="/survey"
+              to="/"
               id="confirmButton"
               className="registration-sign-up-confirm button"
             >
               <span>
-                <span>Continue</span>
+                <span>Finish</span>
                 <br></br>
               </span>
             </Link>
+            <div className="registration-to-login-container">
+              <span className="registration-text12">
+                <span>Already have an account?</span>
+                <br></br>
+              </span>
+              <Link to="/user-login" className="registration-navlink">
+                <span>
+                  Sign in
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: ' ',
+                    }}
+                  />
+                </span>
+                <span>here.</span>
+              </Link>
+            </div>
           </div>
         </form>
       </div>

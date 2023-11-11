@@ -19,3 +19,16 @@
 
 
 
+@media(max-width: 1200px) {
+  .like-bar-like-button {
+    margin-top: var(--dl-space-space-unit);
+    margin-left: var(--dl-space-space-unit);
+    margin-right: var(--dl-space-space-halfunit);
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .like-bar-dislike-button {
+    margin-top: var(--dl-space-space-unit);
+    margin-right: var(--dl-space-space-unit);
+    margin-bottom: var(--dl-space-space-unit);
+  }
+}

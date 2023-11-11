@@ -74,7 +74,7 @@
 }
 .teleport-show {
   display: flex !important;
-  transform: none !important;
+  transform: translateX(0%) !important;
 }
 .form-control {
   padding: 0px;

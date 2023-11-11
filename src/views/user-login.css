@@ -31,24 +31,7 @@
 .user-login-text {
   align-self: center;
 }
-.user-login-container1 {
-  display: flex;
-  align-self: center;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.user-login-text3 {
-  align-self: center;
-  margin-right: var(--dl-space-space-unit);
-}
-.user-login-navlink {
-  align-self: center;
-  font-style: normal;
-  font-weight: 700;
-  text-decoration: underline none;
-}
-.user-login-container2 {
+.user-login-user-login-container {
   height: 688px;
   display: flex;
   align-self: stretch;
@@ -62,7 +45,7 @@
   display: flex;
   align-self: stretch;
 }
-.user-login-container3 {
+.user-login-container1 {
   gap: var(--dl-space-space-unit);
   flex: 1;
   width: 200px;
@@ -79,7 +62,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.user-login-text6 {
+.user-login-text3 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -98,7 +81,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.user-login-text7 {
+.user-login-text4 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -114,12 +97,29 @@
   align-self: center;
   text-decoration: none;
 }
+.user-login-to-registration-container {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.user-login-text5 {
+  align-self: center;
+  margin-right: var(--dl-space-space-unit);
+}
+.user-login-navlink {
+  align-self: center;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: underline none;
+}
 @media(max-width: 479px) {
   .user-login-email {
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .user-login-text6 {
+  .user-login-text3 {
     text-align: left;
     padding-left: var(--dl-space-space-unit);
   }
@@ -131,7 +131,7 @@
     align-items: flex-start;
     justify-content: center;
   }
-  .user-login-text7 {
+  .user-login-text4 {
     width: var(--dl-size-size-xlarge);
     text-align: left;
     font-family: Arial;

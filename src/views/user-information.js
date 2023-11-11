@@ -33,6 +33,8 @@ const UserInformation = (props) => {
                 <input
                   type="text"
                   id="firstName"
+                  disabled
+                  required
                   placeholder="John"
                   className="user-information-textinput input"
                 />
@@ -44,6 +46,8 @@ const UserInformation = (props) => {
                 <input
                   type="text"
                   id="lastName"
+                  disabled
+                  required
                   placeholder="Doe"
                   className="user-information-textinput1 input"
                 />
@@ -55,6 +59,8 @@ const UserInformation = (props) => {
                 <input
                   type="email"
                   id="emailIn"
+                  disabled
+                  required
                   placeholder="example@email.com"
                   className="user-information-textinput2 input"
                 />
@@ -66,6 +72,7 @@ const UserInformation = (props) => {
                 <input
                   type="email"
                   id="confirmEmailIn"
+                  required
                   placeholder="example@email.com"
                   className="user-information-textinput3 input"
                 />
@@ -75,6 +82,8 @@ const UserInformation = (props) => {
                 <input
                   type="password"
                   id="passwordIn"
+                  disabled
+                  required
                   minlength="4"
                   placeholder="Password"
                   className="user-information-textinput4 input"
@@ -87,6 +96,7 @@ const UserInformation = (props) => {
                 <input
                   type="password"
                   id="confirmedPassIn"
+                  required
                   placeholder="Retype Password"
                   className="user-information-textinput5 input"
                 />

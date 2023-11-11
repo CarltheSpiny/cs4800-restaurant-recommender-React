@@ -31,23 +31,6 @@
 .registration-text {
   align-self: center;
 }
-.registration-container1 {
-  display: flex;
-  align-self: center;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.registration-text03 {
-  align-self: center;
-  margin-right: var(--dl-space-space-unit);
-}
-.registration-navlink {
-  align-self: center;
-  font-style: normal;
-  font-weight: 700;
-  text-decoration: underline none;
-}
 .registration-registration-container {
   flex: 0 0 auto;
   width: 100%;
@@ -90,7 +73,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.registration-text08 {
+.registration-text03 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -108,7 +91,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.registration-text09 {
+.registration-text04 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -126,7 +109,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.registration-text10 {
+.registration-text05 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -144,7 +127,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.registration-text11 {
+.registration-text06 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -162,7 +145,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.registration-text12 {
+.registration-text07 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -180,7 +163,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.registration-text13 {
+.registration-text08 {
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
@@ -197,6 +180,32 @@
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
+}
+.registration-to-login-container {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.registration-text12 {
+  align-self: center;
+  margin-right: var(--dl-space-space-unit);
+}
+.registration-navlink {
+  align-self: center;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: underline none;
+}
+@media(max-width: 1200px) {
+  .registration-sign-up-confirm {
+    margin-top: var(--dl-space-space-oneandhalfunits);
+    margin-bottom: var(--dl-space-space-halfunit);
+  }
+  .registration-to-login-container {
+    margin-bottom: var(--dl-space-space-unit);
+  }
 }
 @media(max-width: 767px) {
   .registration-registration-container {
@@ -254,7 +263,7 @@
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .registration-text08 {
+  .registration-text03 {
     width: 170px;
     text-align: left;
     font-family: Arial;
@@ -269,7 +278,7 @@
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .registration-text09 {
+  .registration-text04 {
     width: 170px;
     text-align: left;
     font-family: Arial;
@@ -284,7 +293,7 @@
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .registration-text10 {
+  .registration-text05 {
     width: 170px;
     text-align: left;
   }
@@ -292,16 +301,16 @@
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .registration-text11 {
+  .registration-text06 {
     width: 170px;
     text-align: left;
   }
-  .registration-text12 {
+  .registration-text07 {
     width: 170px;
     align-self: center;
     text-align: left;
   }
-  .registration-text13 {
+  .registration-text08 {
     width: 170px;
     text-align: left;
   }
