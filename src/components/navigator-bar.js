@@ -12,7 +12,7 @@ const NavigatorBar = (props) => {
       data-role="Header"
       className={`navigator-bar-header ${props.rootClassName} `}
     >
-      <Link to="/" className="navigator-bar-navlink">
+      <Link to="/directory" className="navigator-bar-navlink">
         <img
           alt="logo"
           src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
@@ -25,6 +25,7 @@ const NavigatorBar = (props) => {
           className=""
         ></NavigationLinks>
       </div>
+
       <div className="navigator-bar-btn-group">
         <Link to="/user-login" className="navigator-bar-login button">
           {props.Login}
@@ -33,6 +34,8 @@ const NavigatorBar = (props) => {
           {props.Register}
         </Link>
       </div>
+
+      
     </header>
   )
 }
