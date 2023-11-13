@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Helmet } from 'react-helmet'
 import './landing-page.css'
 import NavigatorBar from '../components/navigator-bar'
-import FetchPage from '../components/http-request'
+import FetchPage from '../components/http-get'
+import DataFetchingComponent from '../components/axios-post-request'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
-const url = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/HelloWorld'
+const testUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/HelloWorld'
+const recUrl = 'https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test'
 
+var requestData = "email=test2@gmail.com";
 
 const Landing = (props) => {
   return (
@@ -23,7 +25,11 @@ const Landing = (props) => {
       </div>
       <div>
         <h1>Fetch Page Example</h1>
-        <FetchPage url={url} />
+        <FetchPage url={testUrl} />
+      </div>
+      <div>
+        <h1>POST request Example</h1>
+        <DataFetchingComponent url={recUrl} request={requestData} />
       </div>
       <div>
         <h1>
