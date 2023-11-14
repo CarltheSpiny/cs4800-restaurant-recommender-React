@@ -2,7 +2,7 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
-import SentimentDisplay from './sentiment-display'
+import LikesDisplay from './likes-display'
 import './rated-restraunt-card.css'
 
 const RatedRestrauntCard = (props) => {
@@ -18,16 +18,11 @@ const RatedRestrauntCard = (props) => {
           {props.RestrauntName}
         </h2>
         <div className="rated-restraunt-card-ratings">
-          <SentimentDisplay
+          <LikesDisplay
             title="Likes:"
-            rootClassName="sentiment-display-root-class-name2"
+            rootClassName="likes-display-root-class-name2"
             className=""
-          ></SentimentDisplay>
-          <SentimentDisplay
-            title="Dislikes:"
-            rootClassName="sentiment-display-root-class-name3"
-            className=""
-          ></SentimentDisplay>
+          ></LikesDisplay>
         </div>
       </div>
     </div>
