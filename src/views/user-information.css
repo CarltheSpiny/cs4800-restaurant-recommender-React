@@ -255,6 +255,9 @@
   .user-information-confirm-email {
     display: none;
   }
+  .user-information-more-options-container {
+    padding-bottom: var(--dl-space-space-twounits);
+  }
 }
 @media(max-width: 767px) {
   .user-information-registration-container {

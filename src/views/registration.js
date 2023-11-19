@@ -110,16 +110,16 @@ const Registration = (props) => {
                 />
               </div>
             </div>
-            <Link
-              to="/"
+            <button
               id="confirmButton"
+              type="button"
               className="registration-sign-up-confirm button"
             >
               <span>
                 <span>Finish</span>
                 <br></br>
               </span>
-            </Link>
+            </button>
             <div className="registration-to-login-container">
               <span className="registration-text12">
                 <span>Already have an account?</span>

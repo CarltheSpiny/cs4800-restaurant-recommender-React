@@ -179,7 +179,6 @@
   align-self: center;
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
-  text-decoration: none;
 }
 .registration-to-login-container {
   display: flex;

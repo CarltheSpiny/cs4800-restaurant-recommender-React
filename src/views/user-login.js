@@ -56,13 +56,13 @@ const UserLogin = (props) => {
                 className="user-login-textinput1 input"
               />
             </div>
-            <Link
-              to="/"
+            <button
               id="loginButton"
+              type="submit"
               className="user-login-login-button button"
             >
               Log in
-            </Link>
+            </button>
             <div className="user-login-to-registration-container">
               <span className="user-login-text5">
                 <span>Don&apos;t have an account?</span>

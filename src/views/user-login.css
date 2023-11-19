@@ -95,7 +95,6 @@
 .user-login-login-button {
   width: var(--dl-size-size-xlarge);
   align-self: center;
-  text-decoration: none;
 }
 .user-login-to-registration-container {
   display: flex;
