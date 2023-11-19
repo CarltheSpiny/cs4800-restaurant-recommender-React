@@ -33,7 +33,7 @@
 }
 .registration-registration-container {
   flex: 0 0 auto;
-  width: 100%;
+  width: auto;
   display: flex;
   margin-top: var(--dl-space-space-unit);
   align-items: center;
@@ -41,15 +41,15 @@
 }
 .registration-registration-form {
   flex: 1;
-  width: 200px;
-  height: 360px;
+  width: auto;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .registration-all-fields {
   flex: 1;
-  width: 200px;
+  width: auto;
   display: flex;
   align-self: center;
   align-items: center;
@@ -58,7 +58,7 @@
 .registration-user-fields {
   gap: var(--dl-space-space-unit);
   flex: 1;
-  height: 312px;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   align-self: stretch;
@@ -69,6 +69,7 @@
 .registration-first-name {
   display: flex;
   position: relative;
+  align-self: flex-end;
   align-items: flex-start;
   flex-direction: row;
   justify-content: flex-start;
@@ -77,7 +78,7 @@
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
-  text-align: center;
+  text-align: right;
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
@@ -87,6 +88,7 @@
 .registration-last-name {
   display: flex;
   position: relative;
+  align-self: flex-end;
   align-items: flex-start;
   flex-direction: row;
   justify-content: flex-start;
@@ -95,7 +97,7 @@
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
-  text-align: center;
+  text-align: right;
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
@@ -105,6 +107,7 @@
 .registration-email {
   display: flex;
   position: relative;
+  align-self: flex-end;
   align-items: flex-start;
   flex-direction: row;
   justify-content: flex-start;
@@ -113,7 +116,7 @@
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
-  text-align: center;
+  text-align: right;
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
@@ -123,6 +126,7 @@
 .registration-confirm-email {
   display: flex;
   position: relative;
+  align-self: flex-end;
   align-items: flex-start;
   flex-direction: row;
   justify-content: flex-start;
@@ -131,7 +135,7 @@
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
-  text-align: center;
+  text-align: right;
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
@@ -141,6 +145,7 @@
 .registration-password {
   display: flex;
   position: relative;
+  align-self: flex-end;
   align-items: flex-start;
   flex-direction: row;
   justify-content: flex-start;
@@ -149,7 +154,7 @@
   width: var(--dl-size-size-xlarge);
   height: 35px;
   align-self: flex-start;
-  text-align: center;
+  text-align: right;
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
@@ -159,15 +164,16 @@
 .registration-confirm-password {
   display: flex;
   position: relative;
+  align-self: flex-end;
   align-items: flex-start;
   flex-direction: row;
   justify-content: flex-start;
 }
 .registration-text08 {
-  width: var(--dl-size-size-xlarge);
+  width: auto;
   height: 35px;
   align-self: flex-start;
-  text-align: center;
+  text-align: right;
   line-height: 2;
   padding-right: var(--dl-space-space-unit);
 }
@@ -198,20 +204,52 @@
   text-decoration: underline none;
 }
 @media(max-width: 1200px) {
+  .registration-registration-container {
+    width: auto;
+  }
+  .registration-registration-form {
+    width: auto;
+    height: auto;
+  }
+  .registration-all-fields {
+    width: auto;
+    align-self: stretch;
+  }
+  .registration-user-fields {
+    align-self: center;
+  }
+  .registration-first-name {
+    align-self: flex-end;
+  }
   .registration-text03 {
     text-align: right;
+  }
+  .registration-last-name {
+    align-self: flex-end;
   }
   .registration-text04 {
     text-align: right;
   }
+  .registration-email {
+    align-self: flex-end;
+  }
   .registration-text05 {
     text-align: right;
+  }
+  .registration-confirm-email {
+    align-self: flex-end;
   }
   .registration-text06 {
     text-align: right;
   }
+  .registration-password {
+    align-self: flex-end;
+  }
   .registration-text07 {
     text-align: right;
+  }
+  .registration-confirm-password {
+    align-self: flex-end;
   }
   .registration-text08 {
     text-align: right;
@@ -221,32 +259,60 @@
     margin-bottom: var(--dl-space-space-halfunit);
   }
   .registration-to-login-container {
+    margin-top: var(--dl-space-space-unit);
     margin-bottom: var(--dl-space-space-unit);
+  }
+}
+@media(max-width: 991px) {
+  .registration-registration-form {
+    width: auto;
+    height: auto;
+  }
+  .registration-all-fields {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    align-self: center;
+  }
+  .registration-user-fields {
+    flex: 0 0 auto;
+    height: auto;
+    align-self: center;
+  }
+  .registration-last-name {
+    align-self: flex-end;
+  }
+  .registration-confirm-password {
+    align-self: flex-end;
   }
 }
 @media(max-width: 767px) {
   .registration-registration-container {
-    width: 728px;
-    height: 743px;
+    width: auto;
+    height: auto;
   }
   .registration-registration-form {
-    width: 622px;
-    height: 722px;
+    width: auto;
+    height: auto;
   }
   .registration-all-fields {
-    width: 556px;
-    height: 100%;
+    width: auto;
+    height: auto;
     align-items: flex-start;
   }
   .registration-user-fields {
-    width: 699px;
-    height: 663px;
+    flex: 1;
+    width: auto;
+    height: 332px;
+    align-self: center;
+    align-items: center;
+    justify-content: flex-start;
   }
 }
 @media(max-width: 479px) {
   .registration-registration-container {
-    width: var(--dl-size-size-xxlarge);
-    height: 811px;
+    width: auto;
+    height: auto;
     align-self: flex-start;
     align-items: flex-start;
     justify-content: flex-start;
@@ -261,20 +327,17 @@
   }
   .registration-all-fields {
     width: auto;
-    height: 773px;
+    height: auto;
     align-self: flex-start;
     align-items: center;
     flex-direction: column;
     justify-content: center;
   }
   .registration-user-fields {
-    width: 479px;
-    height: 938px;
+    width: auto;
+    height: auto;
     align-self: flex-start;
-    margin-top: 0px;
     align-items: center;
-    padding-bottom: 12px;
-    justify-content: flex-start;
   }
   .registration-first-name {
     align-items: flex-start;
@@ -282,7 +345,7 @@
   }
   .registration-text03 {
     width: 170px;
-    text-align: left;
+    text-align: right;
     font-family: Arial;
     padding-right: var(--dl-space-space-unit);
     text-transform: capitalize;
@@ -297,7 +360,7 @@
   }
   .registration-text04 {
     width: 170px;
-    text-align: left;
+    text-align: right;
     font-family: Arial;
     padding-right: var(--dl-space-space-unit);
     text-transform: capitalize;
@@ -312,7 +375,7 @@
   }
   .registration-text05 {
     width: 170px;
-    text-align: left;
+    text-align: right;
   }
   .registration-confirm-email {
     align-items: flex-start;
@@ -320,15 +383,15 @@
   }
   .registration-text06 {
     width: 170px;
-    text-align: left;
+    text-align: right;
   }
   .registration-text07 {
     width: 170px;
     align-self: center;
-    text-align: left;
+    text-align: right;
   }
   .registration-text08 {
     width: 170px;
-    text-align: left;
+    text-align: right;
   }
 }
