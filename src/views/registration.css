@@ -198,6 +198,24 @@
   text-decoration: underline none;
 }
 @media(max-width: 1200px) {
+  .registration-text03 {
+    text-align: right;
+  }
+  .registration-text04 {
+    text-align: right;
+  }
+  .registration-text05 {
+    text-align: right;
+  }
+  .registration-text06 {
+    text-align: right;
+  }
+  .registration-text07 {
+    text-align: right;
+  }
+  .registration-text08 {
+    text-align: right;
+  }
   .registration-sign-up-confirm {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-halfunit);
