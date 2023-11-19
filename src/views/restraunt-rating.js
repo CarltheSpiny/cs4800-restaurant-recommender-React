@@ -23,13 +23,22 @@ const RestrauntRating = (props) => {
         className="restraunt-rating-image"
       />
       <div className="restraunt-rating-header">
-        <div className="restraunt-rating-restraunt-name">
-          <h1 className="restraunt-rating-title">Restaurant Name</h1>
-          <span className="restraunt-rating-text Content">
-            &lt;A small description. Example: Fast food restaurant &gt;
-          </span>
+        <div className="restraunt-rating-restraunt-header">
+          <div className="restraunt-rating-restraunt-name">
+            <h1 className="restraunt-rating-text">
+              Restraunt Name
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: ' ',
+                }}
+              />
+            </h1>
+            <span className="restraunt-rating-text1">
+              &lt;A small description. Example: Fast food restaurant&gt;
+            </span>
+          </div>
         </div>
-        <button type="button" className="button restraunt-rating-like-button">
+        <button type="button" className="restraunt-rating-like-button button">
           Like
         </button>
       </div>
@@ -57,10 +66,10 @@ const RestrauntRating = (props) => {
           </div>
           <div className="restraunt-rating-row3">
             <div className="restraunt-rating-container1">
-              <div className="restraunt-rating-container2">
+              <div className="restraunt-rating-more-info">
                 <span
                   id="fillHeader"
-                  className="restraunt-rating-title1 Content"
+                  className="restraunt-rating-title Content"
                 >
                   More Info:
                 </span>
