@@ -6,77 +6,56 @@ import NavigatorBar from '../components/navigator-bar'
 import Label from '../components/label'
 import './restraunt-rating.css'
 
-const RestrauntRating = (props) => {
+const RestrauntRating = ({location: restaurantData}) => {
+  const { state } = restaurantData;
   return (
-    <div className="restraunt-rating-container">
+    <div className="restraunt-rating-page">
       <Helmet>
         <title>RestrauntRating - cs4800-restaurant-recommender</title>
         <meta
           property="og:title"
-          content="RestrauntRating - cs4800-restaurant-recommender"
+          content="RestrauntRating"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name"></NavigatorBar>
+      <NavigatorBar></NavigatorBar>
       <img
         alt="image"
-        src="https://play.teleporthq.io/static/svg/default-img.svg"
-        className="restraunt-rating-image"
+        src={state.data.image}
+        className="restraunt-image"
       />
       <div className="restraunt-rating-header">
-        <div className="restraunt-rating-restraunt-header">
-          <div className="restraunt-rating-restraunt-name">
-            <h1 className="restraunt-rating-text">
-              Restraunt Name
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: ' ',
-                }}
-              />
-            </h1>
-            <span className="restraunt-rating-text1">
-              &lt;A small description. Example: Fast food restaurant&gt;
-            </span>
-          </div>
-        </div>
-        <button type="button" className="restraunt-rating-like-button button">
-          Like
-        </button>
+        <h1 className="restraunt-rating-title">{state.data.name}</h1>
+        
       </div>
       <div className="restraunt-rating-restraunt-info">
         <div className="restraunt-rating-restraunt-details">
-          <div className="restraunt-rating-row1">
-            <Label
-              mainLabel="Cuisine:"
-              rootClassName="label-root-class-name2"
-            ></Label>
-            <Label
-              mainLabel="Website:"
-              rootClassName="label-root-class-name3"
-            ></Label>
-          </div>
-          <div className="restraunt-rating-row2">
-            <Label
-              mainLabel="Address:"
-              rootClassName="label-root-class-name"
-            ></Label>
-            <Label
-              mainLabel="Phone:"
-              rootClassName="label-root-class-name1"
-            ></Label>
-          </div>
-          <div className="restraunt-rating-row3">
-            <div className="restraunt-rating-container1">
-              <div className="restraunt-rating-more-info">
-                <span
-                  id="fillHeader"
-                  className="restraunt-rating-title Content"
-                >
-                  More Info:
-                </span>
-                <p id="fillList" className="restraunt-rating-content Content">
-                  &lt;Description&gt;
-                </p>
-              </div>
+          <div className="restraunt-rating-restraunt-contacts">
+            <div className="restraunt-rating-row1">
+              <Label
+                mainLabel="Address:"
+                listLabel={state.data.address}
+              ></Label>
+              <Label
+                mainLabel="Hours:"
+                listLabel={state.data.hours}
+              ></Label>
+            </div>
+            <div className="restraunt-rating-row2">
+              <Label
+                mainLabel="Phone:"
+              ></Label>
+              <Label
+                mainLabel="Cuisine:"
+                listLabel={state.data.food_type}
+              ></Label>
+            </div>
+            <div className="restraunt-rating-row3">
+              <Label
+                mainLabel="Website:"
+              ></Label>
+              <button type="button" className="restraunt-rating-like-button button">
+                Like
+              </button>
             </div>
           </div>
         </div>

@@ -5,17 +5,17 @@ import { Helmet } from 'react-helmet'
 import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
 import SearchBar from '../components/search-bar'
-import RatedRestrauntCard from '../components/rated-restraunt-card'
+import RatedRestrauntCard from '../components/rated-restaurant-card'
 import './restaurant-history.css'
 
 const RestaurantHistory = (props) => {
   return (
     <div className="restaurant-history-container">
       <Helmet>
-        <title>RestaurantHistory - cs4800-restaurant-recommender</title>
+        <title>RestaurantHistory</title>
         <meta
           property="og:title"
-          content="RestaurantHistory - cs4800-restaurant-recommender"
+          content="RestaurantHistory"
         />
       </Helmet>
       <NavigatorBar rootClassName="navigator-bar-root-class-name2"></NavigatorBar>
@@ -30,7 +30,11 @@ const RestaurantHistory = (props) => {
       ></SearchBar>
       <div className="restaurant-history-gallery">
         <div className="restaurant-history-container1">
-          <RatedRestrauntCard rootClassName="rated-restraunt-card-root-class-name3"></RatedRestrauntCard>
+          <RatedRestrauntCard
+            rootClassName="rated-restraunt-card-1"
+            className="restaurant-history-search-result-1"
+            indexForRestaurant={0}
+          ></RatedRestrauntCard>
         </div>
       </div>
     </div>

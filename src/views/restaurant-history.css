@@ -21,6 +21,7 @@
 .restaurant-history-container1 {
   width: 100%;
   display: grid;
+  padding: var(--dl-space-space-threeunits);
   grid-gap: var(--dl-space-space-unit);
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }

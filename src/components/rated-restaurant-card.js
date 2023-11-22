@@ -1,49 +1,133 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import PropTypes from 'prop-types'
-
+import { Link } from 'react-router-dom'
 import './rated-restaurant-card.css'
+import RestaurantJson from '../backup-restaurant-output.json'
+/*Headers for CORS */
+const headers = new Headers({
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+});
+/*Options to send with headers */
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow',
+  header: headers
+};
 
-const RatedRestaurantCard = (props) => {
-  return (
-    <div className="rated-restaurant-card-gallery-card">
-      <img
-        alt={props.image_alt}
-        src={props.image_src}
-        className="rated-restaurant-card-image"
-      />
-      <div className="rated-restaurant-card-container">
-        <div className="rated-restaurant-card-container1">
-          <div className="rated-restaurant-card-container2">
-            <h1 className="rated-restaurant-card-text">{props.heading}</h1>
-            <svg viewBox="0 0 1024 1024" className="rated-restaurant-card-icon">
-              <path d="M1024 397.050l-353.78-51.408-158.22-320.582-158.216 320.582-353.784 51.408 256 249.538-60.432 352.352 316.432-166.358 316.432 166.358-60.434-352.352 256.002-249.538z"></path>
-            </svg>
+const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation';
+
+const RatedRestrauntCard = (props) => {
+  const [imageSrc, setImage] = useState(null);
+  const [name, setName] = useState(null);
+  const [rating, setRating] = useState(null);
+  const [ data, setPageContent] = useState(null);
+
+  useEffect(() => {
+    const fetchAndSetData = async () => {
+      try {
+        const response = await fetch(apiUrl, requestOptions);
+        const jsonData = await response.json();
+        console.log('Successful response from fetch: ' + jsonData)
+        setPageContent(jsonData);
+        var imageURL;
+        var restaurantName;
+        var averageRating;
+        try {
+          imageURL = await jsonData.restaurants[props.indexForRestaurant].image
+          restaurantName = await jsonData.restaurants[props.indexForRestaurant].name
+          averageRating = await jsonData.restaurants[props.indexForRestaurant]['average rating']
+          console.log('Successfully set fields')
+        } catch (error) {
+          console.log('Error: ' + error)
+          imageURL = await props.restaurantList.restaurants[props.indexForRestaurant].image
+          restaurantName = await props.restaurantList.restaurants[props.indexForRestaurant].name
+          averageRating = await props.restaurantList.restaurants[props.indexForRestaurant]['average rating']
+          console.log('Successfully set backup fields')
+        }
+        
+        setImage(imageURL);
+        setName(restaurantName);
+        setRating(averageRating);
+      } catch (error) {
+        console.error('Error getting data: ', error);
+      }
+    };    
+    fetchAndSetData();
+  }, []);
+
+  try {
+    return(
+      <Link to={{
+        pathname: '/restraunt-rating',
+        state:  { data: data.restaurants[props.indexForRestaurant]}
+      }}>
+        <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
+          <div className="rated-restraunt-card-gallery-card">
+            <img
+              alt="image"
+              src={imageSrc}
+              className="rated-restraunt-card-restraunt-image"
+            />
+            <h1 className="rated-restraunt-card-restraunt-name">
+              {name}
+            </h1>
+            <div className="rated-restraunt-card-ratings">
+            <label>
+              Rating: {rating} / 5 
+            </label>
+            </div>
           </div>
-          <span className="rated-restaurant-card-text1">{props.text}</span>
-          <span className="rated-restaurant-card-text2">
-            {props.dateVisted}
-          </span>
         </div>
-      </div>
-    </div>
-  )
+      </Link>
+    );
+  } catch (error) {
+    console.log(error)
+    return(
+      <Link to={{
+        pathname: '/restraunt-rating',
+        state:  { data: props.restaurantList.restaurants[props.indexForRestaurant]}
+      }}>
+        <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
+          <div className="rated-restraunt-card-gallery-card">
+            <img
+              alt="image"
+              src={imageSrc}
+              className="rated-restraunt-card-restraunt-image"
+            />
+            <h1 className="rated-restraunt-card-restraunt-name">
+              {name}
+            </h1>
+            <div className="rated-restraunt-card-ratings">
+            <label>
+              Rating: {rating} / 5 
+            </label>
+            </div>
+          </div>
+        </div>
+      </Link>
+    )
+  }
 }
 
-RatedRestaurantCard.defaultProps = {
-  image_alt: 'image',
-  dateVisted: '1/1/1990',
-  text: 'Not fast food',
-  heading: '5',
-  image_src: 'https://play.teleporthq.io/static/svg/default-img.svg',
+RatedRestrauntCard.defaultProps = {
+  rootClassName: 'restaurant-card',
+  Like_Amount: 'Likes',
+  imageSource: 'https://play.teleporthq.io/static/svg/default-img.svg',
+  restrauntName: 'Restraunt Name',
+  indexForRestaurant: 0,
+  restaurantList: RestaurantJson
 }
 
-RatedRestaurantCard.propTypes = {
-  image_alt: PropTypes.string,
-  dateVisted: PropTypes.string,
-  text: PropTypes.string,
-  heading: PropTypes.string,
-  image_src: PropTypes.string,
+RatedRestrauntCard.propTypes = {
+  rootClassName: PropTypes.string,
+  Like_Amount: PropTypes.string,
+  RestrauntImage_src: PropTypes.string,
+  RestrauntName: PropTypes.string,
+  indexForRestaurant: PropTypes.number,
+  restaurantList: PropTypes.any
 }
 
-export default RatedRestaurantCard
+export default RatedRestrauntCard

@@ -8,7 +8,7 @@
 }
 .label-container1 {
   flex: 0 0 auto;
-  width: 556px;
+  width: auto;
   height: 100px;
   display: flex;
   position: relative;

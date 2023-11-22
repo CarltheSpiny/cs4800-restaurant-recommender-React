@@ -15,15 +15,7 @@
   max-width: var(--dl-size-size-maxwidth);
   grid-template-columns: 1fr 1fr 1fr;
 }
-.personal-home-component2 {
-  text-decoration: none;
-}
-.personal-home-component3 {
-  text-decoration: none;
-}
-.personal-home-component4 {
-  text-decoration: none;
-}
+
 @media(max-width: 991px) {
   .personal-home-gallery {
     grid-template-columns: 1fr 1fr;

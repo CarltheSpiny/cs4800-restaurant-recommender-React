@@ -16,12 +16,14 @@ import NotImplemented from './views/not-implemented'
 import PersonalHome from './views/personal-home'
 import RestrauntRating from './views/restraunt-rating'
 import RestaurantHistory from './views/restaurant-history'
+import Directory from './views/dev-directory'
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route component={PersonalHome} exact path="/" />
+        <Route component={Directory} exact path="/directory" />
         <Route component={RestrauntRating} exact path="/restraunt-rating" />
         <Route component={RestaurantHistory} exact path="/restaurant-history" />
         <Route component={UserInformation} exact path="/user-information" />

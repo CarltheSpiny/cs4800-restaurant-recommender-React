@@ -1,0 +1,29 @@
+{
+	"restaurants": 
+	[
+		{
+			"name": "Burger King", 
+			"address": "2833 North Ave, Grand Junction, CO 81503", 
+			"hours": "24/7", 
+			"food_type": "fast food", 
+			"average rating": "3", 
+			"image": "https://thechive.com/wp-content/uploads/2019/12/person-hilariously-photoshops-animals-onto-random-things-xx-photos-25.jpg?attachment_cache_bust=3136487&quality=85&strip=info&w=400"
+		}, 
+		{
+			"name": "Big Dong", 
+			"address": "3801 W Temple Ave, Pomona, CA 91768", 
+			"hours": "7:00AM-7:00PM", 
+			"food_type": "asian fusion", 
+			"average rating": "0", 
+			"image": "https://collegevine.imgix.net/2a5d9bfd-8666-4cc5-98c5-e3daa75518dd.jpg"
+		}, 
+		{
+			"name": "Sublimotion", 
+			"address": "14894 Leer Rd, Posen, MI 49776", 
+			"hours": "1:00PM-2:00PM", 
+			"food_type": "fine_dining", 
+			"average rating": "1.2", 
+			"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2z2pvWMfAc0esndqPY4oU_al7ubp49weIyg&usqp=CAU"
+		}
+	]
+}
