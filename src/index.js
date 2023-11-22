@@ -21,14 +21,14 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route component={PersonalHome} exact path="/" />
+        <Route component={RestrauntRating} exact path="/restraunt-rating" />
+        <Route component={RestaurantHistory} exact path="/restaurant-history" />
         <Route component={UserInformation} exact path="/user-information" />
         <Route component={Registration} exact path="/registration" />
         <Route component={RestaurantSearch} exact path="/restaurant-search" />
         <Route component={UserLogin} exact path="/user-login" />
         <Route component={NotImplemented} path="**" />
-        <Route component={PersonalHome} exact path="/" />
-        <Route component={RestrauntRating} exact path="/restraunt-rating" />
-        <Route component={RestaurantHistory} exact path="/restaurant-history" />
         <Redirect to="**" />
       </Switch>
     </Router>

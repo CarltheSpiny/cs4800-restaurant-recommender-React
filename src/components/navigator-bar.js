@@ -56,6 +56,7 @@ NavigatorBar.defaultProps = {
   image_alt1: 'image',
   image_src1:
     'https://presentation-website-assets.teleporthq.io/logos/logo.png',
+  userData: undefined,  // Set userData to default to undefined
 }
 
 NavigatorBar.propTypes = {
@@ -76,6 +77,7 @@ NavigatorBar.propTypes = {
   button1: PropTypes.string,
   image_alt1: PropTypes.string,
   image_src1: PropTypes.string,
+  userData: PropTypes.object,   // Get user data from login
 }
 
 export default NavigatorBar

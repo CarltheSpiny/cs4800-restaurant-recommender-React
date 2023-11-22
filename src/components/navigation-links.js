@@ -17,7 +17,7 @@ const NavigationLinks = (props) => {
       <Link to="/restaurant-history" className="navigation-links-navlink2">
         {props.HistoryPage}
       </Link>
-      <Link to="/user-information" className="navigation-links-navlink3">
+      <Link to="/user-information" className="navigation-links-navlink3" state={{userData: props.userData}}>
         {props.ProfilePage}
       </Link>
     </nav>
@@ -30,6 +30,7 @@ NavigationLinks.defaultProps = {
   ProfilePage: 'My Profile',
   HomePage: 'Home',
   SearchPage: 'Search',
+  userData: undefined,  // Set userData to default to undefined
 }
 
 NavigationLinks.propTypes = {
@@ -38,6 +39,7 @@ NavigationLinks.propTypes = {
   ProfilePage: PropTypes.string,
   HomePage: PropTypes.string,
   SearchPage: PropTypes.string,
+  userData: PropTypes.object,   // Get userData from login
 }
 
 export default NavigationLinks

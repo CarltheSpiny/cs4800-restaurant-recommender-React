@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
 
@@ -7,6 +7,40 @@ import NavigatorBar from '../components/navigator-bar'
 import './user-login.css'
 
 const UserLogin = (props) => {
+  const [apiData, setApiData] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
+
+  useEffect(() => {
+    const fetchData = async() => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setApiData(data.result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const login = () => {
+    // Validate inputted data with saved api data
+    console.log(apiData);
+    if (apiData && (email === apiData.email.S) && (password === apiData.password.S)) {
+      history.push({
+        pathname: "/",
+        state: { apiData },
+      });
+      alert("Success!");
+    } else {
+      alert("Invalid Credentials!");
+    }
+  }
+
   return (
     <div className="user-login-container">
       <Helmet>
@@ -42,6 +76,8 @@ const UserLogin = (props) => {
                 required
                 placeholder="example@email.com"
                 className="user-login-textinput input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="user-login-password">
@@ -54,13 +90,15 @@ const UserLogin = (props) => {
                 required
                 placeholder="Password"
                 className="user-login-textinput1 input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
               id="loginButton"
-              type="submit"
+              type="button"
               className="user-login-login-button button"
-            >
+              onClick={login}>
               Log in
             </button>
             <div className="user-login-to-registration-container">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
@@ -9,13 +9,18 @@ import RatedRestrauntCard from '../components/rated-restraunt-card'
 import './personal-home.css'
 
 const PersonalHome = (props) => {
+  // Access a user's information
+  const { state } = props.location;
+  // Check if userData is defined (state if undefined, state.apiData otherwise)
+  const userData = state && state.apiData;
+
   return (
     <div className="personal-home-container">
       <Helmet>
         <title>cs4800-restaurant-recommender</title>
         <meta property="og:title" content="cs4800-restaurant-recommender" />
       </Helmet>
-      <NavigatorBar></NavigatorBar>
+      <NavigatorBar userData={userData}></NavigatorBar>
       <Title
         text="Your personalized feed of restaurants we think you'll love!"
         heading="Your Feed"
