@@ -6,40 +6,86 @@ import { Helmet } from 'react-helmet'
 import NavigatorBar from '../components/navigator-bar'
 import './user-login.css'
 
-const UserLogin = (props) => {
+const UserLogin = () => {
   const [apiData, setApiData] = useState(null);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordIncorrect, setIsIncorrect] = useState(false);
+
   const history = useHistory();
 
   const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+  });
 
-  useEffect(() => {
-    const fetchData = async() => {
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setApiData(data.result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchLoginInfo = async () => {
+    try {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        header: headers
+      };
+      console.log("Fetching from API")
+      // Get api data to compare here
+      const response = await fetch(url, requestOptions);
 
-  const login = () => {
-    // Validate inputted data with saved api data
-    console.log(apiData);
-    if (apiData && (email === apiData.email.S) && (password === apiData.password.S)) {
-      history.push({
-        pathname: "/",
-        state: { apiData },
-      });
-      alert("Success!");
-    } else {
-      alert("Invalid Credentials!");
+      const data = await response.json();
+      console.log("Data from API: " + JSON.stringify(data, null, 2))
+      setApiData(data.result);
+      console.log("Data set into setAPiData method (from fetchData): " + apiData)
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log("Fetching complete")
+          resolve(data)
+        }); // Simulate timeout by adding number here
+      })
+    } catch (error) {
+      console.error(error);
     }
   }
+
+  const login = async () => {
+    console.log("Waiting for fetch to finish...")
+    const jsonResult = await fetchLoginInfo()
+    console.log("Attempting Log In")
+    try {
+      console.log("Result of fetch: " + JSON.stringify(jsonResult))
+      console.log("Logging in with these credentials: " +  email + " " + password)
+
+      if (email === jsonResult.result.email.S) {
+        if (password === jsonResult.result.password.S) {
+          alert("Success")
+          setIsIncorrect(false) // in case they try again after
+          history.push({
+            pathname: "/",
+            state: { jsonResult },
+          });
+        } else {
+          alert("Invalid password for email")
+          setPassword("")
+          setIsIncorrect(true)
+        }
+      } else {
+        alert("Email does not have an account")
+        console.log("Compared this: " + email + " with this: " + jsonResult.result.email.S)
+        console.log("and compared this: " + password + " with this: " + jsonResult.result.password.S)
+        setEmail("")
+      }
+    } catch (error) {
+      console.log("Error: " + error)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("form submitted")
+    login()
+  }
+
 
   return (
     <div className="user-login-container">
@@ -64,7 +110,7 @@ const UserLogin = (props) => {
         </span>
       </div>
       <div className="user-login-user-login-container">
-        <form className="user-login-login-form">
+        <form className="user-login-login-form" onSubmit={handleSubmit}>
           <div className="user-login-container1">
             <div className="user-login-email">
               <span id="textLabel" className="user-login-text3">
@@ -89,16 +135,15 @@ const UserLogin = (props) => {
                 id="inputIn"
                 required
                 placeholder="Password"
-                className="user-login-textinput1 input"
+                className={isPasswordIncorrect ? 'user-login-password-incorrect' : 'user-login-password input'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
               id="loginButton"
-              type="button"
-              className="user-login-login-button button"
-              onClick={login}>
+              type="submit"
+              className="user-login-login-button button">
               Log in
             </button>
             <div className="user-login-to-registration-container">
