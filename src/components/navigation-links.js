@@ -8,16 +8,16 @@ import './navigation-links.css'
 const NavigationLinks = (props) => {
   return (
     <nav className={`navigation-links-nav ${props.rootClassName} `}>
-      <Link to="/" className="navigation-links-navlink">
+      <Link to={{ pathname: "/", state: { accountData: props.accountData } }} className="navigation-links-navlink">
         {props.HomePage}
       </Link>
-      <Link to="/restaurant-search" className="navigation-links-navlink1">
+      <Link to={{ pathname: "/restaurant-search", state: { accountData: props.accountData } }} className="navigation-links-navlink1">
         {props.SearchPage}
       </Link>
-      <Link to="/restaurant-history" className="navigation-links-navlink2">
+      <Link to={{ pathname: "/restaurant-history", state: { accountData: props.accountData } }} className="navigation-links-navlink2">
         {props.HistoryPage}
       </Link>
-      <Link to="/user-information" className="navigation-links-navlink3" state={{userData: props.userData}}>
+      <Link to={{ pathname: "/user-information", state: { accountData: props.accountData } }} className="navigation-links-navlink3">
         {props.ProfilePage}
       </Link>
     </nav>
@@ -30,7 +30,7 @@ NavigationLinks.defaultProps = {
   ProfilePage: 'My Profile',
   HomePage: 'Home',
   SearchPage: 'Search',
-  userData: undefined,  // Set userData to default to undefined
+  //accountData: undefined,  // Set accountData to default to undefined
 }
 
 NavigationLinks.propTypes = {
@@ -39,7 +39,7 @@ NavigationLinks.propTypes = {
   ProfilePage: PropTypes.string,
   HomePage: PropTypes.string,
   SearchPage: PropTypes.string,
-  userData: PropTypes.object,   // Get userData from login
+  accountData: PropTypes.object,   // Get user data from login
 }
 
 export default NavigationLinks

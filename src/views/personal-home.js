@@ -8,11 +8,12 @@ import RatedRestrauntCard from '../components/rated-restaurant-card'
 import './personal-home.css'
 
 const PersonalHome = (props) => {
+  const [jsonData, setData] = useState(null);
   // Access a user's information
   const { state } = props.location;
-  const [jsonData, setData] = useState(null);
   // Check if userData is defined (state if undefined, state.apiData otherwise)
-  const userData = state && state.apiData;
+  const userData = state && state.accountData;
+  console.log("User has logged in with: " + JSON.stringify(userData));
 
   return (
     <div className="personal-home-container">
@@ -20,7 +21,7 @@ const PersonalHome = (props) => {
         <title>cs4800-restaurant-recommender</title>
         <meta property="og:title" content="cs4800-restaurant-recommender" />
       </Helmet>
-      <NavigatorBar userData={userData}></NavigatorBar>
+      <NavigatorBar accountData={ userData }></NavigatorBar>
       <Title
         text="Your personalized feed of restaurants we think you'll love!"
         heading="Your Feed"

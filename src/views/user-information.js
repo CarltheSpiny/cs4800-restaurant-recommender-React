@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Helmet } from 'react-helmet'
 
@@ -7,6 +7,42 @@ import Title from '../components/title'
 import './user-information.css'
 
 const UserInformation = (props) => {
+  // User information variables
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // Check if the user's data has been set once (is false; true if data was set previously)
+  const [isDataSet, setIsDataSet] = useState(false);
+
+  // Edit Mode (default to false)
+  const [editMode, setEditMode] = useState(false);
+  const [emailCheck, setEmailCheck] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+
+  // Access the logged in user's information
+  const { state } = props.location;
+  // Check if userData is defined (state if undefined, state.apiData otherwise)
+  const userData = state && state.accountData;
+
+  if (userData && !isDataSet) {
+    setFirstName(userData.firstName.S);
+    setLastName(userData.lastName.S);
+    setEmail(userData.email.S);
+    setPassword(userData.password.S);
+    setIsDataSet(true);
+  }
+
+  const toggleEditMode = () => {
+    if (editMode) {
+      console.log("Information Saved!");
+      setEditMode(!editMode);
+    } else {
+      console.log("Edit Mode On");
+      setEditMode(!editMode);
+    }
+  }
+
   return (
     <div className="user-information-container">
       <Helmet>
@@ -33,10 +69,12 @@ const UserInformation = (props) => {
                 <input
                   type="text"
                   id="firstName"
-                  disabled
+                  readOnly={ !editMode }
                   required
                   placeholder="John"
                   className="user-information-textinput input"
+                  value={ firstName }
+                  onChange={ (e) => setFirstName(e.target.value) }
                 />
               </div>
               <div className="user-information-last-name">
@@ -46,10 +84,12 @@ const UserInformation = (props) => {
                 <input
                   type="text"
                   id="lastName"
-                  disabled
+                  readOnly={ !editMode }
                   required
                   placeholder="Doe"
                   className="user-information-textinput1 input"
+                  value={ lastName }
+                  onChange={ (e) => setLastName(e.target.value) }
                 />
               </div>
               <div className="user-information-email">
@@ -59,22 +99,27 @@ const UserInformation = (props) => {
                 <input
                   type="email"
                   id="emailIn"
-                  disabled
+                  readOnly={ !editMode }
                   required
                   placeholder="example@email.com"
                   className="user-information-textinput2 input"
+                  value={ email }
+                  onChange={ (e) => setEmail(e.target.value) }
                 />
               </div>
-              <div className="user-information-confirm-email">
+              <div className="user-information-confirm-email" style={{ display: editMode ? 'flex' : 'none' }}>
                 <span id="textLabel" className="user-information-text03">
                   Confirm Email:
                 </span>
                 <input
                   type="email"
                   id="confirmEmailIn"
+                  readOnly={ !editMode }
                   required
                   placeholder="example@email.com"
                   className="user-information-textinput3 input"
+                  value={ emailCheck }
+                  onChange={ (e) => setEmailCheck(e.target.value) }
                 />
               </div>
               <div className="user-information-password">
@@ -82,23 +127,28 @@ const UserInformation = (props) => {
                 <input
                   type="password"
                   id="passwordIn"
-                  disabled
+                  disabled={ !editMode }
                   required
                   minlength="4"
                   placeholder="Password"
                   className="user-information-textinput4 input"
+                  value={ password }
+                  onChange={ (e) => setPassword(e.target.value) }
                 />
               </div>
-              <div className="user-information-confirm-password">
+              <div className="user-information-confirm-password" style={{ display: editMode ? 'flex' : 'none' }}>
                 <span className="user-information-text05">
                   Confirm Password:
                 </span>
                 <input
                   type="password"
                   id="confirmedPassIn"
+                  disabled={ !editMode }
                   required
                   placeholder="Retype Password"
                   className="user-information-textinput5 input"
+                  value={ passwordCheck }
+                  onChange={ (e) => setPasswordCheck(e.target.value) }
                 />
               </div>
             </div>
@@ -106,9 +156,10 @@ const UserInformation = (props) => {
               id="confirmButton"
               type="button"
               className="user-information-edit-save-button button"
+              onClick={ toggleEditMode }
             >
               <span>
-                <span>Edit</span>
+                <span>{ editMode ? "Save" : "Edit" }</span>
                 <br></br>
               </span>
             </button>

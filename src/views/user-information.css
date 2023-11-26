@@ -18,7 +18,7 @@
 }
 .user-information-registration-form {
   flex: 1;
-  width: auto;
+  width: 100%;
   height: auto;
   display: flex;
   align-items: center;
@@ -26,8 +26,8 @@
 }
 .user-information-all-fields {
   flex: 1;
-  width: 200px;
-  height: 388px;
+  width: 100%;
+  height: auto;
   display: flex;
   align-self: center;
   align-items: center;
@@ -35,7 +35,8 @@
 }
 .user-information-user-fields {
   gap: var(--dl-space-space-unit);
-  height: 198px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-self: center;
@@ -99,7 +100,7 @@
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-confirm-email {
-  display: none;
+  display: flex;
   position: relative;
   align-items: flex-start;
   flex-direction: row;
@@ -132,10 +133,11 @@
   padding-right: var(--dl-space-space-unit);
 }
 .user-information-textinput4 {
+  display: flex;
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-confirm-password {
-  display: none;
+  display: flex;
   position: relative;
   align-items: flex-start;
   flex-direction: row;
@@ -150,6 +152,7 @@
   padding-right: var(--dl-space-space-unit);
 }
 .user-information-textinput5 {
+  display: flex;
   width: var(--dl-size-size-xxlarge);
 }
 .user-information-edit-save-button {
@@ -245,20 +248,26 @@
   margin-left: var(--dl-space-space-unit);
   margin-right: var(--dl-space-space-unit);
 }
+
 @media(max-width: 1200px) {
   .user-information-all-fields {
     height: auto;
   }
   .user-information-user-fields {
+    width: auto;
     height: auto;
   }
   .user-information-confirm-email {
-    display: none;
+    display: flex;
+  }
+  .user-information-confirm-password {
+    display: flex;
   }
   .user-information-more-options-container {
     padding-bottom: var(--dl-space-space-twounits);
   }
 }
+
 @media(max-width: 767px) {
   .user-information-registration-container {
     width: 728px;
@@ -350,6 +359,7 @@
     text-align: left;
   }
   .user-information-confirm-email {
+    display: flex;
     align-items: flex-start;
     justify-content: flex-start;
   }

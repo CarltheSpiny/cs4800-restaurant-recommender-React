@@ -17,12 +17,14 @@ const NavigatorBar = (props) => {
           alt="logo"
           src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
           className="navigator-bar-image"
+          state={{accountData: props.accountData}}
         />
       </Link>
       <div className="navigator-bar-nav">
         <NavigationLinks
           rootClassName="navigation-links-root-class-name8"
           className=""
+          accountData={ props.accountData }
         ></NavigationLinks>
       </div>
       <div className="navigator-bar-btn-group">
@@ -56,7 +58,7 @@ NavigatorBar.defaultProps = {
   image_alt1: 'image',
   image_src1:
     'https://presentation-website-assets.teleporthq.io/logos/logo.png',
-  userData: undefined,  // Set userData to default to undefined
+  accountData: null,  // Set accountData to default to null
 }
 
 NavigatorBar.propTypes = {
@@ -77,7 +79,7 @@ NavigatorBar.propTypes = {
   button1: PropTypes.string,
   image_alt1: PropTypes.string,
   image_src1: PropTypes.string,
-  userData: PropTypes.object,   // Get user data from login
+  accountData: PropTypes.object,   // Get user data from login
 }
 
 export default NavigatorBar

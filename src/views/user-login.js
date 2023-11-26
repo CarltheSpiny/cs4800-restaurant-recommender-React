@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
@@ -40,7 +40,7 @@ const UserLogin = () => {
       return new Promise((resolve) => {
         setTimeout(() => {
           console.log("Fetching complete")
-          resolve(data)
+          resolve(data.result)
         }); // Simulate timeout by adding number here
       })
     } catch (error) {
@@ -49,41 +49,41 @@ const UserLogin = () => {
   }
 
   const login = async () => {
-    console.log("Waiting for fetch to finish...")
-    const jsonResult = await fetchLoginInfo()
-    console.log("Attempting Log In")
+    console.log("Waiting for fetch to finish...");
+    const accountData = await fetchLoginInfo();
+    console.log("Attempting Log In");
     try {
-      console.log("Result of fetch: " + JSON.stringify(jsonResult))
-      console.log("Logging in with these credentials: " +  email + " " + password)
+      console.log("Result of fetch: " + JSON.stringify(accountData));
+      console.log("Logging in with these credentials: " +  email + " " + password);
 
-      if (email === jsonResult.result.email.S) {
-        if (password === jsonResult.result.password.S) {
-          alert("Success")
-          setIsIncorrect(false) // in case they try again after
+      if (email === accountData.email.S) {
+        if (password === accountData.password.S) {
+          alert("Success");
+          setIsIncorrect(false); // in case they try again after
           history.push({
             pathname: "/",
-            state: { jsonResult },
+            state: { accountData },
           });
         } else {
-          alert("Invalid password for email")
-          setPassword("")
-          setIsIncorrect(true)
+          alert("Invalid password for email");
+          setPassword("");
+          setIsIncorrect(true);
         }
       } else {
-        alert("Email does not have an account")
-        console.log("Compared this: " + email + " with this: " + jsonResult.result.email.S)
-        console.log("and compared this: " + password + " with this: " + jsonResult.result.password.S)
-        setEmail("")
+        alert("Email does not have an account");
+        console.log("Compared this: " + email + " with this: " + accountData.result.email.S);
+        console.log("and compared this: " + password + " with this: " + accountData.result.password.S);
+        setEmail("");
       }
     } catch (error) {
-      console.log("Error: " + error)
+      console.log("Error: " + error);
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("form submitted")
-    login()
+    console.log("form submitted");
+    login();
   }
 
 
