@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
-
+import logo from '../primary-logo.jpg'
 import NavigationLinks from './navigation-links'
 import './navigator-bar.css'
 
@@ -15,7 +15,7 @@ const NavigatorBar = (props) => {
       <Link to="/directory" className="navigator-bar-navlink">
         <img
           alt="logo"
-          src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
+          src={logo}
           className="navigator-bar-image"
           state={{accountData: props.accountData}}
         />

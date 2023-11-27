@@ -11,6 +11,12 @@ const accountURL = 'https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test'
 const restaurantURL = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation'
 
 var requestData = "email=test2@gmail.com";
+/*
+First number is Big Updates 1 = Initial Site from Teleport | 2 = First Edits from VS Code | 3 = Working Version with API | 4 = Merge of Kristine and Miguel Branches
+Second is commit number from the big update?
+Third is commit number?
+*/
+const buildNumber = '4.2.32'
 
 const Directory = () => {
   return (
@@ -22,6 +28,7 @@ const Directory = () => {
       <NavigatorBar></NavigatorBar>
       <Title
       text='Use the links below to get to specific pages'
+      subtext={'Build Version ' + buildNumber}
       heading='Dev Directory'
       ></Title>
       <div className='main-directory-container'>

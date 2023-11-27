@@ -24,6 +24,7 @@ const RatedRestrauntCard = (props) => {
   const [name, setName] = useState(null);
   const [rating, setRating] = useState(null);
   const [ data, setPageContent] = useState(null);
+  const [ backupEnabled, setBackupMode] = useState(false);
 
   useEffect(() => {
     const fetchAndSetData = async () => {
@@ -36,12 +37,15 @@ const RatedRestrauntCard = (props) => {
         var restaurantName;
         var averageRating;
         try {
+          if (backupEnabled)
+            return
           imageURL = await jsonData.restaurants[props.indexForRestaurant].image
           restaurantName = await jsonData.restaurants[props.indexForRestaurant].name
           averageRating = await jsonData.restaurants[props.indexForRestaurant]['average rating']
           console.log('Successfully set fields')
         } catch (error) {
-          console.log('Error: ' + error)
+          console.log('Error in Setting Fields: ' + error)
+          setPageContent(RestaurantJson)
           imageURL = await props.restaurantList.restaurants[props.indexForRestaurant].image
           restaurantName = await props.restaurantList.restaurants[props.indexForRestaurant].name
           averageRating = await props.restaurantList.restaurants[props.indexForRestaurant]['average rating']
@@ -53,6 +57,18 @@ const RatedRestrauntCard = (props) => {
         setRating(averageRating);
       } catch (error) {
         console.error('Error getting data: ', error);
+        setBackupMode(true)
+        setPageContent(RestaurantJson)
+
+        console.log("Page content to set: " + JSON.stringify(RestaurantJson, null, 2))
+        console.log("Page content: " + data)
+        imageURL = props.restaurantList.restaurants[props.indexForRestaurant].image
+        restaurantName = props.restaurantList.restaurants[props.indexForRestaurant].name
+        averageRating = props.restaurantList.restaurants[props.indexForRestaurant]['average rating']
+        setImage(imageURL);
+        setName(restaurantName);
+        setRating(averageRating);
+        console.log('Successfully set backup fields')
       }
     };    
     fetchAndSetData();
