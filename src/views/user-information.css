@@ -206,47 +206,15 @@
   margin-left: var(--dl-space-space-unit);
   margin-right: var(--dl-space-space-unit);
 }
-.user-information-form1 {
-  width: 200px;
-  height: 100px;
-  display: flex;
-  align-self: flex-start;
-  align-items: center;
-  padding-left: var(--dl-space-space-oneandhalfunits);
-  padding-right: var(--dl-space-space-oneandhalfunits);
-  justify-content: center;
+.user-information-delete-account-button {
+  color: #ffffff;
+  margin-left: var(--dl-space-space-oneandhalfunits);
+  margin-right: var(--dl-space-space-oneandhalfunits);
+  background-color: #ff0000;
 }
-.user-information-button1 {
-  margin-left: var(--dl-space-space-unit);
-  margin-right: var(--dl-space-space-unit);
-}
-.user-information-form2 {
-  width: 200px;
-  height: 100px;
-  display: flex;
-  align-self: flex-start;
-  align-items: center;
-  padding-left: var(--dl-space-space-oneandhalfunits);
-  padding-right: var(--dl-space-space-oneandhalfunits);
-  justify-content: center;
-}
-.user-information-button2 {
-  margin-left: var(--dl-space-space-unit);
-  margin-right: var(--dl-space-space-unit);
-}
-.user-information-form3 {
-  width: 200px;
-  height: 100px;
-  display: flex;
-  align-self: flex-start;
-  align-items: center;
-  padding-left: var(--dl-space-space-oneandhalfunits);
-  padding-right: var(--dl-space-space-oneandhalfunits);
-  justify-content: center;
-}
-.user-information-checkbox {
-  margin-left: var(--dl-space-space-unit);
-  margin-right: var(--dl-space-space-unit);
+.user-information-text12 {
+  text-align: center;
+  text-transform: uppercase;
 }
 
 @media(max-width: 1200px) {

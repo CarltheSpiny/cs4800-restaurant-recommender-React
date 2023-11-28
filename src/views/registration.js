@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
@@ -7,6 +7,51 @@ import NavigatorBar from '../components/navigator-bar'
 import './registration.css'
 
 const Registration = (props) => {
+  // User information variables
+  const [apiData, setApiData] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailCheck, setEmailCheck] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+
+  const handleRegister = async() => {
+    const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+    });
+
+    const newUserData = {
+      result: {
+        password: { S: password },
+        restraunts: [],
+        lastName: { S: lastName },
+        username: "",
+        email: { S: email },
+        firstName: { S: firstName },
+      }
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        redirect: 'follow',
+        body: JSON.stringify(userData)
+      });
+  
+      if (response.ok) {
+        console.log('User created successfully');
+      } else {
+        console.error('Error creating user:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="registration-container">
       <Helmet>
@@ -50,6 +95,8 @@ const Registration = (props) => {
                   required
                   placeholder="John"
                   className="registration-textinput input"
+                  value={ firstName }
+                  onChange={ (e) => setFirstName(e.target.value) }
                 />
               </div>
               <div className="registration-last-name">
@@ -62,6 +109,8 @@ const Registration = (props) => {
                   required
                   placeholder="Doe"
                   className="registration-textinput1 input"
+                  value={ lastName }
+                  onChange={ (e) => setLastName(e.target.value) }
                 />
               </div>
               <div className="registration-email">
@@ -74,6 +123,8 @@ const Registration = (props) => {
                   required
                   placeholder="example@email.com"
                   className="registration-textinput2 input"
+                  value={ email }
+                  onChange={ (e) => setEmail(e.target.value) }
                 />
               </div>
               <div className="registration-confirm-email">
@@ -86,6 +137,8 @@ const Registration = (props) => {
                   required
                   placeholder="example@email.com"
                   className="registration-textinput3 input"
+                  value={ emailCheck }
+                  onChange={ (e) => setEmailCheck(e.target.value) }
                 />
               </div>
               <div className="registration-password">
@@ -97,6 +150,8 @@ const Registration = (props) => {
                   minlength="4"
                   placeholder="Password"
                   className="registration-textinput4 input"
+                  value={ password }
+                  onChange={ (e) => setPassword(e.target.value) }
                 />
               </div>
               <div className="registration-confirm-password">
@@ -107,6 +162,8 @@ const Registration = (props) => {
                   required
                   placeholder="Retype Password"
                   className="registration-textinput5 input"
+                  value={ passwordCheck }
+                  onChange={ (e) => setPasswordCheck(e.target.value) }
                 />
               </div>
             </div>
@@ -114,6 +171,7 @@ const Registration = (props) => {
               id="confirmButton"
               type="button"
               className="registration-sign-up-confirm button"
+              onClick={ handleRegister }
             >
               <span>
                 <span>Finish</span>

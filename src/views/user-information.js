@@ -20,11 +20,20 @@ const UserInformation = (props) => {
   const [emailCheck, setEmailCheck] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
+  // API url and headers
+  const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+  });
+
   // Access the logged in user's information
   const { state } = props.location;
   // Check if userData is defined (state if undefined, state.apiData otherwise)
   const userData = state && state.accountData;
 
+  // Preset the text input boxes with logged in user data
   if (userData && !isDataSet) {
     setFirstName(userData.firstName.S);
     setLastName(userData.lastName.S);
@@ -33,14 +42,92 @@ const UserInformation = (props) => {
     setIsDataSet(true);
   }
 
+  // Save changes to user account data and push the changes to api/database
+  const handleSave = async() => {
+    const updatedUserData = {
+      result: {
+        password: { S: password },
+        restraunts: { L: userData.restraunts },
+        lastName: { S: lastName },
+        username: { S: userData.username.S },
+        email: { S: email },
+        firstName: { S: firstName },
+      }
+    };
+
+    var requestOptions = {
+      method: 'PUT',
+      redirect: 'follow',
+      headers: headers,
+      body: JSON.stringify(updatedUserData)
+    };
+
+    const response = await fetch(url, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));;
+
+    /*try {
+      var requestOptions = {
+        method: 'PUT',
+        redirect: 'follow',
+        headers: headers,
+        body: JSON.stringify(updatedUserData)
+      };
+      const response = await fetch(url, requestOptions);
+      
+      // Check if api update was successful
+      if (response.ok) {
+        console.log("User data updated successfully");
+      } else {
+        console.error('Error updating user data:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+    } */
+  }
+
+  // Turn on and off edit mode
   const toggleEditMode = () => {
     if (editMode) {
-      console.log("Information Saved!");
-      setEditMode(!editMode);
+      // Check if user data has been changed
+      if ((firstName != userData.firstName.S) || (lastName != userData.lastName.S) || (email != userData.email.S) || (password != userData.password.S)) {
+        // check if email is inputted the same
+        if (email == emailCheck) {
+          // check if password is inputted the same
+          if (password == passwordCheck) {
+            handleSave();
+            setEditMode(!editMode);
+            console.log("Information Saved!");
+          } else {
+            alert("Passwords don't match");
+          }
+        } else {
+          alert("Passwords don't match");
+        }
+      } else {
+        setEditMode(!editMode);
+      }
+      setEmailCheck("");
+      setPasswordCheck("");
     } else {
       console.log("Edit Mode On");
       setEditMode(!editMode);
     }
+  }
+
+  // Delete user account 
+  const deleteAccount = async() => {
+    var requestOptions = {
+      method: 'DELETE',
+      redirect: 'follow',
+      headers: headers,
+    };
+
+    await fetch(url, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   }
 
   return (
@@ -129,7 +216,7 @@ const UserInformation = (props) => {
                   id="passwordIn"
                   disabled={ !editMode }
                   required
-                  minlength="4"
+                  minLength="4"
                   placeholder="Password"
                   className="user-information-textinput4 input"
                   value={ password }
@@ -175,27 +262,21 @@ const UserInformation = (props) => {
       <div className="user-information-more-options-container">
         <div className="user-information-container1">
           <form className="user-information-form">
-            <label>Retake Survey</label>
-            <button type="button" className="user-information-button button">
-              Start
-            </button>
-          </form>
-          <form className="user-information-form1">
             <label>Clear rating history</label>
-            <button type="button" className="user-information-button1 button">
+            <button type="button" className="user-information-button button">
               Clear
             </button>
           </form>
-          <form className="user-information-form2">
-            <label>Clear search history</label>
-            <button type="button" className="user-information-button2 button">
-              Clear
-            </button>
-          </form>
-          <form className="user-information-form3">
-            <label>Display your rating instead of global</label>
-            <input type="checkbox" className="user-information-checkbox" />
-          </form>
+          <button
+            type="button"
+            className="user-information-delete-account-button button"
+            //onClick={ deleteAccount }
+          >
+            <span className="user-information-text12">
+              <span>Delete Account</span>
+              <br></br>
+            </span>
+          </button>
         </div>
       </div>
     </div>
