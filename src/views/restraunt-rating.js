@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Helmet } from 'react-helmet'
 
@@ -8,6 +8,18 @@ import './restraunt-rating.css'
 
 const RestrauntRating = ({location: restaurantData}) => {
   const { state } = restaurantData;
+  const [isLiked, setLiked] = useState(false);
+
+
+
+  // Add code that pushes something
+
+  const handleLike = (e) => {
+    e.preventDefault();
+    console.log("Added to Liked")
+    setLiked(!isLiked)
+  }
+
   return (
     <div className="restraunt-rating-page">
       <Helmet>
@@ -53,8 +65,8 @@ const RestrauntRating = ({location: restaurantData}) => {
               <Label
                 mainLabel="Website:"
               ></Label>
-              <button type="button" className="restraunt-rating-like-button button">
-                Like
+              <button type="button" className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} onClick={handleLike}>
+                {isLiked ? 'Liked' : 'Like'}
               </button>
             </div>
           </div>

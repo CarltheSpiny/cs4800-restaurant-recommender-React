@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
@@ -7,36 +7,82 @@ import NavigationLinks from './navigation-links'
 import './navigator-bar.css'
 
 const NavigatorBar = (props) => {
-  return (
-    <header
-      data-role="Header"
-      className={`navigator-bar-header ${props.rootClassName} `}
-    >
-      <Link to="/directory" className="navigator-bar-navlink">
-        <img
-          alt="logo"
-          src={logo}
-          className="navigator-bar-image"
-          state={{accountData: props.accountData}}
-        />
-      </Link>
-      <div className="navigator-bar-nav">
-        <NavigationLinks
-          rootClassName="navigation-links-root-class-name8"
-          className=""
-          accountData={ props.accountData }
-        ></NavigationLinks>
-      </div>
-      <div className="navigator-bar-btn-group">
-        <Link to="/user-login" className="navigator-bar-login button">
-          {props.Login}
+  const [isLoggedIn, setLoggedIn] = useState(false)
+
+  useEffect (() => {
+    console.log("User data: " + props.accountData)
+    if (props.accountData != null && props.accountData != undefined)
+      setLoggedIn(true)
+  })
+
+  if (isLoggedIn) {
+    console.log("We are logged in")
+    return (
+      <header
+        data-role="Header"
+        className={`navigator-bar-header ${props.rootClassName} `}
+      >
+        <Link to="/directory" className="navigator-bar-navlink">
+          <img
+            alt="logo"
+            src={logo}
+            className="navigator-bar-image"
+            state={{accountData: props.accountData}}
+          />
         </Link>
-        <Link to="/registration" className="navigator-bar-register button">
-          {props.Register}
+        <div className="navigator-bar-nav">
+          <NavigationLinks
+            rootClassName="navigation-links-root-class-name8"
+            className=""
+            accountData={ props.accountData }
+          ></NavigationLinks>
+        </div>
+        <div className="navigator-bar-btn-group">
+        <span>Hello, {props.accountData.firstName.S}!</span>
+          <Link to={{
+            pathname: '/',
+            state: {data: null}
+          }} 
+          className="navigator-bar-login button">
+            Sign Out
+          </Link>
+        </div>
+      </header>
+    )
+  } else {
+    console.log("No user data, showing login button")
+    return (
+      <header
+        data-role="Header"
+        className={`navigator-bar-header ${props.rootClassName} `}
+      >
+        <Link to="/directory" className="navigator-bar-navlink">
+          <img
+            alt="logo"
+            src={logo}
+            className="navigator-bar-image"
+            state={{accountData: props.accountData}}
+          />
         </Link>
-      </div>
-    </header>
-  )
+        <div className="navigator-bar-nav">
+          <NavigationLinks
+            rootClassName="navigation-links-root-class-name8"
+            className=""
+            accountData={ props.accountData }
+          ></NavigationLinks>
+        </div>
+        <div className="navigator-bar-btn-group">
+          <Link to="/user-login" className="navigator-bar-login button">
+            {props.Login}
+          </Link>
+          <Link to="/registration" className="navigator-bar-register button">
+            {props.Register}
+          </Link>
+        </div>
+      </header>
+    )
+  }
+  
 }
 
 NavigatorBar.defaultProps = {

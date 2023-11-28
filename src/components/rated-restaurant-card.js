@@ -10,14 +10,23 @@ const headers = new Headers({
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
 });
+
+const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation';
+const cppAddress = '3801 W Temple Ave, Pomona, CA 91768'
+
+const requestBody = {
+  "message" : "i want to eat some spicy food",
+  "location" : cppAddress,
+  "liked_restaurants" : ["E0JNvQbfoGg6d13ADsxdfg"]
+}
+
 /*Options to send with headers */
 var requestOptions = {
   method: 'GET',
   redirect: 'follow',
-  header: headers
+  header: headers,
+  json: requestBody
 };
-
-const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation';
 
 const RatedRestrauntCard = (props) => {
   const [imageSrc, setImage] = useState(null);
@@ -42,7 +51,7 @@ const RatedRestrauntCard = (props) => {
           imageURL = await jsonData.restaurants[props.indexForRestaurant].image
           restaurantName = await jsonData.restaurants[props.indexForRestaurant].name
           averageRating = await jsonData.restaurants[props.indexForRestaurant]['average rating']
-          console.log('Successfully set fields')
+          //console.log('Successfully set fields')
         } catch (error) {
           console.log('Error in Setting Fields: ' + error)
           setPageContent(RestaurantJson)
@@ -60,8 +69,9 @@ const RatedRestrauntCard = (props) => {
         setBackupMode(true)
         setPageContent(RestaurantJson)
 
-        console.log("Page content to set: " + JSON.stringify(RestaurantJson, null, 2))
-        console.log("Page content: " + data)
+        //console.log("Page content to set: " + JSON.stringify(RestaurantJson, null, 2))
+        //console.log("Page content: " + data)
+        setPageContent(RestaurantJson)
         imageURL = props.restaurantList.restaurants[props.indexForRestaurant].image
         restaurantName = props.restaurantList.restaurants[props.indexForRestaurant].name
         averageRating = props.restaurantList.restaurants[props.indexForRestaurant]['average rating']

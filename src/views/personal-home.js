@@ -7,7 +7,7 @@ import Title from '../components/title'
 import RatedRestrauntCard from '../components/rated-restaurant-card'
 import './personal-home.css'
 
-const PersonalHome = (props) => {
+const PersonalHome = (props, location) => {
   const [jsonData, setData] = useState(null);
   // Access a user's information
   const { state } = props.location;

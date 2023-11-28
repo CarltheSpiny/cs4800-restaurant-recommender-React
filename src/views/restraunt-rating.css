@@ -87,6 +87,24 @@
   justify-content: flex-start;
 }
 
+.restraunt-rating-unlike-button {
+  flex: 0 0 auto;
+  color: white;
+  background-color: red;
+  width: 100px;
+  margin-top: 45px;
+  margin-left: 30px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-top: var(--dl-space-space-unit);
+  padding-left: 29px;
+  padding-right: var(--dl-space-space-twounits);
+  flex-direction: row;
+  padding-bottom: var(--dl-space-space-unit);
+  justify-content: flex-start;
+}
+
 @media(max-width: 1200px) {
   .restraunt-rating-restraunt-details {
     width: auto;

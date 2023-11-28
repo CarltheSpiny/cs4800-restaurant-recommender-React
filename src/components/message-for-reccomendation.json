@@ -1,0 +1,5 @@
+{
+    "message" : "i want to eat some spicy food",
+    "location" : "insert address (it doesn't have to be in a specific format, the api can parse it either way)",
+    "liked_restaurants" : ["id_of_restaurant_1", "id_of_restaruant_2", "..."]
+}
