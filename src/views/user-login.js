@@ -7,14 +7,18 @@ import NavigatorBar from '../components/navigator-bar'
 import './user-login.css'
 
 const UserLogin = () => {
+  // Complete API data
   const [apiData, setApiData] = useState(null);
-
+  
+  // User input
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordIncorrect, setIsIncorrect] = useState(false);
 
+  // Page Navigation
   const history = useHistory();
 
+  // API URL and headers
   const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
   const headers = new Headers({
     'Content-Type': 'application/json',
@@ -22,6 +26,7 @@ const UserLogin = () => {
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
   });
 
+  // Get user data from API
   const fetchLoginInfo = async () => {
     try {
       var requestOptions = {
@@ -48,6 +53,7 @@ const UserLogin = () => {
     }
   }
 
+  // Check if user exists
   const login = async () => {
     console.log("Waiting for fetch to finish...");
     const accountData = await fetchLoginInfo();
@@ -71,8 +77,8 @@ const UserLogin = () => {
         }
       } else {
         alert("Email does not have an account");
-        console.log("Compared this: " + email + " with this: " + accountData.result.email.S);
-        console.log("and compared this: " + password + " with this: " + accountData.result.password.S);
+        console.log("Compared this: " + email + " with this: " + accountData.email.S);
+        console.log("and compared this: " + password + " with this: " + accountData.password.S);
         setEmail("");
       }
     } catch (error) {
@@ -80,6 +86,7 @@ const UserLogin = () => {
     }
   }
 
+  // Handle submission of dat
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("form submitted");

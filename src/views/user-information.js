@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
 
@@ -15,6 +16,9 @@ const UserInformation = (props) => {
   // Check if the user's data has been set once (is false; true if data was set previously)
   const [isDataSet, setIsDataSet] = useState(false);
 
+  // Page navigation
+  const history = useHistory();
+
   // Edit Mode (default to false)
   const [editMode, setEditMode] = useState(false);
   const [emailCheck, setEmailCheck] = useState("");
@@ -24,74 +28,53 @@ const UserInformation = (props) => {
   const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
   const headers = new Headers({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+    //'Access-Control-Allow-Origin': '*',
+    //'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
   });
 
   // Access the logged in user's information
   const { state } = props.location;
-  // Check if userData is defined (state if undefined, state.apiData otherwise)
-  const userData = state && state.accountData;
+  // Check if AccountData is defined (state if undefined, state.apiData otherwise)
+  const accountData = state && state.accountData;
 
   // Preset the text input boxes with logged in user data
-  if (userData && !isDataSet) {
-    setFirstName(userData.firstName.S);
-    setLastName(userData.lastName.S);
-    setEmail(userData.email.S);
-    setPassword(userData.password.S);
+  if (accountData && !isDataSet) {
+    setFirstName(accountData.firstName.S);
+    setLastName(accountData.lastName.S);
+    setEmail(accountData.email.S);
+    setPassword(accountData.password.S);
     setIsDataSet(true);
   }
 
   // Save changes to user account data and push the changes to api/database
   const handleSave = async() => {
-    const updatedUserData = {
-      result: {
-        password: { S: password },
-        restraunts: { L: userData.restraunts },
-        lastName: { S: lastName },
-        username: { S: userData.username.S },
-        email: { S: email },
-        firstName: { S: firstName },
-      }
+    const updatedAccountData = {
+      "username": accountData.username.S,
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email,
+      //"restraunts": accountData.restraunts,
+      "password": password
     };
 
     var requestOptions = {
       method: 'PUT',
       redirect: 'follow',
       headers: headers,
-      body: JSON.stringify(updatedUserData)
+      body: JSON.stringify(updatedAccountData)
     };
 
     const response = await fetch(url, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
-      .catch(error => console.log('error', error));;
-
-    /*try {
-      var requestOptions = {
-        method: 'PUT',
-        redirect: 'follow',
-        headers: headers,
-        body: JSON.stringify(updatedUserData)
-      };
-      const response = await fetch(url, requestOptions);
-      
-      // Check if api update was successful
-      if (response.ok) {
-        console.log("User data updated successfully");
-      } else {
-        console.error('Error updating user data:', response.status, response.statusText);
-      }
-    } catch (error) {
-      console.error(error);
-    } */
+      .catch(error => console.log('error', error));
   }
 
   // Turn on and off edit mode
   const toggleEditMode = () => {
     if (editMode) {
       // Check if user data has been changed
-      if ((firstName != userData.firstName.S) || (lastName != userData.lastName.S) || (email != userData.email.S) || (password != userData.password.S)) {
+      if ((firstName != accountData.firstName.S) || (lastName != accountData.lastName.S) || (email != accountData.email.S) || (password != accountData.password.S)) {
         // check if email is inputted the same
         if (email == emailCheck) {
           // check if password is inputted the same
@@ -118,16 +101,34 @@ const UserInformation = (props) => {
 
   // Delete user account 
   const deleteAccount = async() => {
-    var requestOptions = {
-      method: 'DELETE',
-      redirect: 'follow',
-      headers: headers,
-    };
+    const userConfirmed = window.confirm('Are you sure you want to delete your account?');
 
-    await fetch(url, requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+    if (userConfirmed) {
+      // If User clicked 'OK'
+      console.log('User clicked OK');
+      var requestOptions = {
+        method: 'DELETE',
+        redirect: 'follow',
+        headers: headers,
+      };
+  
+      await fetch(url, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+      
+      // Erase logged in user data
+      accountData = undefined;
+
+      // Go back to main page with blank user data
+      history.push({
+        pathname: "/",
+        state: { accountData },
+      });
+    } else {
+      // If User clicked 'Cancel' or closed the dialog
+      console.log('User clicked Cancel');
+    }
   }
 
   return (
@@ -139,7 +140,7 @@ const UserInformation = (props) => {
           content="UserInformation - cs4800-restaurant-recommender"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name4"></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name4" accountData={ accountData }></NavigatorBar>
       <Title
         text="You can update your account information here."
         heading="Your Information"
@@ -270,7 +271,7 @@ const UserInformation = (props) => {
           <button
             type="button"
             className="user-information-delete-account-button button"
-            //onClick={ deleteAccount }
+            onClick={ deleteAccount }
           >
             <span className="user-information-text12">
               <span>Delete Account</span>
