@@ -21,7 +21,6 @@ const UserInformation = (props) => {
 
   // Edit Mode (default to false)
   const [editMode, setEditMode] = useState(false);
-  const [emailCheck, setEmailCheck] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
   // API url and headers
@@ -35,7 +34,7 @@ const UserInformation = (props) => {
   // Access the logged in user's information
   const { state } = props.location;
   // Check if AccountData is defined (state if undefined, state.apiData otherwise)
-  const accountData = state && state.accountData;
+  var accountData = state && state.accountData;
 
   // Preset the text input boxes with logged in user data
   if (accountData && !isDataSet) {
@@ -75,23 +74,17 @@ const UserInformation = (props) => {
     if (editMode) {
       // Check if user data has been changed
       if ((firstName != accountData.firstName.S) || (lastName != accountData.lastName.S) || (email != accountData.email.S) || (password != accountData.password.S)) {
-        // check if email is inputted the same
-        if (email == emailCheck) {
-          // check if password is inputted the same
-          if (password == passwordCheck) {
-            handleSave();
-            setEditMode(!editMode);
-            console.log("Information Saved!");
-          } else {
-            alert("Passwords don't match");
-          }
+        // check if password is inputted the same
+        if (password == passwordCheck) {
+          handleSave();
+          setEditMode(!editMode);
+          console.log("Information Saved!");
         } else {
           alert("Passwords don't match");
         }
       } else {
         setEditMode(!editMode);
       }
-      setEmailCheck("");
       setPasswordCheck("");
     } else {
       console.log("Edit Mode On");
@@ -106,6 +99,7 @@ const UserInformation = (props) => {
     if (userConfirmed) {
       // If User clicked 'OK'
       console.log('User clicked OK');
+      
       var requestOptions = {
         method: 'DELETE',
         redirect: 'follow',
@@ -187,27 +181,11 @@ const UserInformation = (props) => {
                 <input
                   type="email"
                   id="emailIn"
-                  readOnly={ !editMode }
+                  readOnly="true"
                   required
                   placeholder="example@email.com"
                   className="user-information-textinput2 input"
                   value={ email }
-                  onChange={ (e) => setEmail(e.target.value) }
-                />
-              </div>
-              <div className="user-information-confirm-email" style={{ display: editMode ? 'flex' : 'none' }}>
-                <span id="textLabel" className="user-information-text03">
-                  Confirm Email:
-                </span>
-                <input
-                  type="email"
-                  id="confirmEmailIn"
-                  readOnly={ !editMode }
-                  required
-                  placeholder="example@email.com"
-                  className="user-information-textinput3 input"
-                  value={ emailCheck }
-                  onChange={ (e) => setEmailCheck(e.target.value) }
                 />
               </div>
               <div className="user-information-password">
