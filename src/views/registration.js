@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
 
@@ -8,7 +8,7 @@ import './registration.css'
 
 const Registration = (props) => {
   // User information variables
-  const [apiData, setApiData] = useState(null);
+  const [apiData, setAPiData] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,37 +16,65 @@ const Registration = (props) => {
   const [emailCheck, setEmailCheck] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
-  const handleRegister = async() => {
-    const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
-    });
+  // Page navigation
+  const history = useHistory();
 
-    const newUserData = {
-      result: {
-        password: { S: password },
-        restraunts: [],
-        lastName: { S: lastName },
-        username: "",
-        email: { S: email },
-        firstName: { S: firstName },
-      }
+  // API URL and headers
+  const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+  });
+
+  // Create a new account
+  const handleRegister = async() => {
+    const newAccountData = {
+      "username": "",
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email,
+      //"restraunts": accountData.restraunts,
+      "password": password
     };
 
+    const requestOptions = {
+      method: 'POST',
+      redirect: 'follow',
+      body: JSON.stringify(newAccountData)
+    }
+    const response = await fetch(url, requestOptions)
+      .then(response => console.log(response.text()))
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+    const accountData = await readNewAccountData();
+    history.push({
+      pathname: "/",
+      state: { accountData },
+    });
+
+    alert(`Account Created!\nWelcome, ${firstName} ${lastName}!`);
+  }
+
+  // Get new account data
+  const readNewAccountData = async() => {
     try {
-      const response = await fetch(url, {
-        method: 'POST',
+      var requestOptions = {
+        method: 'GET',
         redirect: 'follow',
-        body: JSON.stringify(userData)
-      });
-  
-      if (response.ok) {
-        console.log('User created successfully');
-      } else {
-        console.error('Error creating user:', response.status, response.statusText);
-      }
+        header: headers
+      };
+      // Get api data
+      console.log("Fetching from API");
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log("Fetching complete")
+          resolve(data.result)
+        }); // Simulate timeout by adding number here
+      })
     } catch (error) {
       console.error(error);
     }
