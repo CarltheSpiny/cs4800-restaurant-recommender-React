@@ -17,15 +17,15 @@ const cppAddress = '3801 W Temple Ave, Pomona, CA 91768'
 const requestBody = {
   "message" : "i want to eat some spicy food",
   "location" : cppAddress,
-  "liked_restaurants" : ["E0JNvQbfoGg6d13ADsxdfg"]
+  "liked_restaurants" : []
 }
 
 /*Options to send with headers */
 var requestOptions = {
-  method: 'GET',
+  method: 'POST',
   redirect: 'follow',
   header: headers,
-  json: requestBody
+  body: JSON.stringify(requestBody, null, 2)
 };
 
 const RatedRestrauntCard = (props) => {
@@ -33,24 +33,27 @@ const RatedRestrauntCard = (props) => {
   const [name, setName] = useState(null);
   const [rating, setRating] = useState(null);
   const [ data, setPageContent] = useState(null);
+  const [ id_data, setIdData] = useState(null);
   const [ backupEnabled, setBackupMode] = useState(false);
 
   useEffect(() => {
+    // Will fetch a list of reccomended restaurants
     const fetchAndSetData = async () => {
       try {
         const response = await fetch(apiUrl, requestOptions);
         const jsonData = await response.json();
         console.log('Successful response from fetch: ' + jsonData)
-        setPageContent(jsonData);
+        setIdData(jsonData);
         var imageURL;
         var restaurantName;
         var averageRating;
         try {
           if (backupEnabled)
             return
-          imageURL = await jsonData.restaurants[props.indexForRestaurant].image
-          restaurantName = await jsonData.restaurants[props.indexForRestaurant].name
-          averageRating = await jsonData.restaurants[props.indexForRestaurant]['average rating']
+
+          //imageURL = await jsonData.restaurants[props.indexForRestaurant].image
+          //restaurantName = await jsonData.restaurants[props.indexForRestaurant].name
+          //averageRating = await jsonData.restaurants[props.indexForRestaurant]['average rating']
           //console.log('Successfully set fields')
         } catch (error) {
           console.log('Error in Setting Fields: ' + error)
