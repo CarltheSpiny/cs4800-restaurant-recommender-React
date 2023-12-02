@@ -10,7 +10,7 @@ const NavigatorBar = (props) => {
   const [isLoggedIn, setLoggedIn] = useState(false)
 
   useEffect (() => {
-    console.log("User data: " + props.accountData)
+    // console.log("User data: " + props.accountData)
     if (props.accountData != null && props.accountData != undefined)
       setLoggedIn(true)
   })
@@ -50,7 +50,7 @@ const NavigatorBar = (props) => {
       </header>
     )
   } else {
-    console.log("No user data, showing login button")
+    console.warn("No user data, showing login button")
     return (
       <header
         data-role="Header"
