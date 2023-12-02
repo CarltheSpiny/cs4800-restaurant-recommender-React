@@ -6,13 +6,14 @@ import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
 import RatedRestrauntCard from '../components/rated-restaurant-card'
 import './personal-home.css'
-import ExampleOut from '../components/get-restaurant-reccomendation.json'
 
 const PersonalHome = (props) => {
   const [jsonData, setData] = useState(null);
 
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
+
+  const [fetchedRecommendation, setFetched] = useState(false);
 
   // Access a user's information
   const { state } = props.location;
@@ -28,7 +29,11 @@ const PersonalHome = (props) => {
   });
 
  useEffect(() => {
-    console.log("User has logged in with: " + JSON.stringify(userData));
+    // console.log("User has logged in with: " + JSON.stringify(userData));
+    if (fetchedRecommendation) {
+      console.warn("Recomendation had been fetched; Will not fetch a new reccomendation")
+      return;
+    }
 
     const requestBody = {
       "message" : "i want to eat some spicy food",
@@ -49,8 +54,8 @@ const PersonalHome = (props) => {
         const response = await fetch(apiUrl, requestOptions)
         const data = await response.json()
         console.log("Personal Home: JSON response: ", data)
-        console.log(response.status)
         setData(data)
+        setFetched(true)
       } catch (error) {
         console.log("Personal Home: Error: " + error)
         setError(true);
@@ -84,7 +89,6 @@ const PersonalHome = (props) => {
  }
 
   if (isLoading) {
-    console.log("Loading page...");
     return (
       <div className="personal-home-container">
         <Helmet>
@@ -98,65 +102,56 @@ const PersonalHome = (props) => {
           rootClassName="title-root-class-name"
         ></Title>
         <div className="personal-home-gallery">
-        <RatedRestrauntCard
-          rootClassName="rated-restraunt-card-1"
-          className="personal-home-component1"
-          isLoadingPage={true}
-        ></RatedRestrauntCard>
-        <RatedRestrauntCard
-          rootClassName="rated-restraunt-card-2"
-          className="personal-home-component2"
-          isLoadingPage={true}
-        ></RatedRestrauntCard>
-        <RatedRestrauntCard
-          rootClassName="rated-restraunt-card-2"
-          className="personal-home-component2"
-          isLoadingPage={true}
-        ></RatedRestrauntCard>
+        
         </div>
       </div>
     )
   }
 
-  console.log("Page loaded!")
-  return (
-    <div className="personal-home-container">
-      <Helmet>
-        <title>cs4800-restaurant-recommender</title>
-        <meta property="og:title" content="cs4800-restaurant-recommender" />
-      </Helmet>
-      <NavigatorBar accountData={ userData }></NavigatorBar>
-      <Title
-        text="Your personalized feed of restaurants we think you'll love!"
-        heading="Your Feed"
-        rootClassName="title-root-class-name"
-      ></Title>
-      <div className="personal-home-gallery">
-        
-        <RatedRestrauntCard
-          rootClassName="rated-restraunt-card-1"
-          className="personal-home-component1"
-          indexForRestaurant={0}
-          reccomendedRestaurants={jsonData}
-          isLoadingPage={false}
-        ></RatedRestrauntCard>
-        <RatedRestrauntCard
-          rootClassName="rated-restraunt-card-2"
-          className="personal-home-component2"
-          indexForRestaurant={1}
-          reccomendedRestaurants={jsonData}
-          isLoadingPage={false}
-        ></RatedRestrauntCard>
-        <RatedRestrauntCard
-          rootClassName="rated-restraunt-card-3"
-          className="personal-home-component3"
-          indexForRestaurant={2}
-          reccomendedRestaurants={jsonData}
-          isLoadingPage={false}
-        ></RatedRestrauntCard>
+  else {
+    console.log("Personal Page: Page loaded!")
+    return (
+      <div className="personal-home-container">
+        <Helmet>
+          <title>Home</title>
+          <meta property="og:title" content="cs4800-restaurant-recommender" />
+        </Helmet>
+        <NavigatorBar accountData={ userData }></NavigatorBar>
+        <Title
+          text="Your personalized feed of restaurants we think you'll love!"
+          heading="Your Feed"
+          rootClassName="title-root-class-name"
+        ></Title>
+        <div className="personal-home-gallery">
+          
+          <RatedRestrauntCard
+            rootClassName="rated-restraunt-card-1"
+            className="personal-home-component1"
+            indexForRestaurant={0}
+            reccomendedRestaurants={jsonData}
+            isLoadingPage={isLoading}
+          ></RatedRestrauntCard>
+
+          <RatedRestrauntCard
+            rootClassName="rated-restraunt-card-1"
+            className="personal-home-component1"
+            indexForRestaurant={1}
+            reccomendedRestaurants={jsonData}
+            isLoadingPage={isLoading}
+          ></RatedRestrauntCard>
+
+          <RatedRestrauntCard
+            rootClassName="rated-restraunt-card-1"
+            className="personal-home-component1"
+            indexForRestaurant={2}
+            reccomendedRestaurants={jsonData}
+            isLoadingPage={isLoading}
+          ></RatedRestrauntCard>
+          
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   
 }

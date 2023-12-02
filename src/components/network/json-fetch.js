@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import RestaurantJson from '../network/backup-restaurant-output.json'
 
 const FetchFromURL = ({ url }) => {
   const [data, setPageContent] = useState(null);
@@ -24,6 +25,10 @@ const FetchFromURL = ({ url }) => {
         const jsonData = await response.json();
         setPageContent(jsonData);
         console.log(jsonData)
+        if (response.status == 500) {
+          setPageContent(RestaurantJson)
+          console.log("Error from Server")
+        }
       } catch (error) {
         console.log(error)
         setError(error);
@@ -46,7 +51,7 @@ const FetchFromURL = ({ url }) => {
   return (
     <div>
       <div>
-        <span>Number of Restaurants returned: {Object.keys(data.restaurants).length} </span>
+        <span>Number of Restaurants returned: {Object.keys(data).length} </span>
       </div>
       <div>
         <span>{JSON.stringify(data.restaurants[0].name, null, 2)}</span>

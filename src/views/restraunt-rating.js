@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom/cjs/react-router-dom'
 
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
@@ -17,8 +18,10 @@ const headers = new Headers({
 
 const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
 
-const RestrauntRating = (props, location) => {
-  const { state } = location;
+const RestrauntRating = (props) => {
+  let { id } = useParams();
+
+  console.log("Params: " + id)
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [jsonData, setData] = useState("");
@@ -28,10 +31,10 @@ const RestrauntRating = (props, location) => {
   useEffect(() => {
     const fetchWithId = async () => {
       try {
-        if ((state != null) || (state != undefined)) {
-          console.log("ID to fetch: " + state)
+        if ((id != null) || (id != undefined)) {
+          console.log("ID to fetch: " + id)
           const requestBody = {
-            "id" : state
+            "id" : id
           }
           
           var request = {
@@ -48,7 +51,7 @@ const RestrauntRating = (props, location) => {
           if (response.status != "200")
             setError(true)
         } else {
-          console.error("No ID was passed")
+          console.error("No ID was passed...")
           setData(RestaurantFromID)
           return;
         }
@@ -60,7 +63,7 @@ const RestrauntRating = (props, location) => {
       }
     }
     fetchWithId()
-  })
+  }, [])
 
   // Add code that pushes something
   function handleText(jsonText) {
@@ -219,12 +222,12 @@ const RestrauntRating = (props, location) => {
         <NavigatorBar></NavigatorBar>
         <img
           alt="image"
-          src={jsonData.body.image_url}
+          src={jsonData.image_url}
           className="restraunt-image"
         />
         <div className="restraunt-rating-header">
           <h1 className="restraunt-rating-title">
-            {jsonData.body.name}
+            {jsonData.name}
           </h1>
         </div>
         <div className="restraunt-rating-restraunt-info">
@@ -233,38 +236,38 @@ const RestrauntRating = (props, location) => {
               <div className="restraunt-rating-row1">
                 <Label
                   mainLabel="Address:"
-                  listLabel={jsonData.body.location}
+                  listLabel={jsonData.location}
                 ></Label>
                 <Label
                   mainLabel="Rating:"
-                  listLabel={jsonData.body.rating + "/ 5"}
+                  listLabel={jsonData.rating + "/ 5"}
                 ></Label>
               </div>
               <div className="restraunt-rating-row2">
                 <Label
                   mainLabel="Phone:"
-                  listLabel={jsonData.body.phone}
+                  listLabel={jsonData.phone}
                 ></Label>
                 <LinkLabel
                   mainLabel="Website: "
-                  href_label={jsonData.body.url}
+                  href_label={jsonData.url}
                 ></LinkLabel>
               </div>
               <div className="restraunt-rating-row3">
                 <Label
                   mainLabel="Cusisne:"
-                  listLabel={handleText(jsonData.body.restaurant_types)}
+                  listLabel={handleText(jsonData.restaurant_types)}
                 ></Label>
                 <Label
-                  mainLabel="Price Range: "
-                  listLabel={jsonData.body.price}
+                  mainLabel="Price: "
+                  listLabel={jsonData.price}
                 ></Label>
               </div>
-              <button type="button" className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} onClick={handleLike}>
-                  {isLiked ? 'Liked' : 'Like'}
-                </button>
             </div>
           </div>
+          <button type="button" className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} onClick={handleLike}>
+                  {isLiked ? 'Liked' : 'Like'}
+                </button>
         </div>
       </div>
     )

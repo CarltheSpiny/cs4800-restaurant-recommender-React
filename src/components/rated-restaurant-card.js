@@ -26,6 +26,8 @@ const RatedRestrauntCard = (props) => {
 
   const [ id_data, setIdData] = useState(null);
 
+  var backupJson;
+
   useEffect(() => {
     if (isRepLoading) {
       console.warn("A card wanted to load again!")
@@ -38,11 +40,11 @@ const RatedRestrauntCard = (props) => {
       console.warn("Didn't fetch; Page was still loading")
       return
     } else {
-      console.log("Page Loaded. Attempting to fetch...")
+      console.log("Restaurant Card: Page Loaded. Attempting to fetch...")
     }
 
     const requestBody = {
-      "id" : props.reccomendedRestaurants[0]
+      "id" : props.reccomendedRestaurants[props.indexForRestaurant]
     }
     
     var request = {
@@ -54,11 +56,12 @@ const RatedRestrauntCard = (props) => {
     
     const fetchFromId = async () => {     
       try {
-        console.log("ID to fetch: " + props.reccomendedRestaurants)
+        console.log("ID to fetch: " + props.reccomendedRestaurants[props.indexForRestaurant])
         const response = await fetch(apiUrl, request)
         const data = await response.json()
         console.log("RestaurantCard: JSON response: ", data)
         setIdData(data)
+        backupJson = data
         if (response.status != "200")
           setError(true)
         setFields(data)
@@ -75,17 +78,14 @@ const RatedRestrauntCard = (props) => {
       console.log("Setting fields...")
       setRepLoading(true)
       setIdData(jsonData)
+      backupJson = jsonData
       var imageURL;
       var restaurantName;
       var averageRating;
       try {
-        if (isError || isLoading) {
-          console.warn("Caught an error in loading from the fetch response!")
-          return
-        }
-        imageURL = await id_data.restaurants[props.indexForRestaurant].image
-        restaurantName = await id_data.restaurants[props.indexForRestaurant].name
-        averageRating = await id_data.restaurants[props.indexForRestaurant]['average rating']
+        imageURL = jsonData.image_url
+        restaurantName = jsonData.name
+        averageRating = jsonData.rating
         console.log("Set fields from the restaurant response")
       } catch (error) {
         console.error("Error in setting fields: " + error)
@@ -95,16 +95,18 @@ const RatedRestrauntCard = (props) => {
       setImage(imageURL);
       setName(restaurantName);
       setRating(averageRating);
+      console.log("The value of idData: " + id_data)
     }
+
     fetchFromId()
-  });
+  }, [props]);
 
   if (isError) {
     console.error("Error in fetching!")
     return(
       <Link to={{
         pathname: '/restraunt-rating',
-        state:  { data: "J7kxtWf2zUG93y7-XItdlA"}
+        state:  { id_data }
       }}>
         <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
           <div className="rated-restraunt-card-gallery-card">
@@ -127,7 +129,7 @@ const RatedRestrauntCard = (props) => {
     )
   }
 
-  else if (isLoading) {
+  else if (isLoading || props.isLoadingPage) {
     console.log("Loading restaurant card...");
     return (
       <Link to={{
@@ -156,12 +158,10 @@ const RatedRestrauntCard = (props) => {
   }
 
   else {
-    console.log("Finished loading restuarnt card.")
+    console.log("Finished loading restuarant card; Will send this data to next page: ", props.reccomendedRestaurants[props.indexForRestaurant])
     return(
-      <Link to={{
-        pathname: '/restraunt-rating',
-        state:  { data: null}
-      }}>
+      <Link to={`/restraunt-rating/${props.reccomendedRestaurants[props.indexForRestaurant]}`}>
+
         <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
           <div className="rated-restraunt-card-gallery-card">
             <img
@@ -192,7 +192,8 @@ RatedRestrauntCard.defaultProps = {
   restrauntName: 'Loading...',
   indexForRestaurant: 0,
   restaurantRating: "--",
-  reccomendedRestaurants: RestaurantJson.restaurants[0]
+  reccomendedRestaurants: RestaurantJson.restaurants[0],
+  isLoadingPage: true
 }
 
 RatedRestrauntCard.propTypes = {

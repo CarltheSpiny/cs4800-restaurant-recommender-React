@@ -7,16 +7,20 @@ import Title from '../components/title'
 import './not-implemented.css'
 
 const NotImplemented = (props) => {
+  // Access a user's information
+  const { state } = props.location;
+  // Check if userData is defined (state if undefined, state.apiData otherwise)
+  const userData = state && state.accountData;
   return (
     <div id="404-page" className="not-implemented-container">
       <Helmet>
-        <title>NotImplemented - cs4800-restaurant-recommender</title>
+        <title>Page not found</title>
         <meta
           property="og:title"
           content="NotImplemented - cs4800-restaurant-recommender"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name5"></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name5" accountData={state}></NavigatorBar>
       <Title
         text="Whoops!"
         heading="Page Not Found"

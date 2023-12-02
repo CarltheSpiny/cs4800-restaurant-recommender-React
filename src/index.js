@@ -24,7 +24,7 @@ const App = () => {
       <Switch>
         <Route component={PersonalHome} exact path="/" />
         <Route component={Directory} exact path="/directory" />
-        <Route component={RestrauntRating} exact path="/restraunt-rating" />
+        <Route path="/restraunt-rating/:id" children={<RestrauntRating />} />
         <Route component={RestaurantHistory} exact path="/restaurant-history" />
         <Route component={UserInformation} exact path="/user-information" />
         <Route component={Registration} exact path="/registration" />
