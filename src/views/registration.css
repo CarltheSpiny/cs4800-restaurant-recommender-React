@@ -36,6 +36,7 @@
   width: auto;
   display: flex;
   margin-top: var(--dl-space-space-unit);
+  margin-bottom: var(--dl-space-space-twounits);
   align-items: center;
   justify-content: center;
 }

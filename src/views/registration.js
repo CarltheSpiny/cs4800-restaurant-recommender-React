@@ -8,7 +8,6 @@ import './registration.css'
 
 const Registration = (props) => {
   // User information variables
-  const [apiData, setAPiData] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

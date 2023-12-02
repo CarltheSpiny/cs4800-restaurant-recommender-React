@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 import logo from '../primary-logo.jpg'
@@ -7,82 +7,69 @@ import NavigationLinks from './navigation-links'
 import './navigator-bar.css'
 
 const NavigatorBar = (props) => {
-  const [isLoggedIn, setLoggedIn] = useState(false)
+  // Page navigation
+  const history = useHistory();
 
-  useEffect (() => {
-    console.log("User data: " + props.accountData)
-    if (props.accountData != null && props.accountData != undefined)
-      setLoggedIn(true)
-  })
+  // Handle logout functionality
+  const handleLogout = () => {
+    //setLoggedIn(false);
+    history.push({
+      pathname: "/",
+      state: { accountData: null },
+    });
+  }
 
-  if (isLoggedIn) {
-    console.log("We are logged in")
-    return (
-      <header
-        data-role="Header"
-        className={`navigator-bar-header ${props.rootClassName} `}
-      >
-        <Link to="/directory" className="navigator-bar-navlink">
-          <img
-            alt="logo"
-            src={logo}
-            className="navigator-bar-image"
-            state={{accountData: props.accountData}}
-          />
-        </Link>
-        <div className="navigator-bar-nav">
-          <NavigationLinks
-            rootClassName="navigation-links-root-class-name8"
-            className=""
-            accountData={ props.accountData }
-          ></NavigationLinks>
-        </div>
-        <div className="navigator-bar-btn-group">
-        <span>Hello, {props.accountData.firstName.S}!</span>
-          <Link to={{
-            pathname: '/',
-            state: {data: null}
-          }} 
-          className="navigator-bar-login button">
+  // Set buttons when user is logged in status
+  const isLoggedIn = () => {
+    // Check if accountData in props is not null or undefined
+    if (props.accountData) {
+      return (
+        <>
+          <span className="navigator-bar-greeting">Hello, {props.accountData.firstName.S}!</span>
+          <button className="navigator-bar-signout" onClick={ handleLogout }>
             Sign Out
-          </Link>
-        </div>
-      </header>
-    )
-  } else {
-    console.log("No user data, showing login button")
-    return (
-      <header
-        data-role="Header"
-        className={`navigator-bar-header ${props.rootClassName} `}
-      >
-        <Link to="/directory" className="navigator-bar-navlink">
-          <img
-            alt="logo"
-            src={logo}
-            className="navigator-bar-image"
-            state={{accountData: props.accountData}}
-          />
-        </Link>
-        <div className="navigator-bar-nav">
-          <NavigationLinks
-            rootClassName="navigation-links-root-class-name8"
-            className=""
-            accountData={ props.accountData }
-          ></NavigationLinks>
-        </div>
-        <div className="navigator-bar-btn-group">
+          </button>
+        </>
+      );
+    } else {    // If user is not logged in
+      return (
+        <>
           <Link to="/user-login" className="navigator-bar-login button">
             {props.Login}
           </Link>
           <Link to="/registration" className="navigator-bar-register button">
             {props.Register}
           </Link>
-        </div>
-      </header>
-    )
+        </>
+      );
+    }
   }
-  
+
+  return (
+    <header
+      data-role="Header"
+      className={`navigator-bar-header ${props.rootClassName} `}
+    >
+      <Link to="/directory" className="navigator-bar-navlink">
+        <img
+          alt="logo"
+          src={logo}
+          className="navigator-bar-image"
+          state={{accountData: props.accountData}}
+        />
+      </Link>
+      <div className="navigator-bar-nav">
+        <NavigationLinks
+          rootClassName="navigation-links-root-class-name8"
+          className=""
+          accountData={ props.accountData }
+        ></NavigationLinks>
+      </div>
+      <div className="navigator-bar-btn-group">
+        { isLoggedIn() }
+      </div>
+    </header>
+  )
 }
 
 NavigatorBar.defaultProps = {
