@@ -24,11 +24,9 @@ const UserInformation = (props) => {
   const [passwordCheck, setPasswordCheck] = useState("");
 
   // API url and headers
-  const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
+  const url = `https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account?email=${email}`;
   const headers = new Headers({
     'Content-Type': 'application/json',
-    //'Access-Control-Allow-Origin': '*',
-    //'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
   });
 
   // Access the logged in user's information

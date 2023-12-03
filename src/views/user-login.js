@@ -19,7 +19,7 @@ const UserLogin = () => {
   const history = useHistory();
 
   // API URL and headers
-  const url = `https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test?email=${email}`;
+  const url = `https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account?email=${email}`;
   const headers = new Headers({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
