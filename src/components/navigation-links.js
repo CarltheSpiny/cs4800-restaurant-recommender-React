@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import './navigation-links.css'
 
 const NavigationLinks = (props) => {
-  // console.log("Account Info: " + props.accountData)
   return (
     <nav className={`navigation-links-nav ${props.rootClassName} `}>
       <Link to={{ pathname: "/", state: { accountData: props.accountData } }} className="navigation-links-navlink">
@@ -31,7 +30,7 @@ NavigationLinks.defaultProps = {
   ProfilePage: 'My Profile',
   HomePage: 'Home',
   SearchPage: 'Search',
-  //accountData: undefined,  // Set accountData to default to undefined
+  accountData: null,  // Set accountData to default to undefined
 }
 
 NavigationLinks.propTypes = {

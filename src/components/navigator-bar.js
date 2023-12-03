@@ -59,11 +59,7 @@ const NavigatorBar = (props) => {
         />
       </Link>
       <div className="navigator-bar-nav">
-        <NavigationLinks
-          rootClassName="navigation-links-root-class-name8"
-          className=""
-          accountData={ props.accountData }
-        ></NavigationLinks>
+        <NavigationLinks rootClassName="navigation-links-root-class-name8" className="" accountData={ props.accountData }></NavigationLinks>
       </div>
       <div className="navigator-bar-btn-group">
         { isLoggedIn() }

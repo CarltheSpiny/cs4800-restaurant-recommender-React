@@ -9,6 +9,11 @@ import RatedRestrauntCard from '../components/rated-restaurant-card'
 import './restaurant-history.css'
 
 const RestaurantHistory = (props) => {
+  // Access the logged in user's information
+  const { state } = props.location;
+  // Check if AccountData is defined (state if undefined, state.apiData otherwise)
+  var accountData = state && state.accountData;
+
   return (
     <div className="restaurant-history-container">
       <Helmet>
@@ -18,7 +23,7 @@ const RestaurantHistory = (props) => {
           content="RestaurantHistory"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name2"></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }></NavigatorBar>
       <Title
         text="A list of all the restaurants you have visited or rated."
         heading="Your Restaurant History"

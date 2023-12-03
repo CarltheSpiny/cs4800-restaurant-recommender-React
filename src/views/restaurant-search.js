@@ -22,7 +22,8 @@ const RestaurantSearch = (props) => {
 
   // User login data
   const { state } = props.location;
-  const userData = state && state.accountData;
+  // Check if AccountData is defined (state if undefined, state.apiData otherwise)
+  var accountData = state && state.accountData;
 
   // Fetch Fields
   const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation';
@@ -65,7 +66,6 @@ const RestaurantSearch = (props) => {
 
     const fetchReccomendation = async () => {
       try {
-
         console.log("Fetching a reccomnedation from search...")
         const response = await fetch(apiUrl, requestOptions)
         const data = await response.json()
@@ -102,14 +102,14 @@ const RestaurantSearch = (props) => {
             content="RestaurantSearch - cs4800-restaurant-recommender"
           />
         </Helmet>
-        <NavigatorBar rootClassName="navigator-bar-root-class-name1"> accountData={userData}</NavigatorBar>
+        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
         <Title
           text="Use the search bar to find a restaurant."
           heading="Search"
           rootClassName="title-root-class-name1"
         ></Title>
 
-        <div className={`search-bar-container ${props.rootClassName} `}>
+        <div className={`search-bar-container ${props.rootClassName}`}>
         <form className="search-bar-form" onSubmit={handleSubmit}>
           <label className="search-bar-text">{props.searchLabel}</label>
           <input 
@@ -146,7 +146,7 @@ const RestaurantSearch = (props) => {
             content="Restaurant Search"
           />
         </Helmet>
-        <NavigatorBar rootClassName="navigator-bar-root-class-name1"></NavigatorBar>
+        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
         <Title
           text="Use the search bar to find a restaurant."
           heading="Search"
@@ -189,7 +189,7 @@ const RestaurantSearch = (props) => {
             content="RestaurantSearch - cs4800-restaurant-recommender"
           />
         </Helmet>
-        <NavigatorBar rootClassName="navigator-bar-root-class-name1"></NavigatorBar>
+        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
         <Title
           text="Use the search bar to find a restaurant."
           heading="Search"
@@ -250,7 +250,7 @@ const RestaurantSearch = (props) => {
           content="Restaurant Search"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name1"></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
       <Title
         text="Use the search bar to find a restaurant."
         heading="Search"
