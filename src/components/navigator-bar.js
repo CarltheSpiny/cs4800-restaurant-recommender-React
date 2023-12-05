@@ -22,7 +22,7 @@ const NavigatorBar = (props) => {
   // Set buttons when user is logged in status
   const isLoggedIn = () => {
     // Check if accountData in props is not null or undefined
-    if (props.accountData) {
+    if ((props.accountData != null) && (props.accountData != undefined)) {
       return (
         <>
           <span className="navigator-bar-greeting">Hello, {props.accountData.firstName.S}!</span>

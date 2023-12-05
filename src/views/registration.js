@@ -29,11 +29,9 @@ const Registration = (props) => {
   // Create a new account
   const handleRegister = async() => {
     const newAccountData = {
-      "username": "",
       "firstName": firstName,
       "lastName": lastName,
       "email": email,
-      //"restraunts": accountData.restraunts,
       "password": password
     };
 

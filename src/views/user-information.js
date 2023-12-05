@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
@@ -30,9 +30,12 @@ const UserInformation = (props) => {
   });
 
   // Access the logged in user's information
+  const [accountData, setAccountData] = useState(null);
   const { state } = props.location;
   // Check if AccountData is defined (state if undefined, state.apiData otherwise)
-  var accountData = state && state.accountData;
+  useEffect(() => {
+    setAccountData(state && state.accountData);
+  }, [state]);
 
   // Preset the text input boxes with logged in user data
   if (accountData && !isDataSet) {
@@ -46,16 +49,14 @@ const UserInformation = (props) => {
   // Save changes to user account data and push the changes to api/database
   const handleSave = async() => {
     const updatedAccountData = {
-      "username": accountData.username.S,
       "firstName": firstName,
       "lastName": lastName,
       "email": email,
-      //"restraunts": accountData.restraunts,
       "password": password
     };
 
     var requestOptions = {
-      method: 'PUT',
+      method: 'PATCH',
       redirect: 'follow',
       headers: headers,
       body: JSON.stringify(updatedAccountData)
@@ -65,10 +66,14 @@ const UserInformation = (props) => {
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
+
+    // Update logged in account data
+    const data = await readAccountData();
+    setAccountData(data);
   }
 
   // Turn on and off edit mode
-  const toggleEditMode = () => {
+  const toggleEditMode = async() => {
     if (editMode) {
       // Check if user data has been changed
       if ((firstName != accountData.firstName.S) || (lastName != accountData.lastName.S) || (email != accountData.email.S) || (password != accountData.password.S)) {
@@ -110,7 +115,7 @@ const UserInformation = (props) => {
         .catch(error => console.log('error', error));
       
       // Erase logged in user data
-      accountData = undefined;
+      accountData = null;
 
       // Go back to main page with blank user data
       history.push({
@@ -120,6 +125,29 @@ const UserInformation = (props) => {
     } else {
       // If User clicked 'Cancel' or closed the dialog
       console.log('User clicked Cancel');
+    }
+  }
+
+  // Get updated account data
+  const readAccountData = async() => {
+    try {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: headers
+      };
+      // Get api data
+      console.log("Fetching from API");
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log("Fetching complete")
+          resolve(data.result)
+        }); // Simulate timeout by adding number here
+      })
+    } catch (error) {
+      console.error(error);
     }
   }
 

@@ -8,7 +8,7 @@ import RatedRestrauntCard from '../components/rated-restaurant-card'
 import './personal-home.css'
 
 const PersonalHome = (props) => {
-  const [jsonData, setData] = useState(null);
+  const [restrauntData, setData] = useState(null);
 
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
@@ -28,7 +28,7 @@ const PersonalHome = (props) => {
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
   });
 
- useEffect(() => {
+  useEffect(() => {
     // console.log("User has logged in with: " + JSON.stringify(userData));
     if (fetchedRecommendation) {
       console.warn("Recomendation had been fetched; Will not fetch a new reccomendation")
@@ -128,24 +128,27 @@ const PersonalHome = (props) => {
             rootClassName="rated-restraunt-card-1"
             className="personal-home-component1"
             indexForRestaurant={0}
-            reccomendedRestaurants={jsonData}
+            reccomendedRestaurants={restrauntData}
             isLoadingPage={isLoading}
+            accountData={ userData }
           ></RatedRestrauntCard>
 
           <RatedRestrauntCard
             rootClassName="rated-restraunt-card-1"
             className="personal-home-component1"
             indexForRestaurant={1}
-            reccomendedRestaurants={jsonData}
+            reccomendedRestaurants={restrauntData}
             isLoadingPage={isLoading}
+            accountData={ userData }
           ></RatedRestrauntCard>
 
           <RatedRestrauntCard
             rootClassName="rated-restraunt-card-1"
             className="personal-home-component1"
             indexForRestaurant={2}
-            reccomendedRestaurants={jsonData}
+            reccomendedRestaurants={restrauntData}
             isLoadingPage={isLoading}
+            accountData={ userData }
           ></RatedRestrauntCard>
           
         </div>

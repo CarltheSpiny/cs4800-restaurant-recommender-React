@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './rated-restaurant-card.css'
 import RestaurantJson from '../backup-restaurant-output.json'
+
 /*Headers for CORS */
 const headers = new Headers({
   'Content-Type': 'application/json',
@@ -14,7 +15,6 @@ const headers = new Headers({
 const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
 
 /*Options to send with headers */
-
 const RatedRestrauntCard = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
@@ -23,8 +23,7 @@ const RatedRestrauntCard = (props) => {
   const [imageSrc, setImage] = useState(null);
   const [name, setName] = useState(null);
   const [rating, setRating] = useState(null);
-
-  const [ id_data, setIdData] = useState(null);
+  const [id_data, setIdData] = useState(null);
 
   var backupJson;
 
@@ -54,7 +53,7 @@ const RatedRestrauntCard = (props) => {
       body: JSON.stringify(requestBody, null, 2)
     }
     
-    const fetchFromId = async () => {     
+    const fetchFromId = async() => {     
       try {
         console.log("ID to fetch: " + props.reccomendedRestaurants[props.indexForRestaurant])
         const response = await fetch(apiUrl, request)
@@ -74,7 +73,7 @@ const RatedRestrauntCard = (props) => {
       }
     }
 
-    const setFields = async (jsonData) => {
+    const setFields = async(jsonData) => {
       console.log("Setting fields...")
       setRepLoading(true)
       setIdData(jsonData)
@@ -99,14 +98,18 @@ const RatedRestrauntCard = (props) => {
     }
 
     fetchFromId()
+
+
   }, [props]);
+
+  console.log("Card Account: " + JSON.stringify(props.accountData));
 
   if (isError) {
     console.error("Error in fetching!")
     return(
       <Link to={{
         pathname: '/restraunt-rating',
-        state:  { id_data }
+        state:  { accountData: props.accountData, data: id_data }
       }}>
         <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
           <div className="rated-restraunt-card-gallery-card">
@@ -134,7 +137,7 @@ const RatedRestrauntCard = (props) => {
     return (
       <Link to={{
         pathname: '/restraunt-rating',
-        state:  { data: null}
+        state:  { accountData: props.accountData, data: null }
       }}>
         <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
           <div className="rated-restraunt-card-gallery-card">
@@ -160,8 +163,10 @@ const RatedRestrauntCard = (props) => {
   else {
     console.log("Finished loading restuarant card; Will send this data to next page: ", props.reccomendedRestaurants[props.indexForRestaurant])
     return(
-      <Link to={`/restraunt-rating/${props.reccomendedRestaurants[props.indexForRestaurant]}`}>
-
+      <Link to={{ 
+        pathname: `/restraunt-rating/${props.reccomendedRestaurants[props.indexForRestaurant]}`, 
+        state: { accountData: props.accountData} 
+      }}>
         <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
           <div className="rated-restraunt-card-gallery-card">
             <img
@@ -193,7 +198,8 @@ RatedRestrauntCard.defaultProps = {
   indexForRestaurant: 0,
   restaurantRating: "--",
   reccomendedRestaurants: RestaurantJson.restaurants[0],
-  isLoadingPage: true
+  isLoadingPage: true,
+  accountData: null
 }
 
 RatedRestrauntCard.propTypes = {
@@ -203,7 +209,8 @@ RatedRestrauntCard.propTypes = {
   indexForRestaurant: PropTypes.number,
   restaurantRating: PropTypes.any,
   reccomendedRestaurants: PropTypes.any,
-  isLoadingPage: PropTypes.bool
+  isLoadingPage: PropTypes.bool,
+  accountData: PropTypes.object
 }
 
 export default RatedRestrauntCard

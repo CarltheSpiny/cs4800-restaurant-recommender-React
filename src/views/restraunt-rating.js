@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom/cjs/react-router-dom'
+import { useParams, useLocation } from 'react-router-dom/cjs/react-router-dom'
 
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
@@ -16,50 +16,58 @@ const headers = new Headers({
   'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
 });
 
-const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
+const restrauntUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
 
 const RestrauntRating = (props) => {
+  // Get restraunt id
   let { id } = useParams();
 
-  console.log("Params: " + id)
+  // Logged in account data
+  const [accountData, setAccountData] = useState(null);
+  const location = useLocation();
+
+  console.log("Params: " + id);
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
-  const [jsonData, setData] = useState("");
-
+  const [restrauntData, setData] = useState("");
   const [isLiked, setLiked] = useState(false);
 
   useEffect(() => {
+    // Set first account data
+    setAccountData(location.state && location.state.accountData);
+
+    // Fetch restraunt by id
     const fetchWithId = async () => {
       try {
         if ((id != null) || (id != undefined)) {
-          console.log("ID to fetch: " + id)
+          console.log("ID to fetch: " + id);
           const requestBody = {
             "id" : id
-          }
+          };
           
           var request = {
             method: 'POST',
             redirect: 'follow',
             header: headers,
             body: JSON.stringify(requestBody, null, 2)
-          }
+          };
 
-          const response = await fetch(apiUrl, request)
-          const data = await response.json()
-          console.log("Rating Response: ", data)
-          setData(data)
+          const response = await fetch(restrauntUrl, request);
+          const data = await response.json();
+          console.log("Rating Response: ", data);
+          setData(data);
           if (response.status != "200")
-            setError(true)
+            setError(true);
         } else {
-          console.error("No ID was passed...")
-          setData(RestaurantFromID)
+          console.error("No ID was passed...");
+          setData(RestaurantFromID);
           return;
         }
       } catch (error) {
-        console.error("An error occured: " + error)
-        setError(true)
+        console.error("An error occured: " + error);
+        setError(true);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
     fetchWithId()
@@ -73,6 +81,7 @@ const RestrauntRating = (props) => {
     return text;
   }
 
+  // Set restraunt as liked and save it to likedRestraunts on account
   const handleLike = (e) => {
     e.preventDefault();
     console.log("Added to Liked")
@@ -89,7 +98,7 @@ const RestrauntRating = (props) => {
             content="RestrauntRating"
           />
         </Helmet>
-        <NavigatorBar></NavigatorBar>
+        <NavigatorBar accountData={ accountData }></NavigatorBar>
         <img
           alt="image"
           src={props.imageSource}
@@ -133,9 +142,13 @@ const RestrauntRating = (props) => {
                   listLabel="???"
                 ></Label>
               </div>
-              <button type="button" className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} onClick={handleLike}>
+              <button 
+                type="button" 
+                className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} 
+                onClick={handleLike}
+              >
                   {isLiked ? 'Liked' : 'Like'}
-                </button>
+              </button>
             </div>
           </div>
         </div>
@@ -153,7 +166,7 @@ const RestrauntRating = (props) => {
             content="RestrauntRating"
           />
         </Helmet>
-        <NavigatorBar></NavigatorBar>
+        <NavigatorBar accountData={ accountData }></NavigatorBar>
         <img
           alt="image"
           src={props.imageSource}
@@ -219,15 +232,15 @@ const RestrauntRating = (props) => {
             content="RestrauntRating"
           />
         </Helmet>
-        <NavigatorBar></NavigatorBar>
+        <NavigatorBar accountData={ accountData }></NavigatorBar>
         <img
           alt="image"
-          src={jsonData.image_url}
+          src={restrauntData.image_url}
           className="restraunt-image"
         />
         <div className="restraunt-rating-header">
           <h1 className="restraunt-rating-title">
-            {jsonData.name}
+            {restrauntData.name}
           </h1>
         </div>
         <div className="restraunt-rating-restraunt-info">
@@ -236,31 +249,31 @@ const RestrauntRating = (props) => {
               <div className="restraunt-rating-row1">
                 <Label
                   mainLabel="Address:"
-                  listLabel={jsonData.location}
+                  listLabel={restrauntData.location}
                 ></Label>
                 <Label
                   mainLabel="Rating:"
-                  listLabel={jsonData.rating + "/ 5"}
+                  listLabel={restrauntData.rating + "/ 5"}
                 ></Label>
               </div>
               <div className="restraunt-rating-row2">
                 <Label
                   mainLabel="Phone:"
-                  listLabel={jsonData.phone}
+                  listLabel={restrauntData.phone}
                 ></Label>
                 <LinkLabel
-                  mainLabel="Website: "
-                  href_label={jsonData.url}
+                  mainLabel="Website:"
+                  href_label={restrauntData.url}
                 ></LinkLabel>
               </div>
               <div className="restraunt-rating-row3">
                 <Label
-                  mainLabel="Cusisne:"
-                  listLabel={handleText(jsonData.restaurant_types)}
+                  mainLabel="Cuisine:"
+                  listLabel={handleText(restrauntData.restaurant_types)}
                 ></Label>
                 <Label
-                  mainLabel="Price: "
-                  listLabel={jsonData.price}
+                  mainLabel="Price:"
+                  listLabel={restrauntData.price}
                 ></Label>
               </div>
             </div>
