@@ -1,6 +1,7 @@
 .restaurant-search-container {
   width: 100%;
   display: flex;
+  overflow: auto;
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
@@ -9,14 +10,10 @@
 .restaurant-search-gallery {
   width: 100%;
   display: grid;
-  padding-top: 90px;
+  padding: var(--dl-space-space-threeunits);
   grid-gap: var(--dl-space-space-unit);
+  
   grid-template-columns: 1fr 1fr 1fr;
-}
-
-.location-header {
-  align-self: center;
-  margin-bottom: var(--dl-space-space-unit);
 }
 
 .search-bar-container {
