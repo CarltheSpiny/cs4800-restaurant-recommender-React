@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { Helmet } from 'react-helmet'
-import opencage from 'opencage-api-client'
+
 import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
 import RatedRestrauntCard from '../components/rated-restaurant-card'
@@ -9,26 +9,19 @@ import './personal-home.css'
 
 const PersonalHome = (props) => {
   const [restrauntData, setData] = useState(null);
-  const [coordinates, setCoordinates] = useState(null);
-  const [currentAddress, setAddress] = useState("");
+
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
 
   const [fetchedRecommendation, setFetched] = useState(false);
 
-  // <--------------------Access a user's information --------------------->
+  // Access a user's information
   const { state } = props.location;
   // Check if userData is defined (state if undefined, state.apiData otherwise)
   const userData = state && state.accountData;
-  // <--------------------Access a user's information --------------------->
-
-  // Geolocation 
-  const api_key = '68cf56fa9c6a4506a10ff5550808ded7'
-  const api_url = 'https://api.opencagedata.com/geocode/v1/json'
   
-  // Restaurant Recomendation
   const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation';
-  const cppAddress = '3801 W Temple Ave, Pomona, CA 91768'
+  const cppAddress = '3801 W Temple Ave, Pomona, CA 91768'  
   const headers = new Headers({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -37,65 +30,27 @@ const PersonalHome = (props) => {
 
   useEffect(() => {
     // console.log("User has logged in with: " + JSON.stringify(userData));
-
-    // <-------------- Coordinates and Reverse Geosearch --------------------->
-    const getCoords = async () => {
-      if ("geolocation" in navigator) {
-          navigator.geolocation.getCurrentPosition(
-              (position) => {
-              const { latitude, longitude} = position.coords;
-              console.info("Latitude:", latitude);
-              console.info("Longitude:", longitude);
-              var currentPos = latitude + ',' + longitude
-              setCoordinates(position.coords)
-              getAddress(currentPos)
-              }
-          )
-      }
+    if (fetchedRecommendation) {
+      console.warn("Recomendation had been fetched; Will not fetch a new reccomendation")
+      return;
     }
 
-    const getAddress = async (geolocation) => {
-      var stringIsInvalid = geolocation === undefined ||
-                            typeof geolocation !== 'string' ||
-                            geolocation.length < 1;
-
-        if(stringIsInvalid) {
-            console.error("URI component would be undefined, aborting fetch")
-            console.warn("Errorneus String: " + geolocation)
-            return;
-        };
-
-        console.info("Fetching from api")
-        opencage.geocode({ key: api_key, q: geolocation }).then(response => {
-            setAddress(response.results[0].formatted)
-            fetchReccomendation(response.results[0].formatted);
-        }).catch(err => {
-            console.error(err);
-        })
+    const requestBody = {
+      "message" : "i want to eat some spicy food",
+      "location" : cppAddress,
+      "liked_restaurants" : []
     }
 
-    // <-------------- End Coordinates and Reverse Geosearch --------------------->
+    var requestOptions = {
+      method: 'POST',
+      redirect: 'follow',
+      header: headers,
+      body: JSON.stringify(requestBody, null, 2)
+    };
 
-    const fetchReccomendation = async (backAddress) => {
-      if (fetchedRecommendation) {
-        console.warn("Recomendation had been fetched; Will not fetch a new reccomendation")
-        return;
-      }
-  
-      const requestBody = {
-        "message" : "",
-        "location" : backAddress,
-        "liked_restaurants" : []
-      }
-  
-      var requestOptions = {
-        method: 'POST',
-        redirect: 'follow',
-        header: headers,
-        body: JSON.stringify(requestBody, null, 2)
-      };
-
+    const fetchReccomendation = async () => {
       try {
+        console.log("Fetching a recommendation...")
         const response = await fetch(apiUrl, requestOptions)
         const data = await response.json()
         console.log("Personal Home: JSON response: ", data)
@@ -109,21 +64,8 @@ const PersonalHome = (props) => {
       }
     }
 
-    getCoords()
+    fetchReccomendation()
  }, [])
-
- var testforUrl = (
-  <p>
-    Text1
-  </p>
- )
- var testforUrl2 = (
-  <p>
-    Text2???
-  </p>
- )
-
- testforUrl = testforUrl + <p>????</p>
 
  if (isError) {
   console.log("Error loading restaurants!")
@@ -139,9 +81,6 @@ const PersonalHome = (props) => {
           heading="Your Feed"
           rootClassName="title-root-class-name"
         ></Title>
-        <div>
-          {currentAddress && <p>Current Address: {currentAddress}</p>}
-        </div>
         <div className="personal-home-gallery">
         <h2>An error occured when getting your feed.</h2>
         </div>
@@ -160,11 +99,10 @@ const PersonalHome = (props) => {
         <Title
           text="Your personalized feed of restaurants we think you'll love!"
           heading="Your Feed"
-          rootClassName
-          ="title-root-class-name"
+          rootClassName="title-root-class-name"
         ></Title>
         <div className="personal-home-gallery">
-          <span>Loading...</span>
+        
         </div>
       </div>
     )
@@ -184,9 +122,6 @@ const PersonalHome = (props) => {
           heading="Your Feed"
           rootClassName="title-root-class-name"
         ></Title>
-        <div>
-          {currentAddress && <p>Current Address: {currentAddress}</p>}
-        </div>
         <div className="personal-home-gallery">
           
           <RatedRestrauntCard

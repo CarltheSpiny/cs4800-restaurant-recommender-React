@@ -7,10 +7,8 @@ import FetchAccountInfo from '../components/network/data-fetch'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import Title from '../components/title'
 import TestJson from '../backup-restaurant-output.json'
-
 const accountURL = 'https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test'
 const restaurantURL = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation'
-const getRestURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?email=test2@gmail.com'
 
 var requestData = "email=test2@gmail.com";
 /*
@@ -18,7 +16,7 @@ First number is Big Updates 1 = Initial Site from Teleport | 2 = First Edits fro
 Second is commit number from the big update?
 Third is commit number?
 */
-const buildNumber = '4.3.5'
+const buildNumber = '4.3.01'
 
 const Directory = () => {
   return (
@@ -48,12 +46,6 @@ const Directory = () => {
           <h2>Fetching from User Account</h2>
           <div className='get-request-text2'>
             <FetchAccountInfo url={accountURL} request={requestData} />
-          </div>
-        </div>
-        <div className='get-request-heading'>
-          <h2>Fetching Liked List</h2>
-          <div className='get-request-text'>
-            <FetchFromURL url={getRestURL} />
           </div>
         </div>
         <div className='navigated-pages-container'>
