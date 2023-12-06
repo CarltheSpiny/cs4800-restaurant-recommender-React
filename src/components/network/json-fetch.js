@@ -44,22 +44,31 @@ const FetchFromURL = ({ url }) => {
     return <p>Loading...</p>;
   }
 
-  if (error) {
+  else if (error) {
     return <p>Error: {error.message + ' ' + url}</p>;
   }
 
-  return (
-    <div>
+  else {
+    try {
+      return(
       <div>
-        <span>Number of Restaurants returned: {Object.keys(data).length} </span>
+        <span>Number of Restaurants returned: {Object.keys(data.restaurants).length} </span>
+        <div>
+          <span>{JSON.stringify(data.restaurants[0].name, null, 2)}</span>
+          <span>{JSON.stringify(data.restaurants[1].name, null, 2)}</span>
+          <span>{JSON.stringify(data.restaurants[2].name, null, 2)}</span>
+        </div>
       </div>
-      <div>
-        <span>{JSON.stringify(data.restaurants[0].name, null, 2)}</span>
-        <span>{JSON.stringify(data.restaurants[1].name, null, 2)}</span>
-        <span>{JSON.stringify(data.restaurants[2].name, null, 2)}</span>
+      )
+    } catch (error) {
+      return(
+        <div>
+        <span>Number of Restaurants returned: {Object.keys(data.restaurants).length} </span>
+        <p>{JSON.stringify(data.restaurants, null, 2)}</p>
       </div>
-    </div>
-  );
+      )
+    }
+  }
 };
 
 export default FetchFromURL;
