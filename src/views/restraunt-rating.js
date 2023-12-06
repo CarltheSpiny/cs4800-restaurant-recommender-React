@@ -16,7 +16,10 @@ const headers = new Headers({
   'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
 });
 
-const restrauntUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
+const restIDURL = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
+const likeURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant'
+const unLikeURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?'
+const getLikedURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?'
 
 const RestrauntRating = (props) => {
   // Get restraunt id
@@ -26,11 +29,13 @@ const RestrauntRating = (props) => {
   const [accountData, setAccountData] = useState(null);
   const location = useLocation();
 
-  console.log("Params: " + id);
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [restrauntData, setData] = useState("");
+
+  const [hasFetched, setHasFetched] = useState(false)
   const [isLiked, setLiked] = useState(false);
+  const [shouldUpdate, setShouldUpdateLike] = useState(false);
 
   useEffect(() => {
     // Set first account data
@@ -38,13 +43,14 @@ const RestrauntRating = (props) => {
 
     // Fetch restraunt by id
     const fetchWithId = async () => {
+      if (hasFetched)
+        return
       try {
         if ((id != null) || (id != undefined)) {
           console.log("ID to fetch: " + id);
           const requestBody = {
             "id" : id
           };
-          
           var request = {
             method: 'POST',
             redirect: 'follow',
@@ -52,12 +58,14 @@ const RestrauntRating = (props) => {
             body: JSON.stringify(requestBody, null, 2)
           };
 
-          const response = await fetch(restrauntUrl, request);
+          // Get the data from the Rest ID
+          const response = await fetch(restIDURL, request);
           const data = await response.json();
           console.log("Rating Response: ", data);
           setData(data);
-          if (response.status != "200")
-            setError(true);
+          setHasFetched(true)
+
+          
         } else {
           console.error("No ID was passed...");
           setData(RestaurantFromID);
@@ -71,7 +79,86 @@ const RestrauntRating = (props) => {
       }
     }
     fetchWithId()
-  }, [])
+
+    const getLikeStatus = async () => {
+      if (isLoading) {
+        return
+      }
+      var stringIsInvalid = accountData.email.S === undefined ||
+                            typeof accountData.email.S !== 'string' ||
+                            accountData.email.S.length < 1;
+      if (stringIsInvalid) {
+        console.error("No account available yet!")
+        return;
+      } else {
+        console.info("Was able to get account info")
+      }
+
+      try {
+        var optionsForGet = {
+          method: 'GET',
+          redirect: 'follow',
+          header: headers
+        }
+
+        var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
+        console.info("Url for get Liked Rests= " + getAllLikedURL)
+
+        const getLiked = await fetch(getAllLikedURL, optionsForGet);
+        const jsonData = await getLiked.json();
+
+        console.log("JSON = " + JSON.stringify(jsonData.restaurants[6]))
+        console.info("Length: " + Object.keys(jsonData.restaurants).length)
+
+        for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
+          if (jsonData.restaurants[i].S == id) {
+            console.info("This rest was found in the list")
+            setLiked(true)
+          }
+        }
+      } catch (error) {
+        console.error("Error: " + error)
+      }
+    }
+    getLikeStatus()
+
+    const setRestAsLiked = async () => {
+      try {
+        
+        var optionsForLike = {
+          method: 'POST',
+          redirect: 'follow',
+          header: headers,
+          body: JSON.stringify({
+            "email": accountData.email.S,
+            "restaurantID" : id
+          })
+        }
+
+        var optionsForUnLike = {
+          method: 'DELETE',
+          redirect: 'follow',
+          header: headers
+        }
+        // If this rest is liked, then remove it
+        if (isLiked) {
+            const update = await fetch(likeURL, optionsForLike);
+            console.log("Liked?")
+        } else {
+          var removeLikeURL = unLikeURL + `email=` + accountData.email.S + "&restaurantID=" + id
+          console.info("Url for unlike= " + removeLikeURL)
+          const deleteLike = await fetch(removeLikeURL, optionsForUnLike);
+
+        }
+        setShouldUpdateLike(false)
+      } catch (error) {
+        console.error("Error: " + error)
+      }
+    }
+
+    if (shouldUpdate)
+      setRestAsLiked()
+  }, [isLiked, isLoading])
 
   // Add code that pushes something
   function handleText(jsonText) {
@@ -84,7 +171,11 @@ const RestrauntRating = (props) => {
   // Set restraunt as liked and save it to likedRestraunts on account
   const handleLike = (e) => {
     e.preventDefault();
-    console.log("Added to Liked")
+    if (accountData == undefined || accountData == null){
+      console.error("Can't like if no user is logged in!")
+      return
+    }
+    setShouldUpdateLike(true)
     setLiked(!isLiked)
   }
 
