@@ -41,49 +41,11 @@ const RestrauntRating = (props) => {
     // Set first account data
     setAccountData(location.state && location.state.accountData);
 
-    // Fetch restraunt by id
-    const fetchWithId = async () => {
-      if (hasFetched)
-        return
-      try {
-        if ((id != null) || (id != undefined)) {
-          console.log("ID to fetch: " + id);
-          const requestBody = {
-            "id" : id
-          };
-          var request = {
-            method: 'POST',
-            redirect: 'follow',
-            header: headers,
-            body: JSON.stringify(requestBody, null, 2)
-          };
-
-          // Get the data from the Rest ID
-          const response = await fetch(restIDURL, request);
-          const data = await response.json();
-          console.log("Rating Response: ", data);
-          setData(data);
-          setHasFetched(true)
-
-          
-        } else {
-          console.error("No ID was passed...");
-          setData(RestaurantFromID);
-          return;
-        }
-      } catch (error) {
-        console.error("An error occured: " + error);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchWithId()
-
     const getLikeStatus = async () => {
       if (isLoading) {
         return
       }
+
       var stringIsInvalid = accountData.email.S === undefined ||
                             typeof accountData.email.S !== 'string' ||
                             accountData.email.S.length < 1;
@@ -107,7 +69,7 @@ const RestrauntRating = (props) => {
         const getLiked = await fetch(getAllLikedURL, optionsForGet);
         const jsonData = await getLiked.json();
 
-        console.log("JSON = " + JSON.stringify(jsonData.restaurants[6]))
+        console.log("JSON = " + JSON.stringify(jsonData.restaurants))
         console.info("Length: " + Object.keys(jsonData.restaurants).length)
 
         for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
@@ -120,7 +82,49 @@ const RestrauntRating = (props) => {
         console.error("Error: " + error)
       }
     }
-    getLikeStatus()
+
+
+    // Fetch restraunt by id
+    const fetchWithId = async () => {
+      if (hasFetched)
+        return
+      try {
+        if ((id != null) || (id != undefined)) {
+          console.log("ID to fetch: " + id);
+          const requestBody = {
+            "id" : id
+          };
+          var request = {
+            method: 'POST',
+            redirect: 'follow',
+            header: headers,
+            body: JSON.stringify(requestBody, null, 2)
+          };
+
+          // Get the data from the Rest ID
+          const response = await fetch(restIDURL, request);
+          const data = await response.json();
+          console.log("Rating Response: ", data);
+          setData(data);
+          setHasFetched(true)
+          getLikeStatus()
+          
+        } else {
+          console.error("No ID was passed...");
+          setData(RestaurantFromID);
+          return;
+        }
+      } catch (error) {
+        console.error("An error occured: " + error);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchWithId()
+
+    
+   
 
     const setRestAsLiked = async () => {
       try {
@@ -148,7 +152,7 @@ const RestrauntRating = (props) => {
           var removeLikeURL = unLikeURL + `email=` + accountData.email.S + "&restaurantID=" + id
           console.info("Url for unlike= " + removeLikeURL)
           const deleteLike = await fetch(removeLikeURL, optionsForUnLike);
-
+          getLikeStatus()
         }
         setShouldUpdateLike(false)
       } catch (error) {
