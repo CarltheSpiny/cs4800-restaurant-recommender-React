@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
 
+import opencage from 'opencage-api-client'
 import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
 import './restaurant-search.css'
@@ -19,54 +20,120 @@ const RestaurantSearch = (props) => {
 
   const [hasFetched, setHasFetched] = useState(false)
   const [shouldRender, setShouldRender] = useState(false)
+  const [hasLocation, setLocationFetched] = useState(false)
 
-  // User login data
+  const [coordinates, setCoordinates] = useState(null);
+  const [currentAddress, setAddress] = useState("");
+
+
+   // <--------------------Access a user's information --------------------->
   const { state } = props.location;
   // Check if AccountData is defined (state if undefined, state.apiData otherwise)
   var accountData = state && state.accountData;
+   // <--------------------Access a user's information --------------------->
+
+  // Geolocation 
+  const api_key = '68cf56fa9c6a4506a10ff5550808ded7'
+  const api_url = 'https://api.opencagedata.com/geocode/v1/json'
 
   // Fetch Fields
   const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation';
   const cppAddress = '3801 W Temple Ave, Pomona, CA 91768'  
   const headers = new Headers({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+    'Access-Control-Allow-Origin': '*'
+    //'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
   });
 
   useEffect(() => { 
-    if (hasFetched) {
-      console.warn("Recomendation has been fetched; no need to do it again.")
-      return;
+
+    // <-------------- Coordinates and Reverse Geosearch --------------------->
+    const getCoords = async () => {
+      if (hasLocation) {
+        //  console.info("User location has been fetched; Not fetching again")
+        fetchReccomendation(currentAddress);
+        return;
+      }
+
+      else if ("geolocation" in navigator) {
+          try {
+              navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const { latitude, longitude} = position.coords;
+                console.info("Latitude:", latitude);
+                console.info("Longitude:", longitude);
+                var currentPos = latitude + ',' + longitude
+                setCoordinates(position.coords)
+                getAddress(currentPos)
+              }
+          )
+        } catch (error) {
+          console.error(error)
+        } finally {
+          setLocationFetched(true)
+          setLoading(false)
+        }
+      }
     }
 
-    const requestBody = {
-      "message" : serachQuery,
-      "location" : cppAddress,
-      "liked_restaurants" : []
+    const getAddress = async (geolocation) => {
+      var stringIsInvalid = geolocation === undefined ||
+                            typeof geolocation !== 'string' ||
+                            geolocation.length < 1;
+
+        if(stringIsInvalid) {
+            console.error("URI component would be undefined, aborting fetch")
+            console.warn("Errorneus String: " + geolocation)
+            return;
+        };
+
+        console.info("Fetching from geolocation api")
+        opencage.geocode({ key: api_key, q: geolocation }).then(response => {
+            setAddress(response.results[0].formatted)
+            setLocationFetched(true)
+            fetchReccomendation(response.results[0].formatted);
+        }).catch(err => {
+            console.error(err);
+        })
     }
 
-    var requestOptions = {
-      method: 'POST',
-      redirect: 'follow',
-      header: headers,
-      body: JSON.stringify(requestBody, null, 2)
-    };
+    // <-------------- End Coordinates and Reverse Geosearch --------------------->
 
-    if (String(serachQuery).match("Nothing")) {
-      setLoading(false)
-      console.warn("Search is empty; Not fetching anything yet.")
-      return;
-    }
+    
 
-    if (hasClickedSearch == false) {
-      console.log("The query was not submitted (Query may exist); We shouldn't fetch")
-      return;
-    }
+    const fetchReccomendation = async (backAddress) => {
+      if (hasFetched) {
+        console.warn("Recomendation has been fetched; no need to do it again.")
+        return;
+      }
+  
+      const requestBody = {
+        "message" : serachQuery,
+        "location" : backAddress,
+        "liked_restaurants" : []
+      }
+  
+      var requestOptions = {
+        method: 'POST',
+        redirect: 'follow',
+        header: headers,
+        body: JSON.stringify(requestBody, null, 2)
+      };
+  
+      if (String(serachQuery).match("Nothing")) {
+        setLoading(false)
+        console.warn("Search is empty; Not fetching anything yet.")
+        return;
+      }
+  
+      if (hasClickedSearch == false) {
+        // console.log("The query was not submitted (Query may exist); We shouldn't fetch")
+        return;
+      }
 
-    const fetchReccomendation = async () => {
       try {
         console.log("Fetching a reccomnedation from search...")
+        console.info("This is the body: " + JSON.stringify(requestOptions))
         const response = await fetch(apiUrl, requestOptions)
         const data = await response.json()
         console.log("Restaurant Search: JSON response: ", data)
@@ -80,12 +147,13 @@ const RestaurantSearch = (props) => {
         setLoading(false)
       }
     }
-    fetchReccomendation()
-  })
+    getCoords();
+  }, [shouldRender, hasClickedSearch])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setHasFetched(false)
+    setLoading(true)
     setShouldRender(true)
     setHasClicked(true)
     console.log("Submitted search: " + serachQuery)
@@ -195,6 +263,9 @@ const RestaurantSearch = (props) => {
           heading="Search"
           rootClassName="title-root-class-name1"
         ></Title>
+        <div>
+          {currentAddress && <p>Current Address: {currentAddress}</p>}
+        </div>
         <div className={`search-bar-container ${props.rootClassName} `}>
           <form className="search-bar-form" onSubmit={handleSubmit}>
             <label className="search-bar-text">{props.searchLabel}</label>
@@ -256,6 +327,9 @@ const RestaurantSearch = (props) => {
         heading="Search"
         rootClassName="title-root-class-name1"
       ></Title>
+      <div className='location-header'>
+          {currentAddress && <h3>Current Address: {currentAddress}</h3>}
+        </div>
       <div className={`search-bar-container ${props.rootClassName} `}>
       <form className="search-bar-form" onSubmit={handleSubmit}>
         <label className="search-bar-text">{props.searchLabel}</label>

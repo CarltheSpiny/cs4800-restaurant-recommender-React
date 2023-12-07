@@ -54,7 +54,7 @@ const RestrauntRating = (props) => {
           var request = {
             method: 'POST',
             redirect: 'follow',
-            header: headers,
+            header: restrauntHeaders,
             body: JSON.stringify(requestBody, null, 2)
           };
 
@@ -236,7 +236,7 @@ const RestrauntRating = (props) => {
               <button 
                 type="button" 
                 className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} 
-                onClick={handleLike}
+                onClick={ () => handleLike() }
               >
                   {isLiked ? 'Liked' : 'Like'}
               </button>
@@ -369,7 +369,10 @@ const RestrauntRating = (props) => {
               </div>
             </div>
           </div>
-          <button type="button" className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} onClick={handleLike}>
+          <button 
+            type="button" 
+            className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} 
+            onClick={ () => handleLike() }>
                   {isLiked ? 'Liked' : 'Like'}
                 </button>
         </div>

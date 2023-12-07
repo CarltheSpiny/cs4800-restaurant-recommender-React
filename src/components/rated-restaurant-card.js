@@ -25,6 +25,8 @@ const RatedRestrauntCard = (props) => {
   const [rating, setRating] = useState(null);
   const [id_data, setIdData] = useState(null);
 
+  const [hasSetFields, setFieldsAsSet] = useState(false)
+
   var backupJson;
 
   useEffect(() => {
@@ -52,6 +54,11 @@ const RatedRestrauntCard = (props) => {
       header: headers,
       body: JSON.stringify(requestBody, null, 2)
     }
+
+    if (isRepLoading) {
+      console.warn("A card wanted to load again!")
+      return;
+    }
     
     const fetchFromId = async() => {     
       try {
@@ -63,6 +70,8 @@ const RatedRestrauntCard = (props) => {
         backupJson = data
         if (response.status != "200")
           setError(true)
+        
+        setRepLoading(true)
         setFields(data)
       } catch (error) {
         console.error("Error: " + error)
@@ -77,6 +86,7 @@ const RatedRestrauntCard = (props) => {
       console.log("Setting fields...")
       setRepLoading(true)
       setIdData(jsonData)
+      setFieldsAsSet(true)
       backupJson = jsonData
       var imageURL;
       var restaurantName;
@@ -94,7 +104,6 @@ const RatedRestrauntCard = (props) => {
       setImage(imageURL);
       setName(restaurantName);
       setRating(averageRating);
-      console.log("The value of idData: " + id_data)
     }
 
     fetchFromId()
@@ -102,7 +111,7 @@ const RatedRestrauntCard = (props) => {
 
   }, [props]);
 
-  console.log("Card Account: " + JSON.stringify(props.accountData));
+  // console.log("Card Account: " + JSON.stringify(props.accountData));
 
   if (isError) {
     console.error("Error in fetching!")
@@ -133,7 +142,7 @@ const RatedRestrauntCard = (props) => {
   }
 
   else if (isLoading || props.isLoadingPage) {
-    console.log("Loading restaurant card...");
+    // console.log("Loading restaurant card...");
     return (
       <Link to={{
         pathname: '/restraunt-rating',
@@ -161,7 +170,11 @@ const RatedRestrauntCard = (props) => {
   }
 
   else {
-    console.log("Finished loading restuarant card; Will send this data to next page: ", props.reccomendedRestaurants[props.indexForRestaurant])
+    if (props.reccomendedRestaurants[props.indexForRestaurant] == undefined){
+      console.error("Card wanted to load again with null data")
+      return(
+        <p> Whoops!</p>
+    )}
     return(
       <Link to={{ 
         pathname: `/restraunt-rating/${props.reccomendedRestaurants[props.indexForRestaurant]}`, 
