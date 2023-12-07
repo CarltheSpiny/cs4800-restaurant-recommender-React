@@ -167,9 +167,7 @@ const RatedRestrauntCard = (props) => {
         </div>
       </Link>
     )
-  }
-
-  else {
+  } else {
     if (props.reccomendedRestaurants[props.indexForRestaurant] == undefined){
       console.error("Card wanted to load again with null data")
       return(

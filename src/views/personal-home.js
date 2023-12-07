@@ -36,8 +36,6 @@ const PersonalHome = (props) => {
   });
 
   useEffect(() => {
-    // console.log("User has logged in with: " + JSON.stringify(userData));
-
     // <-------------- Coordinates and Reverse Geosearch --------------------->
     const getCoords = async () => {
       if ("geolocation" in navigator) {
@@ -56,8 +54,8 @@ const PersonalHome = (props) => {
 
     const getAddress = async (geolocation) => {
       var stringIsInvalid = geolocation === undefined ||
-                            typeof geolocation !== 'string' ||
-                            geolocation.length < 1;
+        typeof geolocation !== 'string' || 
+        geolocation.length < 1;
 
         if(stringIsInvalid) {
             console.error("URI component would be undefined, aborting fetch")
@@ -73,7 +71,6 @@ const PersonalHome = (props) => {
             console.error(err);
         })
     }
-
     // <-------------- End Coordinates and Reverse Geosearch --------------------->
 
     const fetchReccomendation = async (backAddress) => {
@@ -185,7 +182,7 @@ const PersonalHome = (props) => {
           rootClassName="title-root-class-name"
         ></Title>
         <div>
-          {currentAddress && <p>Current Address: {currentAddress}</p>}
+          {currentAddress && <p className='address-text'>Current Address: {currentAddress}</p>}
         </div>
         <div className="personal-home-gallery">
           

@@ -15,6 +15,9 @@
   max-width: var(--dl-size-size-maxwidth);
   grid-template-columns: 1fr 1fr 1fr;
 }
+.address-text {
+  margin-bottom: var(--dl-space-space-twounits);
+}
 
 @media(max-width: 991px) {
   .personal-home-gallery {

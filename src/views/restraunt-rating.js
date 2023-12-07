@@ -54,7 +54,7 @@ const RestrauntRating = (props) => {
           var request = {
             method: 'POST',
             redirect: 'follow',
-            header: restrauntHeaders,
+            header: headers,
             body: JSON.stringify(requestBody, null, 2)
           };
 
@@ -85,8 +85,8 @@ const RestrauntRating = (props) => {
         return
       }
       var stringIsInvalid = accountData.email.S === undefined ||
-                            typeof accountData.email.S !== 'string' ||
-                            accountData.email.S.length < 1;
+        typeof accountData.email.S !== 'string' ||
+        accountData.email.S.length < 1;
       if (stringIsInvalid) {
         console.error("No account available yet!")
         return;
@@ -122,7 +122,7 @@ const RestrauntRating = (props) => {
     }
     getLikeStatus()
 
-    const setRestAsLiked = async () => {
+    const setRestAsLiked = async() => {
       try {
         
         var optionsForLike = {
@@ -140,7 +140,7 @@ const RestrauntRating = (props) => {
           redirect: 'follow',
           header: headers
         }
-        // If this rest is liked, then remove it
+        // If this restraunt is liked, remove it
         if (isLiked) {
             const update = await fetch(likeURL, optionsForLike);
             console.log("Liked?")

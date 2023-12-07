@@ -50,7 +50,7 @@ const RestaurantSearch = (props) => {
     // <-------------- Coordinates and Reverse Geosearch --------------------->
     const getCoords = async () => {
       if (hasLocation) {
-        //  console.info("User location has been fetched; Not fetching again")
+        //console.info("User location has been fetched; Not fetching again")
         fetchReccomendation(currentAddress);
         return;
       }
@@ -96,10 +96,7 @@ const RestaurantSearch = (props) => {
             console.error(err);
         })
     }
-
     // <-------------- End Coordinates and Reverse Geosearch --------------------->
-
-    
 
     const fetchReccomendation = async (backAddress) => {
       if (hasFetched) {
@@ -264,7 +261,7 @@ const RestaurantSearch = (props) => {
           rootClassName="title-root-class-name1"
         ></Title>
         <div>
-          {currentAddress && <p>Current Address: {currentAddress}</p>}
+          {currentAddress && <p className='location-header'>Current Address: {currentAddress}</p>}
         </div>
         <div className={`search-bar-container ${props.rootClassName} `}>
           <form className="search-bar-form" onSubmit={handleSubmit}>

@@ -15,12 +15,15 @@
   justify-content: center;
 }
 .rated-restraunt-card-restraunt-image {
+  width: 330px;
+  max-width: 330px;
   height: 330px;
+  max-height: 330px;
   align-self: stretch;
   object-fit: cover;
 }
 .rated-restraunt-card-restraunt-name {
-  align-self: stretch;
+  align-self: flex-start;
   margin-top: var(--dl-space-space-halfunit);
   font-weight: 600;
   margin-bottom: var(--dl-space-space-halfunit);
