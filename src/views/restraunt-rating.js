@@ -17,9 +17,9 @@ const headers = new Headers({
 });
 
 const restIDURL = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
-const likeURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant'
-const unLikeURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?'
-const getLikedURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?'
+const likeURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant';
+const unLikeURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?';
+const getLikedURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?';
 
 const RestrauntRating = (props) => {
   // Get restraunt id
@@ -35,136 +35,131 @@ const RestrauntRating = (props) => {
 
   const [hasFetched, setHasFetched] = useState(false)
   const [isLiked, setLiked] = useState(false);
-  const [shouldUpdate, setShouldUpdateLike] = useState(false);
 
   useEffect(() => {
     // Set first account data
     setAccountData(location.state && location.state.accountData);
 
-    // Fetch restraunt by id
-    const fetchWithId = async () => {
-      if (hasFetched)
-        return
-      try {
-        if ((id != null) || (id != undefined)) {
-          console.log("ID to fetch: " + id);
-          const requestBody = {
-            "id" : id
-          };
-          var request = {
-            method: 'POST',
-            redirect: 'follow',
-            header: headers,
-            body: JSON.stringify(requestBody, null, 2)
-          };
-
-          // Get the data from the Rest ID
-          const response = await fetch(restIDURL, request);
-          const data = await response.json();
-          console.log("Rating Response: ", data);
-          setData(data);
-          setHasFetched(true)
-
-          
-        } else {
-          console.error("No ID was passed...");
-          setData(RestaurantFromID);
-          return;
-        }
-      } catch (error) {
-        console.error("An error occured: " + error);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
     fetchWithId()
-
-    const getLikeStatus = async () => {
-      if (isLoading) {
-        return
-      }
-      var stringIsInvalid = accountData.email.S === undefined ||
-        typeof accountData.email.S !== 'string' ||
-        accountData.email.S.length < 1;
-      if (stringIsInvalid) {
-        console.error("No account available yet!")
-        return;
-      } else {
-        console.info("Was able to get account info")
-      }
-
-      try {
-        var optionsForGet = {
-          method: 'GET',
-          redirect: 'follow',
-          header: headers
-        }
-
-        var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
-        console.info("Url for get Liked Rests= " + getAllLikedURL)
-
-        const getLiked = await fetch(getAllLikedURL, optionsForGet);
-        const jsonData = await getLiked.json();
-
-        console.log("JSON = " + JSON.stringify(jsonData.restaurants[6]))
-        console.info("Length: " + Object.keys(jsonData.restaurants).length)
-
-        for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
-          if (jsonData.restaurants[i].S == id) {
-            console.info("This rest was found in the list")
-            setLiked(true)
-          }
-        }
-      } catch (error) {
-        console.error("Error: " + error)
-      }
-    }
     getLikeStatus()
+  }, []);
 
-    const setRestAsLiked = async() => {
-      try {
-        
-        var optionsForLike = {
+  // Fetch restraunt by id
+  const fetchWithId = async () => {
+    if (hasFetched)
+      return
+    try {
+      if ((id != null) || (id != undefined)) {
+        console.log("ID to fetch: " + id);
+        const requestBody = {
+          "id" : id
+        };
+        var request = {
           method: 'POST',
           redirect: 'follow',
           header: headers,
-          body: JSON.stringify({
-            "email": accountData.email.S,
-            "restaurantID" : id
-          })
-        }
+          body: JSON.stringify(requestBody, null, 2)
+        };
 
-        var optionsForUnLike = {
-          method: 'DELETE',
-          redirect: 'follow',
-          header: headers
-        }
-        // If this restraunt is liked, remove it
-        if (isLiked) {
-            const update = await fetch(likeURL, optionsForLike);
-            console.log("Liked?")
-        } else {
-          var removeLikeURL = unLikeURL + `email=` + accountData.email.S + "&restaurantID=" + id
-          console.info("Url for unlike= " + removeLikeURL)
-          const deleteLike = await fetch(removeLikeURL, optionsForUnLike);
-
-        }
-        setShouldUpdateLike(false)
-      } catch (error) {
-        console.error("Error: " + error)
+        // Get the data from the Rest ID
+        const response = await fetch(restIDURL, request);
+        const data = await response.json();
+        console.log("Rating Response: ", data);
+        setData(data);
+        setHasFetched(true)
+      } else {
+        console.error("No ID was passed...");
+        setData(RestaurantFromID);
+        return;
       }
+    } catch (error) {
+      console.error("An error occured: " + error);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const getLikeStatus = async () => {
+    if (isLoading) {
+      return
+    }
+    var stringIsInvalid = accountData.email.S === undefined ||
+      typeof accountData.email.S !== 'string' ||
+      accountData.email.S.length < 1;
+    if (stringIsInvalid) {
+      console.error("No account available yet!")
+      return;
+    } else {
+      console.info("Was able to get account info")
     }
 
-    if (shouldUpdate)
-      setRestAsLiked()
-  }, [isLiked, isLoading])
+    try {
+      var optionsForGet = {
+        method: 'GET',
+        redirect: 'follow',
+        header: headers
+      }
+
+      var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
+      console.info("Url for get Liked Rests= " + getAllLikedURL)
+
+      const getLiked = await fetch(getAllLikedURL, optionsForGet);
+      const jsonData = await getLiked.json();
+
+      console.log("JSON = " + JSON.stringify(jsonData.restaurants[6]))
+      console.info("Length: " + Object.keys(jsonData.restaurants).length)
+
+      for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
+        if (jsonData.restaurants[i].S == id) {
+          console.info("This rest was found in the list");
+          setLiked(true);
+        }
+      }
+
+    } catch (error) {
+      console.error("Error: " + error)
+    }
+  }
+
+  const setRestAsLiked = async(likeStatus) => {
+    try {
+      var optionsForLike = {
+        method: 'POST',
+        redirect: 'follow',
+        header: headers,
+        body: JSON.stringify({
+          "email": accountData.email.S,
+          "restaurantID" : id
+        })
+      }
+
+      var optionsForUnLike = {
+        method: 'DELETE',
+        redirect: 'follow',
+        header: headers
+      }
+      // If this restraunt is liked, remove it
+      if (likeStatus) {
+        const update = await fetch(likeURL, optionsForLike);
+        console.log("Liked?");
+        console.warn(update);
+      } else {
+        var removeLikeURL = unLikeURL + `email=` + accountData.email.S + "&restaurantID=" + id;
+        console.info("Url for unlike= " + removeLikeURL);
+        const deleteLike = await fetch(removeLikeURL, optionsForUnLike);
+        console.warn(deleteLike);
+      }
+    } catch (error) {
+      console.error("Error: " + error);
+    }
+  }
 
   // Add code that pushes something
   function handleText(jsonText) {
-    var text = String(jsonText)
-      text.replace(/["{}]/g, '');
-      console.log(text)
+    var text = String(jsonText);
+    text.replace(/["{}]/g, '');
+    console.log(text);
     return text;
   }
 
@@ -172,11 +167,16 @@ const RestrauntRating = (props) => {
   const handleLike = (e) => {
     e.preventDefault();
     if (accountData == undefined || accountData == null){
-      console.error("Can't like if no user is logged in!")
-      return
+      console.error("You are not logged in!");
+      return;
     }
-    setShouldUpdateLike(true)
-    setLiked(!isLiked)
+    setLiked((prevIsLiked) => {
+      const newIsLiked = !prevIsLiked;
+      console.warn("Prev: " + prevIsLiked);
+      console.warn("New: " + newIsLiked);
+      setRestAsLiked(newIsLiked);
+      return newIsLiked;
+    });
   }
 
   if (isError) {
@@ -236,7 +236,7 @@ const RestrauntRating = (props) => {
               <button 
                 type="button" 
                 className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} 
-                onClick={ () => handleLike() }
+                onClick={ (e) => handleLike(e) }
               >
                   {isLiked ? 'Liked' : 'Like'}
               </button>
@@ -372,7 +372,7 @@ const RestrauntRating = (props) => {
           <button 
             type="button" 
             className={isLiked ? "restraunt-rating-unlike-button button" : "restraunt-rating-like-button button"} 
-            onClick={ () => handleLike() }>
+            onClick={ (e) => handleLike(e) }>
                   {isLiked ? 'Liked' : 'Like'}
                 </button>
         </div>

@@ -45,8 +45,7 @@ const RestaurantSearch = (props) => {
     //'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
   });
 
-  useEffect(() => { 
-
+  useEffect(() => {
     // <-------------- Coordinates and Reverse Geosearch --------------------->
     const getCoords = async () => {
       if (hasLocation) {

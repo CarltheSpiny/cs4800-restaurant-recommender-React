@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Helmet } from 'react-helmet'
 
@@ -13,6 +13,37 @@ const RestaurantHistory = (props) => {
   const { state } = props.location;
   // Check if AccountData is defined (state if undefined, state.apiData otherwise)
   var accountData = state && state.accountData;
+
+  // Restraunt API url and headers
+  const restrauntUrl = `https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?email=${accountData.email.S}`;
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
+  });
+
+  useEffect(() => {
+    
+  });
+
+  const loadLiked = async() => {
+    try {
+      var requestOoptions = {
+        method: 'GET',
+        redirect: 'follow',
+        header: headers
+      }
+
+      const getLiked = await fetch(restrauntUrl, requestOptions);
+      const jsonData = await getLiked.json();
+
+      console.log("JSON = " + JSON.stringify(jsonData.restaurants[6]))
+      console.info("Length: " + Object.keys(jsonData.restaurants).length)
+
+    } catch (error) {
+      console.error("Error: " + error)
+    }
+  }
 
   return (
     <div className="restaurant-history-container">
