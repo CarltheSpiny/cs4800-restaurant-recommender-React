@@ -12,7 +12,7 @@
   display: grid;
   padding: var(--dl-space-space-threeunits);
   grid-gap: var(--dl-space-space-unit);
-  max-width: var(--dl-size-size-maxwidth);
+  
   grid-template-columns: 1fr 1fr 1fr;
 }
 

@@ -88,6 +88,10 @@
   justify-content: flex-start;
 }
 
+.tbody {
+  flex-direction: column;
+}
+
 
 .mb-4 {
   align-self: center;

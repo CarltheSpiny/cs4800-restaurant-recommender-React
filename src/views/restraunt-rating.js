@@ -74,30 +74,40 @@ const RestrauntRating = (props) => {
         }
 
         var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
-        // console.info("Url for get Liked Rests= " + getAllLikedURL)
 
-        const getLiked = await fetch(getAllLikedURL, optionsForGet);
-        const jsonData = await getLiked.json();        
+        const getLiked = await fetch(getAllLikedURL, optionsForGet)
+        .then(response => response.json())
+        .then((data) => {
+          console.log("Data" + JSON.stringify(data.restaurants))
+          if (JSON.stringify(data.restaurants) == "[]") {
 
-        if (!shouldUpdate) {
-          console.warn("should not update; Maybe we have updated before?")
-          return
-        }
+            return
+          }
+          const jsonData = data.json();   
 
-        for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
-          if (jsonData.restaurants[i].S == id) {
-            try {
-              console.info("This rest was found in the liked list")
-              setLiked(true)
-              setShouldUpdateLike(false)
-              return
-            } catch (error) {
-              
-            } finally {
-              setLiked(false)
+          if (!shouldUpdate) {
+            console.warn("should not update; Maybe we have updated before?")
+            return
+          }
+
+
+          for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
+            if (jsonData.restaurants[i].S == id) {
+              try {
+                console.info("This rest was found in the liked list")
+                setLiked(true)
+                setShouldUpdateLike(false)
+                return
+              } catch (error) {
+                
+              } finally {
+                
+              }
             }
           }
-        }
+
+        });
+        
       } catch (error) {
         console.error("Error: " + error)
       } finally {
@@ -155,7 +165,7 @@ const RestrauntRating = (props) => {
       console.warn("Clicks: " + clicks)
       if (clicks > 0) {
         console.warn("Multiple calls detected; updating like status instead")
-        getLikeStatus();
+        //getLikeStatus();
         return
       }
        
@@ -188,7 +198,8 @@ const RestrauntRating = (props) => {
           var removeLikeURL = unLikeURL + `email=` + accountData.email.S + "&restaurantID=" + id
           const deleteLike = await fetch(removeLikeURL, optionsForUnLike);
         }
-        setShouldUpdateLike(true)
+        console.info("Setting render to update")
+        getLikeStatus();
       } catch (error) {
         console.error("Error: " + error)
       } finally {
@@ -200,7 +211,7 @@ const RestrauntRating = (props) => {
     fetchWithId()
 
     if (accountData != undefined || accountData != null){
-      console.log("Account data is now available")
+      //console.log("Account data is now available")
       getLikeStatus();
     }
 
@@ -209,7 +220,7 @@ const RestrauntRating = (props) => {
       toggleLikeAndUpdate()
     }
     
-  }, [isLiked, isLoading])
+  }, [isLoading, isLiked])
 
   function handleText(jsonText) {
     var text = String(jsonText)

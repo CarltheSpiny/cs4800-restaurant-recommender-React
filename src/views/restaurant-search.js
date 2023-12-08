@@ -263,7 +263,7 @@ const RestaurantSearch = (props) => {
           heading="Search"
           rootClassName="title-root-class-name1"
         ></Title>
-        <div>
+        <div className="location-header">
           {currentAddress && <p>Current Address: {currentAddress}</p>}
         </div>
         <div className={`search-bar-container ${props.rootClassName} `}>
