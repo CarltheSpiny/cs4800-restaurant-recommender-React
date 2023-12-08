@@ -9,13 +9,14 @@
 .restaurant-search-gallery {
   width: 100%;
   display: grid;
-  padding: var(--dl-space-space-fourunits);
+  padding: var(--dl-space-space-threeunits);
   grid-gap: var(--dl-space-space-unit);
   grid-template-columns: 1fr 1fr 1fr;
 }
 .location-header {
   align-self: center;
   margin-bottom: var(--dl-space-space-unit);
+  margin-bottom: 16px;
 }
 .search-bar-container {
   flex: 0 0 auto;
@@ -24,6 +25,7 @@
   position: relative;
   align-items: flex-start;
   justify-content: center;
+  margin-bottom: 8px;
 }
 .search-bar-form {
   width: 100%;

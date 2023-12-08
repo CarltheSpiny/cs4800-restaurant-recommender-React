@@ -7,16 +7,16 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+.rest-card-table {
+  flex-direction: column;
+}
 .restaurant-history-gallery {
   width: 100%;
-  display: flex;
-  max-width: var(--dl-size-size-maxwidth);
-  align-items: center;
-  padding-top: var(--dl-space-space-twounits);
-  padding-left: var(--dl-space-space-threeunits);
-  padding-right: var(--dl-space-space-threeunits);
-  flex-direction: column;
-  padding-bottom: var(--dl-space-space-twounits);
+  display: grid;
+  padding: var(--dl-space-space-threeunits);
+  grid-gap: var(--dl-space-space-unit);
+
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .restaurant-history-container1 {
   width: 100%;

@@ -109,18 +109,6 @@ const PersonalHome = (props) => {
     getCoords()
  }, [])
 
- var testforUrl = (
-  <p>
-    Text1
-  </p>
- )
- var testforUrl2 = (
-  <p>
-    Text2???
-  </p>
- )
-
- testforUrl = testforUrl + <p>????</p>
 
  if (isError) {
   console.log("Error loading restaurants!")
