@@ -34,15 +34,27 @@ const RestrauntRating = (props) => {
   const [restrauntData, setData] = useState("");
 
   const [hasFetched, setHasFetched] = useState(false)
+
   const [isLiked, setLiked] = useState(false);
-  const [shouldUpdate, setShouldUpdateLike] = useState(false);
+  const [shouldUpdate, setShouldUpdateLike] = useState(true);
+  const [hasClicked, setClicked] = useState(false)
+  const[clicks, setClicks] = useState(0)
 
   useEffect(() => {
     // Set first account data
     setAccountData(location.state && location.state.accountData);
 
     const getLikeStatus = async () => {
-      if (isLoading) {
+
+      if (!shouldUpdate) {
+        console.log("No update on liked status required")
+        return;
+      }
+
+      console.warn("Checking the like status of this rest")
+
+      if (accountData == undefined || accountData == null){
+        console.info("Can't check like if no user is logged in!")
         return
       }
 
@@ -52,8 +64,6 @@ const RestrauntRating = (props) => {
       if (stringIsInvalid) {
         console.error("No account available yet!")
         return;
-      } else {
-        console.info("Was able to get account info")
       }
 
       try {
@@ -64,22 +74,34 @@ const RestrauntRating = (props) => {
         }
 
         var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
-        console.info("Url for get Liked Rests= " + getAllLikedURL)
+        // console.info("Url for get Liked Rests= " + getAllLikedURL)
 
         const getLiked = await fetch(getAllLikedURL, optionsForGet);
-        const jsonData = await getLiked.json();
+        const jsonData = await getLiked.json();        
 
-        console.log("JSON = " + JSON.stringify(jsonData.restaurants))
-        console.info("Length: " + Object.keys(jsonData.restaurants).length)
+        if (!shouldUpdate) {
+          console.warn("should not update; Maybe we have updated before?")
+          return
+        }
 
         for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
           if (jsonData.restaurants[i].S == id) {
-            console.info("This rest was found in the list")
-            setLiked(true)
+            try {
+              console.info("This rest was found in the liked list")
+              setLiked(true)
+              setShouldUpdateLike(false)
+              return
+            } catch (error) {
+              
+            } finally {
+              setLiked(false)
+            }
           }
         }
       } catch (error) {
         console.error("Error: " + error)
+      } finally {
+        setShouldUpdateLike(false)
       }
     }
 
@@ -90,10 +112,11 @@ const RestrauntRating = (props) => {
         return
       try {
         if ((id != null) || (id != undefined)) {
-          console.log("ID to fetch: " + id);
+          // console.log("ID to fetch: " + id);
           const requestBody = {
             "id" : id
           };
+          
           var request = {
             method: 'POST',
             redirect: 'follow',
@@ -102,12 +125,17 @@ const RestrauntRating = (props) => {
           };
 
           // Get the data from the Rest ID
-          const response = await fetch(restIDURL, request);
-          const data = await response.json();
-          console.log("Rating Response: ", data);
-          setData(data);
-          setHasFetched(true)
-          getLikeStatus()
+          try {
+            const response = await fetch(restIDURL, request);
+            const data = await response.json();
+            console.info("Rest info received")
+            setData(data);
+            setHasFetched(true)
+          } catch (error) {
+            console.error("Error in getting Rest ID")
+            return
+          }
+          
           
         } else {
           console.error("No ID was passed...");
@@ -121,12 +149,19 @@ const RestrauntRating = (props) => {
         setLoading(false);
       }
     }
-    fetchWithId()
 
-    
-   
+    const toggleLikeAndUpdate = async () => {
+      console.log("Changing liked status...")
+      console.warn("Clicks: " + clicks)
+      if (clicks > 0) {
+        console.warn("Multiple calls detected; updating like status instead")
+        getLikeStatus();
+        return
+      }
+       
+      setClicks(clicks + 1)
+      
 
-    const setRestAsLiked = async () => {
       try {
         
         var optionsForLike = {
@@ -146,29 +181,39 @@ const RestrauntRating = (props) => {
         }
         // If this rest is liked, then remove it
         if (isLiked) {
+            console.log("Rest was liked, adding to liked list")
             const update = await fetch(likeURL, optionsForLike);
-            console.log("Liked?")
         } else {
+          console.log("Rest was unliked, removing from list")
           var removeLikeURL = unLikeURL + `email=` + accountData.email.S + "&restaurantID=" + id
-          console.info("Url for unlike= " + removeLikeURL)
           const deleteLike = await fetch(removeLikeURL, optionsForUnLike);
-          getLikeStatus()
         }
-        setShouldUpdateLike(false)
+        setShouldUpdateLike(true)
       } catch (error) {
         console.error("Error: " + error)
+      } finally {
+        setClicked(false)
+        setClicks(0)
       }
     }
 
-    if (shouldUpdate)
-      setRestAsLiked()
+    fetchWithId()
+
+    if (accountData != undefined || accountData != null){
+      console.log("Account data is now available")
+      getLikeStatus();
+    }
+
+    if (hasClicked) {
+      //console.info("Button has been clicked during/after render")
+      toggleLikeAndUpdate()
+    }
+    
   }, [isLiked, isLoading])
 
-  // Add code that pushes something
   function handleText(jsonText) {
     var text = String(jsonText)
       text.replace(/["{}]/g, '');
-      console.log(text)
     return text;
   }
 
@@ -179,8 +224,10 @@ const RestrauntRating = (props) => {
       console.error("Can't like if no user is logged in!")
       return
     }
+    console.info("Like button pressed; Handling...")
     setShouldUpdateLike(true)
     setLiked(!isLiked)
+    setClicked(true)
   }
 
   if (isError) {
