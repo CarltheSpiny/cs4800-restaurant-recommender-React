@@ -83,7 +83,7 @@ const RestrauntRating = (props) => {
 
             return
           }
-          const jsonData = data.json();   
+          const jsonData = data
 
           if (!shouldUpdate) {
             console.warn("should not update; Maybe we have updated before?")
