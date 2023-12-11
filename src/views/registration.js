@@ -210,14 +210,8 @@ const Registration = (props) => {
               </span>
               <Link to="/user-login" className="registration-navlink">
                 <span>
-                  Sign in
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: ' ',
-                    }}
-                  />
+                  Sign in here.
                 </span>
-                <span>here.</span>
               </Link>
             </div>
           </div>

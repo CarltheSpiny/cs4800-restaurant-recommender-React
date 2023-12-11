@@ -29,7 +29,7 @@ const RestaurantSearch = (props) => {
    // <--------------------Access a user's information --------------------->
   const { state } = props.location;
   // Check if AccountData is defined (state if undefined, state.apiData otherwise)
-  var accountData = state && state.accountData;
+  const userData = state && state.accountData;
    // <--------------------Access a user's information --------------------->
 
   // Geolocation 
@@ -166,7 +166,7 @@ const RestaurantSearch = (props) => {
             content="RestaurantSearch - cs4800-restaurant-recommender"
           />
         </Helmet>
-        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
+        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ userData }></NavigatorBar>
         <Title
           text="Use the search bar to find a restaurant."
           heading="Search"
@@ -210,7 +210,7 @@ const RestaurantSearch = (props) => {
             content="Restaurant Search"
           />
         </Helmet>
-        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
+        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ userData }></NavigatorBar>
         <Title
           text="Use the search bar to find a restaurant."
           heading="Search"
@@ -253,7 +253,7 @@ const RestaurantSearch = (props) => {
             content="RestaurantSearch - cs4800-restaurant-recommender"
           />
         </Helmet>
-        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
+        <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ userData }></NavigatorBar>
         <Title
           text="Use the search bar to find a restaurant."
           heading="Search"
@@ -287,6 +287,7 @@ const RestaurantSearch = (props) => {
             reccomendedRestaurants={jsonData}
             isLoadingPage={!hasFetched}
             indexForRestaurant={0}
+            accountData={ userData }
           ></RatedRestrauntCard>
           <RatedRestrauntCard
             rootClassName="rated-resturant-card-1"
@@ -294,6 +295,7 @@ const RestaurantSearch = (props) => {
             reccomendedRestaurants={jsonData}
             isLoadingPage={!hasFetched}
             indexForRestaurant={1}
+            accountData={ userData }
           ></RatedRestrauntCard>
           <RatedRestrauntCard
             rootClassName="rated-resturant-card-1"
@@ -301,6 +303,7 @@ const RestaurantSearch = (props) => {
             reccomendedRestaurants={jsonData}
             isLoadingPage={!hasFetched}
             indexForRestaurant={2}
+            accountData={ userData }
           ></RatedRestrauntCard>
         </div>
       </div>
@@ -317,7 +320,7 @@ const RestaurantSearch = (props) => {
           content="Restaurant Search"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ accountData }></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name1" accountData={ userData }></NavigatorBar>
       <Title
         text="Use the search bar to find a restaurant."
         heading="Search"

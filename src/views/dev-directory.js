@@ -7,6 +7,7 @@ import FetchAccountInfo from '../components/network/data-fetch'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import Title from '../components/title'
 import TestJson from '../backup-restaurant-output.json'
+import PropTypes from 'prop-types'
 
 const accountURL = 'https://if3mfcuocb.execute-api.us-east-1.amazonaws.com/test'
 const restaurantURL = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantReccomendation'
@@ -18,16 +19,22 @@ First number is Big Updates 1 = Initial Site from Teleport | 2 = First Edits fro
 Second is commit number from the big update?
 Third is commit number?
 */
-const buildNumber = '4.3.5'
+const buildNumber = '4.4.0'
 
-const Directory = () => {
+const Directory = (props) => {
+  // <--------------------Access a user's information --------------------->
+  const { state } = props.location;
+  // Check if userData is defined (state if undefined, state.apiData otherwise)
+  const userData = state && state.accountData;
+  // <--------------------Access a user's information --------------------->
+
   return (
     <div className="directory-container">
       <Helmet>
         <title>Directory for Devs</title>
         <meta property="og:title" content="Directory" />
       </Helmet>
-      <NavigatorBar></NavigatorBar>
+      <NavigatorBar>accountData={ userData }</NavigatorBar>
       <Title
       text='Use the links below to get to specific pages'
       subtext={'Build Version ' + buildNumber}
@@ -97,8 +104,8 @@ const Directory = () => {
           </h2>
           <h2>
               <Link to={{
-                pathname: '/restraunt-rating',
-                state:  { data: TestJson.restaurants[0]}
+                pathname: `/restraunt-rating/qzCi42NBBnGtyubcRARKcg`, 
+                state: { accountData: userData} 
               }}>
                 RestrauntRating
             </Link>

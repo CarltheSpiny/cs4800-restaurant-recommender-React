@@ -11,6 +11,7 @@
   width: 100%;
   display: grid;
   padding: var(--dl-space-space-threeunits);
+  padding-top: 50px;
   grid-gap: var(--dl-space-space-unit);
   grid-template-columns: 1fr 1fr 1fr;
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom/cjs/react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
@@ -35,17 +36,15 @@ const RestrauntRating = (props) => {
 
   // Used to check if a response has been fetched or not; Prevents multiple class for fetching
   const [hasFetched, setHasFetched] = useState(false)
-  const [hasAccount, setAccountFetched] = useState(false)
-
+  const [isLoggedIn, setLoggedIn] = useState(false)
   const [isLiked, setLiked] = useState(null);
-  const [shouldUpdate, setShouldUpdateLike] = useState(true);
   const [hasClicked, setClicked] = useState(false)
-  const[clicks, setClicks] = useState(0)
 
   // This hook only handles the fetching of rest information
   useEffect(() => {
     if (accountData == null || accountData == undefined)
       return
+      
 
     // Fetch restraunt by id
     const fetchWithId = async () => {
@@ -89,7 +88,7 @@ const RestrauntRating = (props) => {
         setError(true);
       } finally {
         setLoading(false);
-        
+        setLoggedIn(true);
       }
     }
     fetchWithId();
@@ -210,7 +209,7 @@ const RestrauntRating = (props) => {
     return (
       <div className="restraunt-rating-page">
         <Helmet>
-          <title>RestrauntRating - cs4800-restaurant-recommender</title>
+          <title>Restraunt Rating - Error</title>
           <meta
             property="og:title"
             content="RestrauntRating"
@@ -274,11 +273,57 @@ const RestrauntRating = (props) => {
     )
   }
 
+  else if (!isLoggedIn) {
+    return (
+      <div className="restraunt-rating-page">
+        <Helmet>
+          <title>Restraunt Rating - Error</title>
+          <meta
+            property="og:title"
+            content="RestrauntRating"
+          />
+        </Helmet>
+        <NavigatorBar accountData={ accountData }></NavigatorBar>
+        <img
+          alt="image"
+          src={props.imageSource}
+          className="restraunt-image"
+        />
+        <div className="restraunt-rating-header">
+          <h1 className="restraunt-rating-title">
+            You need to be logged in to view the restaurant
+          </h1>
+          <span className="user-login-text5">
+            <span>Don&apos;t have an account?</span>
+              <br></br>
+            </span>
+            <Link to="/registration" className="user-login-navlink">
+              Create one.
+            </Link>
+        </div>
+        <div className="registration-to-login-container">
+              <span className="registration-text12">
+                <span>Already have an account?</span>
+                <br></br>
+              </span>
+              <Link to="/user-login" className="registration-navlink">
+                <span>
+                  Sign in here.
+                </span>
+              </Link>
+            </div>
+        <div className="restraunt-rating-restraunt-info">
+          
+        </div>
+      </div>
+    )
+  }
+
   else if (isLoading) {
     return (
       <div className="restraunt-rating-page">
         <Helmet>
-          <title>RestrauntRating - cs4800-restaurant-recommender</title>
+          <title>Restraunt Rating - Loading...</title>
           <meta
             property="og:title"
             content="RestrauntRating"
@@ -344,7 +389,7 @@ const RestrauntRating = (props) => {
     return (
       <div className="restraunt-rating-page">
         <Helmet>
-          <title>RestrauntRating - cs4800-restaurant-recommender</title>
+          <title>{restrauntData.name} - Restraunt Rating</title>
           <meta
             property="og:title"
             content="RestrauntRating"
