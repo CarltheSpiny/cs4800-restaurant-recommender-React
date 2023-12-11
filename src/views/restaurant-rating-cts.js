@@ -33,30 +33,96 @@ const RestrauntRating = (props) => {
   const [isError, setError] = useState(false);
   const [restrauntData, setData] = useState("");
 
-  // Used to check if a response has been fetched or not; Prevents multiple class for fetching
   const [hasFetched, setHasFetched] = useState(false)
-  const [hasAccount, setAccountFetched] = useState(false)
 
-  const [isLiked, setLiked] = useState(null);
+  const [isLiked, setLiked] = useState(false);
   const [shouldUpdate, setShouldUpdateLike] = useState(true);
   const [hasClicked, setClicked] = useState(false)
   const[clicks, setClicks] = useState(0)
 
-  // This hook only handles the fetching of rest information
   useEffect(() => {
-    if (accountData == null || accountData == undefined)
-      return
+    // Set first account data
+    setAccountData(location.state && location.state.accountData);
 
-    // Fetch restraunt by id
-    const fetchWithId = async () => {
-      console.log("Fetching Rest Info")
-      if (hasFetched){ 
-        console.log("Rest Fetched, no need to do it again")
+    const getLikeStatus = async () => {
+
+      if (!shouldUpdate) {
+        console.log("No update on liked status required")
+        return;
+      }
+
+      console.warn("Checking the like status of this rest")
+
+      if (accountData == undefined || accountData == null){
+        console.info("Can't check like if no user is logged in!")
         return
       }
 
+      var stringIsInvalid = accountData.email.S === undefined ||
+                            typeof accountData.email.S !== 'string' ||
+                            accountData.email.S.length < 1;
+      if (stringIsInvalid) {
+        console.error("No account available yet!")
+        return;
+      }
+
+      try {
+        var optionsForGet = {
+          method: 'GET',
+          redirect: 'follow',
+          header: headers
+        }
+
+        var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
+
+        const getLiked = await fetch(getAllLikedURL, optionsForGet)
+        .then(response => response.json())
+        .then((data) => {
+          console.log("Data" + JSON.stringify(data.restaurants))
+          if (JSON.stringify(data.restaurants) == "[]") {
+
+            return
+          }
+          const jsonData = data
+
+          if (!shouldUpdate) {
+            console.warn("should not update; Maybe we have updated before?")
+            return
+          }
+
+
+          for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
+            if (jsonData.restaurants[i].S == id) {
+              try {
+                console.info("This rest was found in the liked list")
+                setLiked(true)
+                setShouldUpdateLike(false)
+                return
+              } catch (error) {
+                
+              } finally {
+                
+              }
+            }
+          }
+
+        });
+        
+      } catch (error) {
+        console.error("Error: " + error)
+      } finally {
+        setShouldUpdateLike(false)
+      }
+    }
+
+
+    // Fetch restraunt by id
+    const fetchWithId = async () => {
+      if (hasFetched)
+        return
       try {
         if ((id != null) || (id != undefined)) {
+          // console.log("ID to fetch: " + id);
           const requestBody = {
             "id" : id
           };
@@ -79,6 +145,8 @@ const RestrauntRating = (props) => {
             console.error("Error in getting Rest ID")
             return
           }
+          
+          
         } else {
           console.error("No ID was passed...");
           setData(RestaurantFromID);
@@ -89,70 +157,23 @@ const RestrauntRating = (props) => {
         setError(true);
       } finally {
         setLoading(false);
-        
       }
     }
-    fetchWithId();
-  }, [accountData]);
 
-  // Repeatedly set account until it becomes available
-  useEffect(() => {
-    setAccountData(location.state && location.state.accountData);
-  })
+    const toggleLikeAndUpdate = async () => {
+      console.log("Changing liked status...")
+      console.warn("Clicks: " + clicks)
+      if (clicks > 0) {
+        console.warn("Multiple calls detected; updating like status instead")
+        //getLikeStatus();
+        return
+      }
+       
+      setClicks(clicks + 1)
+      
 
-  // When rest is finally fetched, we should then check the liked status too
-  useEffect(() => {
-    if (accountData == null || accountData == undefined)
-      return
-    const getLikeStatus = async () => {
-      console.warn("Checking the like status of this rest for the first time")
       try {
-        var optionsForGet = {
-          method: 'GET',
-          redirect: 'follow',
-          header: headers
-        }
-
-        var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
-        const getLiked = await fetch(getAllLikedURL, optionsForGet)
-          .then(response => response.json())
-          .then((data) => {
-            // console.log("Data" + JSON.stringify(data.restaurants))
-            if (JSON.stringify(data.restaurants) == "[]") {
-              return
-            }
-            const jsonData = data
-            for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
-              if (jsonData.restaurants[i].S == id) {
-                try {
-                  console.info("This rest was found in the liked list")
-                  setLiked(true)
-                  return
-                } catch (error) {
-                  console.log("Error when getting list: " + error)
-                }
-              }
-            }
-        });
-      } catch (error) {
-        console.error("Error: " + error)
-      }
-    }
-    getLikeStatus();
-  }, [hasFetched])
-
-   // Handling changes from liked
-   useEffect(() => {
-    if (accountData == null || accountData == undefined)
-      return
-
-    if(hasClicked == false)
-      return
-
-    const handleLike = async () => {
-      console.log("Like button clicked")
-      if (isLiked) {
-        console.log("Rest was liked")
+        
         var optionsForLike = {
           method: 'POST',
           redirect: 'follow',
@@ -162,30 +183,44 @@ const RestrauntRating = (props) => {
             "restaurantID" : id
           })
         }
-        try {
-          const update = await fetch(likeURL, optionsForLike);
-        } catch (err) {
-          console.error("Error in adding rest to liked list: " + err)
-        }
-        setClicked(false)
-      } else {
-        console.log("Rest was unliked")
+
         var optionsForUnLike = {
           method: 'DELETE',
           redirect: 'follow',
           header: headers
         }
-        try {
+        // If this rest is liked, then remove it
+        if (isLiked) {
+            console.log("Rest was liked, adding to liked list")
+            const update = await fetch(likeURL, optionsForLike);
+        } else {
+          console.log("Rest was unliked, removing from list")
           var removeLikeURL = unLikeURL + `email=` + accountData.email.S + "&restaurantID=" + id
           const deleteLike = await fetch(removeLikeURL, optionsForUnLike);
-        } catch (err) {
-          console.error("Error: " + err)
         }
+        console.info("Setting render to update")
+        getLikeStatus();
+      } catch (error) {
+        console.error("Error: " + error)
+      } finally {
         setClicked(false)
+        setClicks(0)
       }
     }
-    handleLike();
-  }, [hasClicked])
+
+    fetchWithId()
+
+    if (accountData != undefined || accountData != null){
+      //console.log("Account data is now available")
+      getLikeStatus();
+    }
+
+    if (hasClicked) {
+      //console.info("Button has been clicked during/after render")
+      toggleLikeAndUpdate()
+    }
+    
+  }, [isLoading, isLiked])
 
   function handleText(jsonText) {
     var text = String(jsonText)
@@ -200,8 +235,8 @@ const RestrauntRating = (props) => {
       console.error("Can't like if no user is logged in!")
       return
     }
-
     console.info("Like button pressed; Handling...")
+    setShouldUpdateLike(true)
     setLiked(!isLiked)
     setClicked(true)
   }
