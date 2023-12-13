@@ -124,7 +124,7 @@ const RestaurantSearch = (props) => {
             }
             const jsonData = data
             for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
-              userLikedList.push([(jsonData.restaurants[i].S)]);
+              userLikedList.push([(jsonData.restaurants[i].S)] + '');
             }
         });
 
@@ -200,7 +200,7 @@ const RestaurantSearch = (props) => {
       const requestBody = {
         "message" : searchQuery,
         "location" : currentAddress,
-        "liked_restaurants" : likedList
+        "liked_restaurants" : []
       }
   
       var requestOptions = {
@@ -299,7 +299,7 @@ const RestaurantSearch = (props) => {
           </button>
         </form>
       </div>
-        <div className="restaurant-search-gallery">
+        <div className="loading-container">
           <img className='loading-gif' src='https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif'></img>
         </div>
       </div>

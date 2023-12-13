@@ -132,7 +132,7 @@ const PersonalHome = (props) => {
           }
           const jsonData = data
           for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
-            userLikedList.push([(jsonData.restaurants[i].S)]);
+            userLikedList.push([(jsonData.restaurants[i].S)] + '');
           }
           setLikedList(userLikedList);
         })
@@ -162,7 +162,7 @@ const PersonalHome = (props) => {
       const requestBody = {
         "message" : "",
         "location" : currentAddress,
-        "liked_restaurants" : likedList
+        "liked_restaurants" : []
       }
   
       var requestOptions = {
@@ -231,8 +231,8 @@ const PersonalHome = (props) => {
           rootClassName
           ="title-root-class-name"
         ></Title>
-        <div className="personal-home-gallery">
-          <span>Loading...</span>
+        <div className="loading-container">
+          <img className='loading-gif' src='https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif'></img>
         </div>
       </div>
     )

@@ -273,7 +273,35 @@ const RestrauntRating = (props) => {
     )
   }
 
-  else if (!isLoggedIn) {
+  if (isLoading && isLoggedIn) {
+    return (
+      <div className="restraunt-rating-page">
+        <Helmet>
+          <title>Restraunt Rating - Loading...</title>
+          <meta
+            property="og:title"
+            content="RestrauntRating"
+          />
+        </Helmet>
+        <NavigatorBar accountData={ accountData }></NavigatorBar>
+        <img
+          alt="image"
+          src={props.imageSource}
+          className="restraunt-image"
+        />
+        <div className="restraunt-rating-header">
+          <h1 className="restraunt-rating-title">
+            Loading...
+          </h1>
+        </div>
+        <div className="loading-container">
+          <img className='loading-gif' src='https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif'></img>
+        </div>
+      </div>
+    )
+  }
+
+  if (!isLoggedIn) {
     return (
       <div className="restraunt-rating-page">
         <Helmet>
@@ -314,72 +342,6 @@ const RestrauntRating = (props) => {
           </div>
         <div className="restraunt-rating-restraunt-info">
           
-        </div>
-      </div>
-    )
-  }
-
-  else if (isLoading) {
-    return (
-      <div className="restraunt-rating-page">
-        <Helmet>
-          <title>Restraunt Rating - Loading...</title>
-          <meta
-            property="og:title"
-            content="RestrauntRating"
-          />
-        </Helmet>
-        <NavigatorBar accountData={ accountData }></NavigatorBar>
-        <img
-          alt="image"
-          src={props.imageSource}
-          className="restraunt-image"
-        />
-        <div className="restraunt-rating-header">
-          <h1 className="restraunt-rating-title">
-            Loading...
-          </h1>
-        </div>
-        <div className="restraunt-rating-restraunt-info">
-          <div className="restraunt-rating-restraunt-details">
-            <div className="restraunt-rating-restraunt-contacts">
-              <div className="restraunt-rating-row1">
-                <Label
-                  mainLabel="Address:"
-                  listLabel="Loading..."
-                ></Label>
-                <Label
-                  mainLabel="Rating:"
-                  listLabel="Loading..."
-                ></Label>
-              </div>
-              <div className="restraunt-rating-row2">
-                <Label
-                  mainLabel="Phone:"
-                  listLabel="Loading..."
-                ></Label>
-                <Label
-                  mainLabel="Website:"
-                  listLabel="Loading..."
-                ></Label>
-              </div>
-              <div className="restraunt-rating-row3">
-                <Label
-                  mainLabel="Cuisine:"
-                  listLabel="Loading..."
-                ></Label>
-                <Label
-                  mainLabel="Price Range:"
-                  listLabel="Loading"
-                ></Label>
-              </div>
-              <button 
-                type="button" 
-                className={"restraunt-rating-like-button button"}>
-                  Like
-                </button>
-            </div>
-          </div>
         </div>
       </div>
     )

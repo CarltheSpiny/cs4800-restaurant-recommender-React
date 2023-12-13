@@ -13,10 +13,10 @@ const NavigatorBar = (props) => {
   useEffect(() => {
 
     if (props.isLoading) {
-      console.info("Loading from Navigation")
+      
       setLogo(not_logo)
     } else {
-      console.info("Finished loading from Navigation")
+      
       setLogo(logo)
     }
   })

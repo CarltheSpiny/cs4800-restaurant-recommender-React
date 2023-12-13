@@ -18,84 +18,97 @@ const apiUrl = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestau
 const RatedRestrauntCard = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
+  
   const [isRepLoading, setRepLoading] = useState(false);
+  const [hasFetched, setFetched] = useState(false);
 
   const [imageSrc, setImage] = useState(null);
   const [name, setName] = useState(null);
   const [rating, setRating] = useState(null);
-  const [id_data, setIdData] = useState(null);
+
+  const [restData, setRestData] = useState(null);
 
   const [hasSetFields, setFieldsAsSet] = useState(false)
 
   var backupJson;
 
+  // fetch with id
   useEffect(() => {
-    if (isRepLoading) {
-      console.warn("A card wanted to load again!")
-      return;
-    }
-
-    // Will fetch a list of reccomended restaurants
     if (props.isLoadingPage) {
       setLoading(true)
       console.warn("Didn't fetch; Page was still loading")
       return
-    } else {
-      console.log("Restaurant Card: Page Loaded. Attempting to fetch...")
     }
 
-    const requestBody = {
-      "id" : props.reccomendedRestaurants[props.indexForRestaurant]
-    }
-    
-    var request = {
-      method: 'POST',
-      redirect: 'follow',
-      header: headers,
-      body: JSON.stringify(requestBody, null, 2)
-    }
-
-    if (isRepLoading) {
-      console.warn("A card wanted to load again!")
+    if (hasFetched) {
+      console.warn("RestaurantCard [" + props.reccomendedRestaurants[props.indexForRestaurant] + "]: " + "Rest from ID has been fetched, no need to do it again")
       return;
+    } else {
+      console.log("Attempting to fetch Rest Data for the first time")
     }
+
+    // Will fetch a list of reccomended restaurants
     
+
+    if (props.reccomendedRestaurants[props.indexForRestaurant] == null 
+      || props.reccomendedRestaurants[props.indexForRestaurant] == undefined) {
+        console.warn("No ID was provided!")
+        return;
+    } else {
+      console.info("RestaurantCard [" + props.reccomendedRestaurants[props.indexForRestaurant] + "]: " + "ID was provided")
+    }
+
     const fetchFromId = async() => {     
+      console.log("RestaurantCard [" + props.reccomendedRestaurants[props.indexForRestaurant] + "]: " + "Fetching Rest Data from ID")
+      const requestBody = {
+        "id" : props.reccomendedRestaurants[props.indexForRestaurant]
+      }
+      
+      var request = {
+        method: 'POST',
+        redirect: 'follow',
+        header: headers,
+        body: JSON.stringify(requestBody, null, 2)
+      }
       try {
-        console.log("ID to fetch: " + props.reccomendedRestaurants[props.indexForRestaurant])
+        
         const response = await fetch(apiUrl, request)
         const data = await response.json()
-        console.log("RestaurantCard: JSON response: ", data)
-        setIdData(data)
-        backupJson = data
-        if (response.status != "200")
-          setError(true)
+        // console.log("RestaurantCard [" + props.reccomendedRestaurants[props.indexForRestaurant] + "]" + ": JSON response: ", data)
         
-        setRepLoading(true)
-        setFields(data)
+        // backupJson = data
+        if (response.status != "200") {
+          throw Error("RestaurantCard [" + props.reccomendedRestaurants[props.indexForRestaurant] + "]: " + "Server did not respond with a 200 Status")
+        }
+        setRestData(data)
+        setFetched(true)
       } catch (error) {
         console.error("Error: " + error)
         setError(true)
       } finally {
         setLoading(false)
-        
       }
     }
+    fetchFromId()
+  }, [isLoading]);
 
-    const setFields = async(jsonData) => {
-      console.log("Setting fields...")
-      setRepLoading(true)
-      setIdData(jsonData)
-      setFieldsAsSet(true)
-      backupJson = jsonData
+  useEffect(() => {
+    if (restData == null || restData == undefined) {
+      // console.warn("Rest data was null; Not setting fields")
+      return;
+    } else {
+      console.log("RestaurantCard [" + props.reccomendedRestaurants[props.indexForRestaurant] + "]: " + "Rest Data present")
+    }
+
+    const setFields = async() => {
+      console.log("RestaurantCard [" + props.reccomendedRestaurants[props.indexForRestaurant] + "]: " + "Setting fields for the Cards")
       var imageURL;
       var restaurantName;
       var averageRating;
       try {
-        imageURL = jsonData.image_url
-        restaurantName = jsonData.name
-        averageRating = jsonData.rating
-        console.log("Set fields from the restaurant response")
+        imageURL = restData.image_url
+        restaurantName = restData.name
+        averageRating = restData.rating
       } catch (error) {
         console.error("Error in setting fields: " + error)
         console.warn("Using default values!")
@@ -105,11 +118,8 @@ const RatedRestrauntCard = (props) => {
       setName(restaurantName);
       setRating(averageRating);
     }
-
-    fetchFromId()
-
-
-  }, [props]);
+    setFields()
+  }, [restData])  
 
   // console.log("Card Account: " + JSON.stringify(props.accountData));
 
@@ -118,7 +128,7 @@ const RatedRestrauntCard = (props) => {
     return(
       <Link to={{
         pathname: '/restraunt-rating',
-        state:  { accountData: props.accountData, data: id_data }
+        state:  { accountData: props.accountData, data: restData }
       }}>
         <div className={`rated-restraunt-card-container ${props.rootClassName} `}>
           <div className="rated-restraunt-card-gallery-card">
@@ -204,7 +214,7 @@ const RatedRestrauntCard = (props) => {
 
 RatedRestrauntCard.defaultProps = {
   rootClassName: 'restaurant-card',
-  imageSource: 'https://play.teleporthq.io/static/svg/default-img.svg',
+  imageSource: 'https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif',
   restrauntName: 'Loading...',
   indexForRestaurant: 0,
   restaurantRating: "--",

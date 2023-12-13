@@ -18,6 +18,13 @@
 .address-text {
   margin-bottom: var(--dl-space-space-twounits);
 }
+.loading-gif {
+  width: auto;
+  height: var(--dl-size-size-medium);
+  display: flex;
+  align-self: center;
+  object-fit: cover;
+}
 
 @media(max-width: 991px) {
   .personal-home-gallery {

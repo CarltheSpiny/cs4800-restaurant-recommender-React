@@ -6,6 +6,13 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+.loading-gif {
+  width: auto;
+  height: var(--dl-size-size-medium);
+  display: flex;
+  align-self: center;
+  object-fit: cover;
+}
 .restaurant-search-gallery {
   width: 100%;
   display: grid;

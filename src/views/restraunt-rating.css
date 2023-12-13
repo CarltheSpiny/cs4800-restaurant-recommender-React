@@ -12,6 +12,13 @@
   align-self: center;
   object-fit: cover;
 }
+.loading-gif {
+  width: auto;
+  height: var(--dl-size-size-medium);
+  display: flex;
+  align-self: center;
+  object-fit: cover;
+}
 .restraunt-rating-header {
   flex: 0 0 auto;
   width: 100%;
