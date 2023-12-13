@@ -273,7 +273,7 @@ const RestrauntRating = (props) => {
     )
   }
 
-  if (isLoading && isLoggedIn) {
+  if (isLoading) {
     return (
       <div className="restraunt-rating-page">
         <Helmet>

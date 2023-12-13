@@ -164,7 +164,7 @@ const RestaurantSearch = (props) => {
           }
           const jsonData = data
           for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
-            userLikedList.push([(jsonData.restaurants[i].S)]);
+            userLikedList.push([(jsonData.restaurants[i].S)] + '');
           }
           setLikedList(userLikedList);
         })
@@ -200,7 +200,7 @@ const RestaurantSearch = (props) => {
       const requestBody = {
         "message" : searchQuery,
         "location" : currentAddress,
-        "liked_restaurants" : []
+        "liked_restaurants" : likedList
       }
   
       var requestOptions = {
@@ -391,7 +391,7 @@ const RestaurantSearch = (props) => {
             reccomendedRestaurants={restData}
             isLoadingPage={!hasReccomendation}
             indexForRestaurant={0}
-            accountData={ userData }
+            accountData={ accountData }
           ></RatedRestrauntCard>
           <RatedRestrauntCard
             rootClassName="rated-resturant-card-1"
@@ -399,7 +399,7 @@ const RestaurantSearch = (props) => {
             reccomendedRestaurants={restData}
             isLoadingPage={!hasReccomendation}
             indexForRestaurant={1}
-            accountData={ userData }
+            accountData={ accountData }
           ></RatedRestrauntCard>
           <RatedRestrauntCard
             rootClassName="rated-resturant-card-1"
@@ -407,7 +407,7 @@ const RestaurantSearch = (props) => {
             reccomendedRestaurants={restData}
             isLoadingPage={!hasReccomendation}
             indexForRestaurant={2}
-            accountData={ userData }
+            accountData={ accountData }
           ></RatedRestrauntCard>
         </div>
       </div>

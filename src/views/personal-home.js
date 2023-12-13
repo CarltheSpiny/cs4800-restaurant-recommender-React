@@ -162,7 +162,7 @@ const PersonalHome = (props) => {
       const requestBody = {
         "message" : "",
         "location" : currentAddress,
-        "liked_restaurants" : []
+        "liked_restaurants" : likedList
       }
   
       var requestOptions = {
