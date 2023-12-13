@@ -2,11 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
-import logo from '../primary-logo.jpg'
+import not_logo from '../zaidi_face.png'
+import logo from '../zaidi_name.png'
+import cpp_logo from '../primary-logo.jpg'
 import NavigationLinks from './navigation-links'
 import './navigator-bar.css'
 
 const NavigatorBar = (props) => {
+  const [getLogo, setLogo] = useState(cpp_logo)
+  useEffect(() => {
+
+    if (props.isLoading) {
+      console.info("Loading from Navigation")
+      setLogo(not_logo)
+    } else {
+      console.info("Finished loading from Navigation")
+      setLogo(logo)
+    }
+  })
+
   // Page navigation
   const history = useHistory();
 
@@ -19,10 +33,12 @@ const NavigatorBar = (props) => {
     });
   }
 
+ 
   // Set buttons when user is logged in status
   const isLoggedIn = () => {
     // Check if accountData in props is not null or undefined
     if ((props.accountData != null) && (props.accountData != undefined)) {
+      
       return (
         <>
           <span className="navigator-bar-greeting">Hello, {props.accountData.firstName.S}!</span>
@@ -43,6 +59,7 @@ const NavigatorBar = (props) => {
         </>
       );
     }
+    
   }
 
   return (
@@ -53,7 +70,7 @@ const NavigatorBar = (props) => {
       <Link to="/directory" className="navigator-bar-navlink">
         <img
           alt="logo"
-          src={logo}
+          src={getLogo}
           className="navigator-bar-image"
           state={{accountData: props.accountData}}
         />
@@ -88,6 +105,7 @@ NavigatorBar.defaultProps = {
   image_src1:
     'https://presentation-website-assets.teleporthq.io/logos/logo.png',
   accountData: null,  // Set accountData to default to null
+  isLoading: true
 }
 
 NavigatorBar.propTypes = {
@@ -109,6 +127,7 @@ NavigatorBar.propTypes = {
   image_alt1: PropTypes.string,
   image_src1: PropTypes.string,
   accountData: PropTypes.object,   // Get user data from login
+  isLoading: PropTypes.bool
 }
 
 export default NavigatorBar

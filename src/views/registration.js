@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import NavigatorBar from '../components/navigator-bar'
 import './registration.css'
+import Title from '../components/title'
 
 const Registration = (props) => {
   // User information variables
@@ -87,25 +88,11 @@ const Registration = (props) => {
         />
       </Helmet>
       <NavigatorBar rootClassName="navigator-bar-root-class-name6"></NavigatorBar>
-      <img
-        alt="image"
-        src="https://play.teleporthq.io/static/svg/default-img.svg"
-        className="registration-image"
-      />
-      <div className="registration-header">
-        <h1 className="registration-title">User Registration</h1>
-        <span className="registration-text">
-          <span>
-            Fill the fields out bellow to create an account!
-            <span
-              dangerouslySetInnerHTML={{
-                __html: ' ',
-              }}
-            />
-          </span>
-          <br></br>
-        </span>
-      </div>
+     <Title
+     text='Provide your information in the fields below to create an account'
+     heading="Registration"
+     />
+      
       <div className="registration-registration-container">
         <form className="registration-registration-form">
           <div className="registration-all-fields">

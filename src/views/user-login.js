@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet'
-
+import Title from '../components/title'
 import NavigatorBar from '../components/navigator-bar'
 import './user-login.css'
 
@@ -104,18 +104,10 @@ const UserLogin = () => {
         />
       </Helmet>
       <NavigatorBar rootClassName="navigator-bar-root-class-name3"></NavigatorBar>
-      <img
-        alt="image"
-        src="https://play.teleporthq.io/static/svg/default-img.svg"
-        className="user-login-image"
-      />
-      <div className="user-login-user-login-title">
-        <h1 className="user-login-title">User Login</h1>
-        <span className="user-login-text">
-          <span>Hello! Please use your email and password to log in</span>
-          <br></br>
-        </span>
-      </div>
+      <Title
+     text='Provide your information in the fields below to create an account'
+     heading="Registration"
+     />
       <div className="user-login-user-login-container">
         <form className="user-login-login-form" onSubmit={handleSubmit}>
           <div className="user-login-container1">

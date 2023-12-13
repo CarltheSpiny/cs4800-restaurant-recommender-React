@@ -128,6 +128,33 @@ const UserInformation = (props) => {
     }
   }
 
+  const clearLikedList = async () => {
+    const userConfirmed = window.confirm('Are you sure you want to clear your liked list?');
+
+    if (userConfirmed) {
+      // If User clicked 'OK'
+      console.log('User clicked OK');
+      
+      var requestOptions = {
+        method: 'DELETE',
+        redirect: 'follow',
+        headers: headers,
+        body: {
+          "deleteAll": true
+        }
+      };
+  
+      await fetch(url, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+      
+    } else {
+      // If User clicked 'Cancel' or closed the dialog
+      console.log('User clicked Cancel');
+    }
+  }
+
   // Get updated account data
   const readAccountData = async() => {
     try {
@@ -268,7 +295,7 @@ const UserInformation = (props) => {
         <div className="user-information-container1">
           <form className="user-information-form">
             <label>Clear rating history</label>
-            <button type="button" className="user-information-button button">
+            <button type="button" className="user-information-button button" onClick={ clearLikedList }>
               Clear
             </button>
           </form>

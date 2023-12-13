@@ -17,7 +17,7 @@
   justify-content: center;
 }
 .title-image {
-  width: 100%;
+  width: auto;
   height: var(--dl-size-size-medium);
   align-self: center;
   object-fit: cover;

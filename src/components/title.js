@@ -1,6 +1,7 @@
 import React from 'react'
 
 import PropTypes from 'prop-types'
+import banner from '../rest_banner.png'
 
 import './title.css'
 
@@ -28,7 +29,7 @@ Title.defaultProps = {
   subtext: '',
   image_alt: 'image',
   heading: 'Title',
-  image_src: 'https://play.teleporthq.io/static/svg/default-img.svg',
+  image_src: banner,
   rootClassName: '',
 }
 

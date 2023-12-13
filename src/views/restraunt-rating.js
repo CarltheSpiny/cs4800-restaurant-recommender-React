@@ -302,16 +302,16 @@ const RestrauntRating = (props) => {
             </Link>
         </div>
         <div className="registration-to-login-container">
-              <span className="registration-text12">
-                <span>Already have an account?</span>
-                <br></br>
+            <span className="registration-text12">
+              <span>Already have an account?</span>
+              <br></br>
+            </span>
+            <Link to="/user-login" className="registration-navlink">
+              <span>
+                Sign in here.
               </span>
-              <Link to="/user-login" className="registration-navlink">
-                <span>
-                  Sign in here.
-                </span>
-              </Link>
-            </div>
+            </Link>
+          </div>
         <div className="restraunt-rating-restraunt-info">
           
         </div>

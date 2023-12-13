@@ -19,7 +19,7 @@ First number is Big Updates 1 = Initial Site from Teleport | 2 = First Edits fro
 Second is commit number from the big update?
 Third is commit number?
 */
-const buildNumber = '4.4.0'
+const buildNumber = '4.6.1'
 
 const Directory = (props) => {
   // <--------------------Access a user's information --------------------->

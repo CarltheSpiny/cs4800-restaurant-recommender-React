@@ -3,6 +3,7 @@ import { useParams, useLocation } from 'react-router-dom/cjs/react-router-dom'
 
 import { Helmet } from 'react-helmet'
 
+import { Link } from 'react-router-dom'
 import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
 import SearchBar from '../components/search-bar'
@@ -11,69 +12,84 @@ import './restaurant-history.css'
 import { async } from 'q'
 
 const RestaurantHistory = (props) => {
-  const location = useLocation();
+  const [likedListData, setLikedList] = useState(null)
 
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
-  const [restData, setData] = useState("")
+  const [isLoggedIn, setLoggedIn] = useState(false)
 
   const [accountData, setAccountData] = useState(null)
 
+  const location = useLocation();
+
+  const [hasReccomendation, setRecFetched] = useState(false)
   const [hasFetched, setFetched] = useState(false)
 
-  const restIDURL = 'https://ovz97nwwca.execute-api.us-east-1.amazonaws.com/GetRestaurantFromID';
   const getLikedURL = 'https://bn8qlgorkl.execute-api.us-east-1.amazonaws.com/Testing/Account/Restaurant?'
 
-  /*Headers for CORS */
   const headers = new Headers({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With'
   });
 
+  // Repeatedly Set account Data until its exists
   useEffect(() => {
-    setAccountData(location.state && location.state.accountData);
+    setAccountData(location.state && location.state.accountData)
+    if (accountData == null || accountData == undefined) {
+      console.warn("No one is logged in")
+      setLoggedIn(false)
+    } else {
+      setLoggedIn(true)
+    }
+  }, [])
 
-    const fetchLiked = async () => {
-      if (hasFetched)
-        return
+  useEffect(() =>  {
 
+    if (accountData == null || accountData == undefined){
+      console.warn("No account data set; Can't get location until that is set")
+      return
+    } else {
+      console.log("Is logged in!")
+      setLoggedIn(true)
+    }
+
+    console.info("Getting liked list")
+    const getAndSetLikedList = async () => {
       try {
-        if (accountData == undefined || accountData == null){
-          console.info("Can't check like if no user is logged in!")
-          return
-        }
-
         var optionsForGet = {
           method: 'GET',
           redirect: 'follow',
           header: headers
         }
-
+  
+        var userLikedList = [];
         var getAllLikedURL = getLikedURL + `email=` + accountData.email.S
-        const getLiked = await fetch(getAllLikedURL, optionsForGet);
-        const jsonData = await getLiked.json();
-        var result = []
-        console.log("List fetched")
-
-        // Add to rest array
-        for (var i in jsonData.restaurants) {
-          result.push([(jsonData.restaurants[i].S)])
-        }
-
-        setData(result)
-        setFetched(true)
-        console.info("Rests: " + restData)
-
+        
+        const getLiked = await fetch(getAllLikedURL, optionsForGet)
+          .then(response => response.json())
+          .then((data) => {
+          // console.log("Data" + JSON.stringify(data.restaurants))
+          if (JSON.stringify(data.restaurants) == "[]") {
+            return
+          }
+          const jsonData = data
+          for (let i = 0; i < Object.keys(jsonData.restaurants).length; i++) {
+            userLikedList.push([(jsonData.restaurants[i].S)]);
+          }
+          setLikedList(userLikedList);
+        })
       } catch (error) {
-        console.error("Error: " + error)
-        setError(true)
+        console.error("Error in getting liked list: " + error)
+        setLikedList(userLikedList);
       } finally {
         setLoading(false)
       }
     }
-    fetchLiked();
-  }, [isLoading, restData])
+    getAndSetLikedList()
+  }, [accountData])
+
+ 
 
   if (isError) {
     return(<div className="restaurant-history-container">
@@ -84,10 +100,10 @@ const RestaurantHistory = (props) => {
           content="RestaurantHistory"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }isLoading={isLoading}></NavigatorBar>
       <Title
-        text="A list of all the restaurants you have visited or rated."
-        heading="Your Restaurant History"
+        text="A list of all the restaurants you have liked."
+        heading="Restaurant History"
         rootClassName="title-root-class-name4"
       ></Title>
       <span>An error occured getting your liked restaurants</span>
@@ -103,10 +119,10 @@ const RestaurantHistory = (props) => {
           content="RestaurantHistory"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }isLoading={isLoading}></NavigatorBar>
       <Title
-        text="A list of all the restaurants you have visited or rated."
-        heading="Your Restaurant History"
+        text="A list of all the restaurants you have liked."
+        heading="Restaurant History"
         rootClassName="title-root-class-name4"
       ></Title>
       <span>Loading...</span>
@@ -114,16 +130,18 @@ const RestaurantHistory = (props) => {
 
   } else {
     const cards = []
-    for (let i = 0; i < Object.keys(restData).length; i++) {
+    for (let i = 0; i < Object.keys(likedListData).length; i++) {
+      var key = `liked-list-card${i}`;
       cards.push(
       <RatedRestrauntCard
+        key={key}
         className="liked-rest-card"
         indexForRestaurant={0}
-        reccomendedRestaurants={restData[i]}
+        reccomendedRestaurants={likedListData[i]}
         accountData={accountData}
         isLoadingPage={isLoading}
       />)
-      console.info("Sending this data to the card: " + restData[i] + "; with index: " + i)
+      console.info("Sending this data to the card: " + likedListData[i] + "; with index: " + i)
     }
     return(<div className="restaurant-history-container">
       <Helmet>
@@ -133,10 +151,10 @@ const RestaurantHistory = (props) => {
           content="RestaurantHistory"
         />
       </Helmet>
-      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }></NavigatorBar>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }isLoading={isLoading}></NavigatorBar>
       <Title
-        text="A list of all the restaurants you have visited or rated."
-        heading="Your Restaurant History"
+        text="A list of all the restaurants you have liked."
+        heading="Restaurant History"
         rootClassName="title-root-class-name4"
       ></Title>
       <div className="restaurant-history-gallery">
