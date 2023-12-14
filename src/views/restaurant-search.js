@@ -182,7 +182,7 @@ const RestaurantSearch = (props) => {
   useEffect(() => {
     if (likedList == null || likedList == undefined) {
       console.warn("Liked List not set; Can't get a proper reccomendation")
-      return;
+      setLikedList([])
     }
 
     if (hasReccomendation == true) {

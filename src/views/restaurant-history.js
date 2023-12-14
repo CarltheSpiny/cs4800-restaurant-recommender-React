@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom/cjs/react-router-dom'
+import { useLocation } from 'react-router-dom/cjs/react-router-dom'
 
 import { Helmet } from 'react-helmet'
 
-import { Link } from 'react-router-dom'
 import NavigatorBar from '../components/navigator-bar'
 import Title from '../components/title'
-import SearchBar from '../components/search-bar'
 import RatedRestrauntCard from '../components/rated-restaurant-card'
 import './restaurant-history.css'
-import { async } from 'q'
 
 const RestaurantHistory = (props) => {
   const [likedListData, setLikedList] = useState(null)
@@ -130,20 +127,21 @@ const RestaurantHistory = (props) => {
 
   } else {
     const cards = []
-    for (let i = 0; i < Object.keys(likedListData).length; i++) {
-      var key = `liked-list-card${i}`;
-      cards.push(
-      <RatedRestrauntCard
-        key={key}
-        className="liked-rest-card"
-        indexForRestaurant={0}
-        reccomendedRestaurants={likedListData[i]}
-        accountData={accountData}
-        isLoadingPage={isLoading}
-      />)
-      console.info("Sending this data to the card: " + likedListData[i] + "; with index: " + i)
-    }
-    return(<div className="restaurant-history-container">
+    try {
+      for (let i = 0; i < Object.keys(likedListData).length; i++) {
+        var key = `liked-list-card${i}`;
+        cards.push(
+        <RatedRestrauntCard
+          key={key}
+          className="liked-rest-card"
+          indexForRestaurant={0}
+          reccomendedRestaurants={likedListData[i]}
+          accountData={accountData}
+          isLoadingPage={isLoading}
+        />)
+        console.info("Sending this data to the card: " + likedListData[i] + "; with index: " + i)
+      }
+      return(<div className="restaurant-history-container">
       <Helmet>
         <title>Restaurant History</title>
         <meta
@@ -161,6 +159,26 @@ const RestaurantHistory = (props) => {
         {cards}
       </div>
     </div>)
+    } catch (error) {
+      console.warn("An error occured getting liked list (Maybe list was empty)")
+      return(<div className="restaurant-history-container">
+      <Helmet>
+        <title>Restaurant History</title>
+        <meta
+          property="og:title"
+          content="RestaurantHistory"
+        />
+      </Helmet>
+      <NavigatorBar rootClassName="navigator-bar-root-class-name2" accountData={ accountData }isLoading={isLoading}></NavigatorBar>
+      <Title
+        text="A list of all the restaurants you have liked."
+        heading="Restaurant History"
+        rootClassName="title-root-class-name4"
+      ></Title>
+      <span>No liked restaurants. When you like a restaurant, it will appear here.</span>
+    </div>)
+    }
+    
   }
 }
 
